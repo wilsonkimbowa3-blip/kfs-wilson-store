@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KFS Wilson Food Store</title>
+<style>
+body{font-family:Arial;background:#f6f6f6;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
+.card{background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);width:320px}
+h2{text-align:center;color:#2e7d32}
+.input-group{position:relative;margin:15px 0}
+input{width:100%;padding:12px 40px 12px 12px;border:1px solid #ccc;border-radius:8px;box-sizing:border-box;font-size:16px}
+.eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:20px}
+button{width:100%;padding:12px;background:#2e7d32;color:#fff;border:none;border-radius:8px;font-size:16px}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>KFS Wilson Store</h2>
+<div class="input-group">
+<input type="text" value="wilson">
+</div>
+<div class="input-group">
+<input id="pwd" type="password" value="wilson321">
+<span class="eye" onclick="let p=document.getElementById('pwd');p.type=p.type==='password'?'text':'password'">👁️</span>
+</div>
+<button>Login</button>
+</div>
+</body>
+</html>
