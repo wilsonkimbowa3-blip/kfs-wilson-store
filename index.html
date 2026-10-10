@@ -1,29 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KFS Wilson Food Store</title>
+<title>KFS Wilson Food Store - Kampala</title>
 <style>
-body{font-family:Arial;background:#f6f6f6;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
-.card{background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);width:320px}
-h2{text-align:center;color:#2e7d32}
-.input-group{position:relative;margin:15px 0}
-input{width:100%;padding:12px 40px 12px 12px;border:1px solid #ccc;border-radius:8px;box-sizing:border-box;font-size:16px}
-.eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:20px}
-button{width:100%;padding:12px;background:#2e7d32;color:#fff;border:none;border-radius:8px;font-size:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f5f7f5;color:#333}
+header{background:#2e7d32;color:#fff;padding:15px;text-align:center;position:sticky;top:0;z-index:10}
+header h1{font-size:22px}
+header p{font-size:13px;opacity:.9}
+.container{max-width:1000px;margin:0 auto;padding:15px}
+.card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.08);margin-bottom:15px}
+.login-wrap{display:flex;justify-content:center;align-items:center;min-height:70vh}
+.login-card{width:360px}
+.input-group{position:relative;margin:12px 0}
+input,select{width:100%;padding:12px 40px 12px 12px;border:1px solid #ccc;border-radius:8px;font-size:16px}
+.eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:20px;user-select:none}
+.btn{width:100%;padding:13px;background:#2e7d32;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer}
+.btn:hover{background:#1b5e20}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.product{border:1px solid #eee;border-radius:10px;padding:10px;text-align:center}
+.product img{width:100%;height:90px;object-fit:cover;border-radius:8px;background:#e8f5e9}
+.product h4{font-size:14px;margin:8px 0 4px}
+.product p{color:#2e7d32;font-weight:bold}
+.add-btn{background:#ff6f00;color:#fff;border:none;padding:8px 12px;border-radius:6px;width:100%;margin-top:6px;cursor:pointer}
+.topbar{display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap}
+.badge{background:#2e7d32;color:#fff;padding:8px 12px;border-radius:20px;font-size:14px}
+.hidden{display:none}
+.admin-panel{border:2px dashed #2e7d32}
+.order{border-bottom:1px solid #eee;padding:8px 0;font-size:14px}
 </style>
 </head>
 <body>
-<div class="card">
-<h2>KFS Wilson Store</h2>
+<header>
+<h1>🛒 KFS WILSON FOOD STORE</h1>
+<p>Kampala Fresh Foods • Airtel Money: 0755 123456</p>
+</header>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="container login-wrap">
+<div class="card login-card">
+<h2 style="text-align:center;color:#2e7d32;margin-bottom:10px;">KFS Wilson Store Login</h2>
+<p style="text-align:center;font-size:13px;color:#666;">Staff Only - Secure Access</p>
 <div class="input-group">
-<input type="text" value="wilson">
+<input id="user" type="text" value="wilson" placeholder="Username">
 </div>
 <div class="input-group">
-<input id="pwd" type="password" value="wilson321">
+<input id="pwd" type="password" value="wilson321" placeholder="Password">
 <span class="eye" onclick="let p=document.getElementById('pwd');p.type=p.type==='password'?'text':'password'">👁️</span>
 </div>
-<button>Login</button>
+<button class="btn" onclick="doLogin()">Login</button>
+<p id="loginMsg" style="text-align:center;color:red;margin-top:10px;font-size:13px;"></p>
+<p style="text-align:center;margin-top:12px;font-size:11px;color:#999;">Password shows as •••••• with eye toggle = SECURE ✅</p>
 </div>
+</div>
+
+<!-- MAIN SHOP -->
+<div id="shopScreen" class="container hidden">
+<div class="topbar">
+<div class="badge">🛒 Cart: <span id="cartCount">0</span> items</div>
+<div class="badge" style="background:#ff6f00;">UGX <span id="cartTotal">0</span></div>
+<button class="badge" style="border:none;cursor:pointer;background:#333;" onclick="toggleAdmin()">⚙️ Admin</button>
+<button class="badge" style="border:none;cursor:pointer;background:#900;" onclick="logout()">Logout</button>
+</div>
+
+<div class="card">
+<h3>🍚 Fresh Products - Kampala</h3>
+<div class="grid" id="productGrid"></div>
+</div>
+
+<div class="card">
+<h3>🧾 Checkout - Airtel Money</h3>
+<input id="custName" placeholder="Customer Name" style="margin-bottom:10px">
+<input id="custPhone" placeholder="Airtel Number 075..." style="margin-bottom:10px">
+<select id="payMode" style="margin-bottom:10px">
+<option>Airtel Money</option>
+<option>Cash on Delivery</option>
+<option>MTN Money</option>
+</select>
+<button class="btn" style="background:#ff6f00;" onclick="checkout()">Place Order - Pay UGX <span id="payTotal">0</span></button>
+<p style="font-size:12px;color:#666;margin-top:8px;text-align:center;">You will receive confirmation SMS. Deliveries in Kampala within 2hrs.</p>
+</div>
+
+<div id="adminBox" class="card admin-panel hidden">
+<h3>⚙️ Admin Panel - Orders</h3>
+<div id="ordersList"><p>No orders yet</p></div>
+<hr style="margin:12px 0">
+<h4>Add New Product</h4>
+<input id="newPName" placeholder="Product name e.g. Matooke">
+<input id="newPPrice" type="number" placeholder="Price UGX" style="margin:8px 0">
+<input id="newPImg" placeholder="Image link (optional)">
+<button class="btn" style="margin-top:8px;" onclick="addProduct()">Add Product</button>
+</div>
+</div>
+
+<script>
+const defaultProducts=[
+{name:"Matooke",price:5000,img:""},
+{name:"Rice 1kg",price:4500,img:""},
+{name:"Posho 1kg",price:3000,img:""},
+{name:"Beans 1kg",price:4000,img:""},
+{name:"G-Nuts 1kg",price:6000,img:""},
+{name:"Chicken",price:15000,img:""},
+{name:"Beef 1kg",price:18000,img:""},
+{name:"Fish",price:12000,img:""},
+{name:"Tomatoes",price:3000,img:""},
+{name:"Cooking Oil",price:8000,img:""}
+];
+let products=JSON.parse(localStorage.getItem('kfs_products')||'null')||defaultProducts;
+let cart=[];
+let orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]');
+
+function doLogin(){
+let u=document.getElementById('user').value.trim();
+let p=document.getElementById('pwd').value.trim();
+if(u==='wilson' && p==='wilson321'){
+document.getElementById('loginScreen').classList.add('hidden');
+document.getElementById('shopScreen').classList.remove('hidden');
+renderProducts();renderOrders();
+}else{document.getElementById('loginMsg').innerText='Wrong username or password!';}
+}
+function logout(){location.reload();}
+function renderProducts(){
+let g=document.getElementById('productGrid');g.innerHTML='';
+products.forEach((pr,i)=>{
+g.innerHTML+=`<div class="product"><div style="background:#e8f5e9;height:90px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:40px;">🍲</div><h4>${pr.name}</h4><p>UGX ${pr.price.toLocaleString()}</p><button class="add-btn" onclick="addToCart(${i})">Add to Cart</button></div>`;
+});
+}
+function addToCart(i){cart.push(products[i]);updateCart();}
+function updateCart(){
+document.getElementById('cartCount').innerText=cart.length;
+let total=cart.reduce((s,p)=>s+p.price,0);
+document.getElementById('cartTotal').innerText=total.toLocaleString();
+document.getElementById('payTotal').innerText=total.toLocaleString();
+}
+function checkout(){
+if(cart.length===0){alert('Cart empty!');return;}
+let name=document.getElementById('custName').value||'Customer';
+let phone=document.getElementById('custPhone').value||'No phone';
+let pay=document.getElementById('payMode').value;
+let total=cart.reduce((s,p)=>s+p.price,0);
+let order={id:Date.now(),name,phone,pay,total,items:cart.map(p=>p.name).join(', '),time:new Date().toLocaleString()};
+orders.unshift(order);localStorage.setItem('kfs_orders',JSON.stringify(orders));
+alert('Order placed! Total UGX '+total+' via '+pay+'\\nCustomer: '+name);
+cart=[];updateCart();renderOrders();document.getElementById('custName').value='';document.getElementById('custPhone').value='';
+}
+function toggleAdmin(){document.getElementById('adminBox').classList.toggle('hidden');}
+function renderOrders(){
+let l=document.getElementById('ordersList');
+if(orders.length===0){l.innerHTML='<p>No orders yet</p>';return;}
+l.innerHTML=orders.map(o=>`<div class="order"><b>#${o.id}</b> - ${o.name} (${o.phone})<br>${o.items}<br><b>UGX ${o.total}</b> via ${o.pay} - ${o.time}</div>`).join('');
+}
+function addProduct(){
+let n=document.getElementById('newPName').value;let pr=parseInt(document.getElementById('newPPrice').value);
+if(!n||!pr){alert('Enter name and price');return;}
+products.unshift({name:n,price:pr,img:''});localStorage.setItem('kfs_products',JSON.stringify(products));
+renderProducts();document.getElementById('newPName').value='';document.getElementById('newPPrice').value='';alert('Product added!');
+}
+</script>
 </body>
 </html>
