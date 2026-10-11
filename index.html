@@ -1,138 +1,100 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KFS • Kampala Food Shop + AI 🚀</title>
-<link id="manifestLink" rel="manifest" href="">
-<meta name="theme-color" content="#ffcc00">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KFS • Kampala Food Shop + AI</title>
+<link id="manifestLink" rel="manifest">
+<meta name="theme-color" content="#00c853">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:radial-gradient(ellipse at top,#132a4d 0%,#081428 100%);color:#fff;min-height:100vh}
-.header{position:sticky;top:0;z-index:60;background:rgba(8,20,40,.95);backdrop-filter:blur(12px);border-bottom:2px solid #ffcc00;padding:10px 12px}
-.logo{font-weight:900;font-size:1.15rem}.logo span{color:#ffcc00}
-.badge{background:linear-gradient(90deg,#ffcc00,#ff9500);color:#000;padding:4px 10px;border-radius:999px;font-weight:800;font-size:.68rem;display:inline-block;margin-top:4px}
-.nav{display:flex;gap:8px;margin-top:8px}.nav button{flex:1;padding:10px;border-radius:12px;border:1px solid #ffcc00;background:rgba(255,204,0,.1);color:#ffcc00;font-weight:800;cursor:pointer}.nav button.active{background:#ffcc00;color:#000;box-shadow:0 0 18px rgba(255,204,0,.5)}
-.paybanner{background:linear-gradient(90deg,#ffcc00,#ffe566);color:#000;text-align:center;padding:8px;border-radius:10px;margin:10px 12px;font-weight:900;font-size:.82rem}
-.installbar{background:rgba(255,255,255,.08);margin:0 12px;padding:10px 12px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;border:1px dashed #ffcc00;gap:8px}
-.installbar button{background:#ffcc00;color:#000;border:none;padding:8px 14px;border-radius:8px;font-weight:900;cursor:pointer;white-space:nowrap}
-.products{padding:12px;display:grid;gap:12px;padding-bottom:95px}
-.card{background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(255,204,0,.25);border-radius:16px;padding:12px;display:flex;gap:12px;align-items:center}
-.card:hover{border-color:#ffcc00;box-shadow:0 8px 20px rgba(255,204,0,.12)}
-.price{color:#ffcc00;font-weight:900;margin-top:4px}
-.qty{display:flex;align-items:center;gap:6px;margin-top:8px}.qty button{width:36px;height:36px;border-radius:10px;border:none;background:#1a335e;color:#fff;font-weight:800;cursor:pointer}.qty input{width:92px;text-align:center;background:#0a1933;border:1px solid #ffcc00;color:#ffcc00;border-radius:10px;padding:8px;font-weight:900}
-.addbtn{background:linear-gradient(90deg,#ffcc00,#ffaa00);color:#000;border:none;padding:8px 14px;border-radius:10px;font-weight:900;cursor:pointer}
-.cartbar{position:fixed;bottom:0;left:0;right:0;background:#ffcc00;color:#000;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:900;z-index:70}
-.cartbar button{background:#000;color:#ffcc00;border:none;padding:10px 18px;border-radius:12px;font-weight:900;cursor:pointer}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);display:none;justify-content:center;align-items:flex-start;z-index:200;padding:12px;overflow-y:auto}.modal.open{display:flex}
-.modalbox{background:linear-gradient(180deg,#12264a,#0a1933);border:2px solid #ffcc00;border-radius:20px;padding:16px;width:100%;max-width:520px;margin:20px auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}
-.modalbox h2{color:#ffcc00;text-align:center;margin-bottom:8px}
-.modalbox label{font-size:.8rem;color:#a9bfd9;margin-top:8px;display:block}
-.modalbox input,.modalbox select,.modalbox textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #ffcc00;background:#08162f;color:#fff;margin-top:4px}
-.btn-yellow{background:#ffcc00;color:#000;border:none;padding:14px;width:100%;border-radius:12px;font-weight:900;margin-top:12px;cursor:pointer}.btn-dark{background:#2a3a5a;color:#fff;border:none;padding:12px;width:100%;border-radius:12px;font-weight:800;margin-top:8px;cursor:pointer}
-.aiBox{border:2px solid #a855f7;border-radius:18px;padding:14px;background:rgba(168,85,247,.12);margin-top:10px}
-.aiChat{background:rgba(8,22,47,.9);border:1px solid #a855f7;border-radius:12px;padding:12px;min-height:130px;max-height:240px;overflow-y:auto;margin:10px 0;font-size:.88rem;line-height:1.4}
-.qBtns{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}.qBtns button{background:rgba(255,204,0,.13);border:1px solid #ffcc00;color:#ffcc00;padding:6px 11px;border-radius:999px;font-weight:800;font-size:.78rem;cursor:pointer}
-.askRow{display:flex;gap:8px}.askRow input{flex:1}.askRow button{background:linear-gradient(90deg,#a855f7,#ffcc00);color:#000;border:none;padding:12px 16px;border-radius:12px;font-weight:900;cursor:pointer;white-space:nowrap}
-.order-item{background:rgba(255,255,255,.06);padding:10px;border-radius:10px;margin-top:8px;border-left:4px solid #ffcc00;font-size:.85rem}
-.receipt{background:#fff;color:#000;padding:16px;border-radius:12px;font-family:monospace;font-size:.82rem}
-.editBox{border:1.5px dashed #00ff88;border-radius:12px;padding:10px;margin-top:12px;background:rgba(0,255,136,.07)}
-</style></head><body>
-<div class="header">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap"><div class="logo">KFS • <span>Kampala Food Shop + AI</span> 🤖</div><div class="badge">⚙️ ADMIN + 🤖 AI • Kisenyi • Type KG</div></div>
-<div class="nav"><button id="btnShop" class="active" onclick="showShop()">🛒 SHOP</button><button id="btnAdmin" onclick="openAdmin()">⚙️ AI ADMIN</button><button onclick="resetCart()">🔒 RESET</button></div>
+body{background:#f5f5f5}
+header{background:#111;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+#installBanner{background:linear-gradient(90deg,#00c853,#009624);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+#installBtn{background:#fff;color:#00c853;border:none;padding:10px 20px;border-radius:25px;font-weight:900;font-size:16px;cursor:pointer;animation:pulse 1.5s infinite;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+#products{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;padding:12px}
+.card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.card input{width:100%;padding:8px;margin:6px 0;border:1px solid #ddd;border-radius:8px}
+.btn{background:#00c853;color:#fff;border:none;padding:8px 12px;border-radius:8px;width:100%;font-weight:700;cursor:pointer}
+.admin-only{display:none}
+</style>
+</head>
+<body>
+<header>
+<div><b>KFS • Kampala Food Shop + AI</b><br><small id="subHead">ADMIN + AI • Kisenyi • Type KG</small></div>
+<div><button onclick="showAdmin()">AI ADMIN</button> <button onclick="resetShop()">RESET</button></div>
+</header>
+
+<div id="installBanner">
+<div><b>📲 Install KFS APP - AI Inside! Works Offline</b><br><small>Tap INSTALL → 5-10 sec. No data needed!</small></div>
+<button id="installBtn">⬇️ INSTALL APP</button>
 </div>
-<div class="paybanner">💰 Airtel Money: 0700892386 - WILSON • MTN • Bank • COD • Instant Receipt • Type 80000kg</div>
-<div class="installbar"><span>📲 Install KFS APP - AI Inside! Works Offline • Tap INSTALL</span><button onclick="installApp()">INSTALL APP</button></div>
-<div id="shopView" class="products"></div>
-<div class="cartbar"><div><span id="cartSummary">0 types • 0kg • UGX 0</span><br><small style="font-size:.65rem">Pay 0700892386 • Type KG • COD</small></div><button onclick="openCheckout()">CHECKOUT 🧾</button></div>
 
-<div id="checkoutModal" class="modal"><div class="modalbox"><h2>🧾 Checkout • Location + Pay</h2>
-<label>Customer Name</label><input id="cName" placeholder="Wilson"><label>Phone</label><input id="cPhone" placeholder="0700 892 386"><label>Delivery Location 📍</label><input id="cLocation" placeholder="Kisenyi, Kampala - Near..."><label>Payment Method 💳</label><select id="cPay"><option>Airtel MoMoPay 0700892386 - WILSON</option><option>MTN MoMoPay - WILSON</option><option>Bank Transfer DFCU/Centenary</option><option>Cash on Delivery (COD)</option></select><label>Note</label><textarea id="cNote" rows="2" placeholder="Leave at gate..."></textarea><div id="checkoutList" style="margin-top:10px"></div><button class="btn-yellow" onclick="placeOrder()">CONFIRM • PAY & RECEIPT 📲</button><button class="btn-dark" onclick="closeM('checkoutModal')">CLOSE</button></div></div>
+<div style="padding:8px 16px;background:#fff;margin:8px;border-radius:8px">
+<b>Airtel Money: 0700892386 - WILSON</b> | <span id="cartInfo">0 types • 0kg • UGX 0</span> | Pay 0700892386 • Type KG • COD
+</div>
 
-<div id="receiptModal" class="modal"><div class="modalbox"><h2>✅ Order Placed!</h2><div id="receiptBox" class="receipt"></div><button class="btn-yellow" onclick="printReceipt()">🖨️ PRINT RECEIPT / PDF</button><button class="btn-yellow" style="background:#25D366;color:#fff" onclick="sendWA()">📲 SEND TO WHATSAPP 0700892386</button><button class="btn-yellow" style="background:#0a1933;color:#ffcc00;border:1px solid #ffcc00" onclick="downloadReceipt()">⬇️ DOWNLOAD RECEIPT</button><button class="btn-dark" onclick="closeM('receiptModal')">CONTINUE</button></div></div>
+<div id="products"></div>
 
-<div id="adminModal" class="modal"><div class="modalbox" style="border-color:#a855f7;max-width:540px">
+<div id="adminPanel" style="display:none;position:fixed;inset:0;background:#fff;z-index:200;overflow:auto;padding:16px">
 <h2>⚙️ ADMIN + 🤖 AI</h2>
-<div id="loginBox"><label>Username</label><input id="adminUser" value="wilson"><label>Password</label><div style="position:relative"><input id="adminPwd" type="password" value="wilson321"><span onclick="let e=document.getElementById('adminPwd');e.type=e.type==='password'?'text':'password'" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer">👁️</span></div><p id="loginErr" style="color:#ff6b6b;text-align:center;margin-top:6px;font-size:.85rem"></p><button class="btn-yellow" onclick="loginAdmin()">LOGIN SECURE 🔐</button><button class="btn-dark" onclick="closeM('adminModal')">CLOSE</button></div>
-
-<div id="adminPanel" style="display:none">
-
-<div class="aiBox">
-<div style="color:#ffcc00;font-weight:900;font-size:1.1rem">🤖 KFS AI — Wilson's Helper</div><small style="color:#c4b5fd">Ask AI anything — it knows your stock, prices, payments!</small>
-<div id="aiChat" class="aiChat">👋 Hello Boss Wilson! I am KFS AI! 👋<br><br>• Type "low stock" → I check stock • Type "advert" → I write WhatsApp status advert • Type "luganda" → Translate to Luganda • Type "price beans" → Pricing advice • Type "thank you" → Customer message<br><br>What do you need?</div>
-<div class="qBtns">
-<button onclick="askAI('low stock')">📦 Low Stock?</button><button onclick="askAI('make advert')">📢 Make Advert</button><button onclick="askAI('luganda')">🌍 Luganda</button><button onclick="askAI('thank you')">🙏 Thank You</button><button onclick="askAI('price advice')">💰 Price Advice</button><button onclick="askAI('stock value')">📊 Stock Value</button>
+<div style="background:#e8f5e9;padding:12px;border-radius:10px;margin:10px 0">
+<b>🤖 KFS AI — Wilson's Helper</b>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+<button onclick="aiAsk('Low Stock?')">Low Stock?</button>
+<button onclick="aiAsk('Make Advert')">Make Advert</button>
+<button onclick="aiAsk('Luganda')">Luganda</button>
+<button onclick="aiAsk('Thank You')">Thank You</button>
+<button onclick="aiAsk('Price Advice')">Price Advice</button>
+<button onclick="aiAsk('Stock Value')">Stock Value</button>
 </div>
-<div class="askRow"><input id="aiInput" placeholder="Ask AI: e.g low stock? advert? price beans?"><button onclick="doAI()">ASK AI</button></div>
+<div style="display:flex;gap:8px;margin-top:10px"><input id="aiInput" placeholder="Ask AI anything..." style="flex:1;padding:8px"><button onclick="askAI()">ASK AI</button></div>
+<div id="aiOutput" style="margin-top:10px;background:#fff;padding:8px;border-radius:8px;min-height:40px"></div>
 </div>
-
-<div class="editBox">
-<b style="color:#00ff88">✏️ EDIT SHOP AT ANY TIME - Tap to edit</b><br><small style="color:#9bb0d0">Change name, price, stock - auto saves - Add new product below</small>
-<div id="editProducts"></div>
-<div style="display:flex;gap:6px;margin-top:10px"><input id="newPName" placeholder="New product e.g Sugar 50kg"><input id="newPPrice" type="number" placeholder="Price/kg"><button class="addbtn" onclick="addProd()">+ ADD</button></div>
-<label style="margin-top:10px">💰 PAYMENT NUMBERS (Edit here - shows on receipt)</label><input id="payNumbers" value="Airtel Money: 0700892386 - WILSON • MTN • Bank" onchange="savePay()"><label>Order WhatsApp Number (256...)</label><input id="orderWA" value="256700892386" onchange="savePay()">
+<h3>✏️ EDIT SHOP AT ANY TIME</h3>
+<div id="adminProducts"></div>
+<button onclick="addNewProduct()">+ Add Product</button>
+<button onclick="closeAdmin()">Close Admin</button>
 </div>
-
-<div style="display:flex;gap:8px;margin:12px 0;flex-wrap:wrap"><button class="addbtn" onclick="printAll()">🖨️ Print All Orders</button><button class="addbtn" onclick="exportCSV()">📄 Export CSV</button><button class="addbtn" style="background:#ff4444;color:#fff" onclick="clearOrders()">Clear</button></div>
-<div id="ordersList"></div><div id="salesBox" style="background:rgba(0,255,136,.12);padding:10px;border-radius:10px;margin-top:8px"></div>
-<button class="btn-dark" onclick="closeM('adminModal')">CLOSE ADMIN</button>
-</div></div></div>
 
 <script>
-// PWA MANIFEST + SW for DOWNLOAD APP
-const manifest={name:"KFS Kampala Food Shop + AI",short_name:"KFS AI",start_url:".",display:"standalone",background_color:"#081428",theme_color:"#ffcc00",icons:[{src:"https://cdn-icons-png.flaticon.com/512/3081/3081559.png",sizes:"512x512",type:"image/png"}]};
-const manifestBlob=new Blob([JSON.stringify(manifest)],{type:'application/json'});document.getElementById('manifestLink').href=URL.createObjectURL(manifestBlob);
-if('serviceWorker' in navigator){let swCode=`self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('fetch',e=>e.respondWith(fetch(e.request).catch(()=>new Response('Offline - KFS AI'))));`;let swBlob=new Blob([swCode],{type:'text/javascript'});navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(()=>{});}
+const defaultProducts=[
+{name:"50kg Super Rice",price:4000,stock:500},
+{name:"50kg Nambale Beans",price:3500,stock:400},
+{name:"50kg Posho Flour",price:2500,stock:800}
+];
+let products=JSON.parse(localStorage.getItem('kfs_products')||'null')||defaultProducts;
+let cart=[];
+let deferredPrompt=null;
 
-let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;console.log('Install ready');});
-function installApp(){
-if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(c=>{if(c.outcome==='accepted')alert('✅ KFS APP Installed! Check home screen!');deferredPrompt=null;});}
-else{
-// fallback: download as installable html
-let html=document.documentElement.outerHTML;let b=new Blob([html],{type:'text/html'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='KFS-Kampala-Food-Shop-AI-App.html';a.click();
-alert('📲 App downloaded! Open file → Chrome menu ⋮ → Add to Home Screen / Install App. Your shop will work offline!');
-}}
-const DEFAULT=[{id:'rice',name:'50kg Super Rice',desc:'Premium Tanzania Rice',price:4000,emoji:'🍚',stock:500},{id:'beans',name:'50kg Nambale Beans',desc:'Yellow Beans Clean',price:3500,emoji:'🫘',stock:400},{id:'posho',name:'50kg Posho Flour',desc:'Fine Maize Fortified',price:2500,emoji:'🌽',stock:800},{id:'matooke',name:'50kg Matooke',desc:'Fresh Kisenyi Direct',price:2000,emoji:'🍌',stock:300},{id:'oil',name:'Cooking Oil 20L',desc:'Golden Fry 20L',price:6500,emoji:'🛢️',stock:200},{id:'sugar',name:'Sugar 50kg',desc:'Kakira Original',price:3800,emoji:'🍬',stock:600}];
-let PRODUCTS=JSON.parse(localStorage.getItem('kfs_products')||JSON.stringify(DEFAULT));
-let cart={};let orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]');let lastReceipt=null;
-let PAY=localStorage.getItem('kfs_pay')||'Airtel Money: 0700892386 - WILSON • MTN • Bank';let WA=localStorage.getItem('kfs_wa')||'256700892386';
+const manifest={name:"KFS Kampala Food Shop",short_name:"KFS",start_url:".",display:"standalone",background_color:"#00c853",theme_color:"#00c853",icons:[{src:"https://cdn-icons-png.flaticon.com/512/3081/3081559.png",sizes:"512x512",type:"image/png"}]};
+const blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
+document.getElementById('manifestLink').href=URL.createObjectURL(blob);
 
-function renderShop(){let h='';PRODUCTS.forEach(p=>{let q=cart[p.id]||0;h+=`<div class="card"><div style="font-size:2rem;background:#0d2244;width:60px;height:60px;display:flex;align-items:center;justify-content:center;border-radius:12px">${p.emoji}</div><div style="flex:1"><b>${p.name}</b><br><small style="color:#9bb0d0">${p.desc} • Stock ${p.stock}kg</small><div class="price">UGX ${p.price.toLocaleString()}/kg</div><div class="qty"><button onclick="chg('${p.id}',-1)">-</button><input id="input-${p.id}" type="number" value="${q}" min="0" max="100000" placeholder="80000" oninput="setQ('${p.id}',this.value)"><button onclick="chg('${p.id}',1)">+</button><button class="addbtn" onclick="addC('${p.id}')">ADD</button></div></div></div>`});document.getElementById('shopView').innerHTML=h;updBar();renderEditList();}
-function chg(id,d){let cur=parseInt(document.getElementById('input-'+id)?.value||cart[id]||0);setQ(id,Math.max(0,cur+d));}
-function setQ(id,v){let n=parseInt(v)||0;if(n>100000)n=100000;cart[id]=n;if(n===0)delete cart[id];let el=document.getElementById('input-'+id);if(el&&document.activeElement!==el)el.value=n;updBar();}
-function addC(id){let n=parseInt(document.getElementById('input-'+id).value)||0;if(n<=0){alert('Type KG first! e.g 80000');document.getElementById('input-'+id).focus();return;}cart[id]=n;updBar();let b=event.target;b.innerText='✅ ADDED!';setTimeout(()=>b.innerText='ADD',900);}
-function updBar(){let t=Object.keys(cart).length;let k=Object.values(cart).reduce((a,b)=>a+b,0);let tot=Object.entries(cart).reduce((s,[id,q])=>{let p=PRODUCTS.find(x=>x.id===id);return s+(p?p.price:0)*q},0);document.getElementById('cartSummary').innerText=`${t} types • ${k.toLocaleString()}kg • UGX ${tot.toLocaleString()}`;}
-function showShop(){document.getElementById('shopView').style.display='grid';document.getElementById('btnShop').classList.add('active');document.getElementById('btnAdmin').classList.remove('active');}
-function resetCart(){if(!confirm('Reset cart?'))return;cart={};renderShop();}
-function openCheckout(){if(!Object.keys(cart).length){alert('Cart empty! Add KG first');return;}let list=Object.entries(cart).map(([id,q])=>{let p=PRODUCTS.find(x=>x.id===id);return `<div class="order-item">${p.name} ${q.toLocaleString()}kg = UGX ${(q*p.price).toLocaleString()}</div>`}).join('');let tot=Object.entries(cart).reduce((s,[id,q])=>s+PRODUCTS.find(x=>x.id===id).price*q,0);document.getElementById('checkoutList').innerHTML=list+`<b style="color:#ffcc00">TOTAL UGX ${tot.toLocaleString()} • ${Object.values(cart).reduce((a,b)=>a+b,0).toLocaleString()}kg</b>`;document.getElementById('checkoutModal').classList.add('open');}
-function closeM(id){document.getElementById(id).classList.remove('open');}
-function placeOrder(){let name=document.getElementById('cName').value||'Customer';let phone=document.getElementById('cPhone').value||'0700...';let loc=document.getElementById('cLocation').value;if(!loc){alert('Enter Delivery Location 📍');return;}let pay=document.getElementById('cPay').value;let note=document.getElementById('cNote').value;let kg=Object.values(cart).reduce((a,b)=>a+b,0);let tot=Object.entries(cart).reduce((s,[id,q])=>s+PRODUCTS.find(x=>x.id===id).price*q,0);let items=Object.entries(cart).map(([id,q])=>`${PRODUCTS.find(x=>x.id===id).name} ${q}kg`).join(', ');let id=Date.now();let time=new Date().toLocaleString('en-GB',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'});let o={id,kg,total:tot,items,name,phone,loc,pay,note,time,cart:{...cart}};orders.unshift(o);localStorage.setItem('kfs_orders',JSON.stringify(orders));lastReceipt=o;closeM('checkoutModal');showReceipt(o);cart={};renderShop();}
-function showReceipt(o){let txt=`KFS KAMPALA FOOD SHOP + AI\n${PAY}\n------------------------------\nRECEIPT #${o.id}\nDate: ${o.time}\nCustomer: ${o.name}\nPhone: ${o.phone}\nLocation: ${o.loc}\nPayment: ${o.pay}\nNote: ${o.note||'-'}\n------------------------------\n${Object.entries(o.cart).map(([id,q])=>{let p=PRODUCTS.find(x=>x.id===id);return `${p.name}\n ${q}kg x ${p.price} = ${q*p.price} UGX`}).join('\n')}\n------------------------------\nTOTAL ${o.kg.toLocaleString()}kg\nTOTAL UGX ${o.total.toLocaleString()}\nPay: ${PAY}\n------------------------------\nThank you! AI will call you.`;document.getElementById('receiptBox').innerHTML=`<pre style="white-space:pre-wrap">${txt}</pre>`;document.getElementById('receiptModal').classList.add('open');}
-function printReceipt(){let w=window.open('','_blank');w.document.write(`<pre>${document.getElementById('receiptBox').innerText}</pre>`);w.document.close();w.print();}
-function downloadReceipt(){let b=new Blob([document.getElementById('receiptBox').innerText],{type:'text/plain'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`KFS-Receipt-${lastReceipt.id}.txt`;a.click();}
-function sendWA(){if(!lastReceipt)return;let m=`*KFS ORDER RECEIPT* 🧾%0A%0ARec #${lastReceipt.id}%0ACust: ${lastReceipt.name}%0APhone: ${lastReceipt.phone}%0A📍${lastReceipt.loc}%0A💳${lastReceipt.pay}%0AItems: ${lastReceipt.items}%0ATotal: ${lastReceipt.kg}kg = UGX ${lastReceipt.total.toLocaleString()}%0A${lastReceipt.time}%0APay: ${PAY}`;window.open(`https://wa.me/${WA}?text=${m}`,'_blank');}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
+document.getElementById('installBtn').onclick=async()=>{
+if(deferredPrompt){deferredPrompt.prompt();const r=await deferredPrompt.userChoice;deferredPrompt=null;}
+else{alert('To install: Tap browser menu (3 dots) → Add to Home Screen / Install App');}
+};
 
-function openAdmin(){document.getElementById('adminModal').classList.add('open');renderAdmin();}
-function loginAdmin(){let u=document.getElementById('adminUser').value.toLowerCase().trim();let p=document.getElementById('adminPwd').value.trim();if((u==='wilson'||u==='admin')&&(p==='wilson321'||p==='1234')){document.getElementById('loginBox').style.display='none';document.getElementById('adminPanel').style.display='block';document.getElementById('payNumbers').value=PAY;document.getElementById('orderWA').value=WA;renderAdmin();}else document.getElementById('loginErr').innerText='❌ Wrong! wilson / wilson321';}
-function renderAdmin(){let box=document.getElementById('ordersList');if(!orders.length)box.innerHTML='<div style="color:#9bb0d0;text-align:center;padding:10px">No orders yet - Test order first!</div>';else box.innerHTML=orders.map(o=>`<div class="order-item"><b>#${o.id}</b> ${o.name} - ${o.phone}<br>${o.kg}kg UGX ${o.total.toLocaleString()}<br>${o.items}<br><small>📍${o.loc} • 💳${o.pay} • ${o.time}</small><br><button class="addbtn" style="margin-top:6px" onclick="printOne(${o.id})">🖨️ Receipt</button> <button class="addbtn" style="background:#ff4444;color:#fff" onclick="delO(${o.id})">Delete</button></div>`).join('');let tk=orders.reduce((a,b)=>a+b.kg,0),tm=orders.reduce((a,b)=>a+b.total,0);document.getElementById('salesBox').innerHTML=`<b>📊 TOTAL: ${orders.length} orders • ${tk.toLocaleString()}kg • UGX ${tm.toLocaleString()}</b>`;renderEditList();}
-function renderEditList(){let e=document.getElementById('editProducts');if(!e)return;e.innerHTML=PRODUCTS.map(p=>`<div style="display:flex;gap:5px;margin-top:6px"><input value="${p.name}" onchange="editP('${p.id}','name',this.value)" style="flex:1"><input type="number" value="${p.price}" onchange="editP('${p.id}','price',this.value)" style="width:85px"><input type="number" value="${p.stock}" onchange="editP('${p.id}','stock',this.value)" style="width:65px"><button onclick="delP('${p.id}')" style="background:#ff4444;color:#fff;border:none;border-radius:8px;padding:5px 8px">X</button></div>`).join('');}
-function editP(id,f,v){let p=PRODUCTS.find(x=>x.id===id);if(f==='price'||f==='stock')v=parseInt(v)||0;p[f]=v;localStorage.setItem('kfs_products',JSON.stringify(PRODUCTS));renderShop();}
-function delP(id){if(!confirm('Delete product?'))return;PRODUCTS=PRODUCTS.filter(x=>x.id!==id);localStorage.setItem('kfs_products',JSON.stringify(PRODUCTS));renderShop();}
-function addProd(){let n=document.getElementById('newPName').value.trim();let pr=parseInt(document.getElementById('newPPrice').value)||0;if(!n||!pr)return alert('Enter name & price');PRODUCTS.push({id:'p'+Date.now(),name:n,desc:'New',price:pr,emoji:'🛒',stock:100});document.getElementById('newPName').value='';document.getElementById('newPPrice').value='';localStorage.setItem('kfs_products',JSON.stringify(PRODUCTS));renderShop();}
-function savePay(){PAY=document.getElementById('payNumbers').value;WA=document.getElementById('orderWA').value;localStorage.setItem('kfs_pay',PAY);localStorage.setItem('kfs_wa',WA);}
-function delO(id){if(!confirm('Delete #'+id+'?'))return;orders=orders.filter(o=>o.id!==id);localStorage.setItem('kfs_orders',JSON.stringify(orders));renderAdmin();}
-function clearOrders(){if(!confirm('Clear ALL orders?'))return;orders=[];localStorage.setItem('kfs_orders','[]');renderAdmin();}
-function printOne(id){let o=orders.find(x=>x.id===id);if(!o)return;lastReceipt=o;showReceipt(o);}
-function printAll(){let w=window.open('','_blank');w.document.write(`<h2>KFS All Orders ${new Date().toLocaleString()}</h2><hr>`+orders.map(o=>`#${o.id} - ${o.name} - ${o.phone} - ${o.loc} - ${o.kg}kg UGX ${o.total} - ${o.pay} - ${o.time}`).join('<br><hr>'));w.document.close();w.print();}
-function exportCSV(){let csv='ID,Name,Phone,Location,Pay,KG,Total,Items,Time\n'+orders.map(o=>`"${o.id}","${o.name}","${o.phone}","${o.loc}","${o.pay}",${o.kg},${o.total},"${o.items}","${o.time}"`).join('\n');let b=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='KFS-Orders.csv';a.click();}
-
-function askAI(q){document.getElementById('aiInput').value=q;doAI();}
-function doAI(){let q=document.getElementById('aiInput').value.toLowerCase().trim();if(!q)return;let chat=document.getElementById('aiChat');let totalVal=PRODUCTS.reduce((s,p)=>s+p.price*p.stock,0);let ans='';
-if(q.includes('low stock')){let low=PRODUCTS.filter(p=>p.stock<350);ans=low.length?`📦 Low Stock!\n${low.map(p=>`• ${p.name}: ${p.stock}kg`).join('\n')}\nRestock ASAP Boss!`:`✅ Stock good! Lowest: ${PRODUCTS.sort((a,b)=>a.stock-b.stock)[0].name} ${PRODUCTS.sort((a,b)=>a.stock-b.stock)[0].stock}kg`;}
-else if(q.includes('advert')){ans=`📢 WhatsApp Status Advert:\n\n🔥 KFS KAMPALA FOOD SHOP + AI 🔥\nKisenyi - Type KG e.g 80000kg!\n🍚 Rice 4000/kg\n🫘 Beans 3500/kg\n🌽 Posho 2500/kg\n📲 Order: ${PAY}\n💳 MoMo ${WA}\nSame day delivery Kampala! #KFS`;}
-else if(q.includes('luganda')){ans=`🌍 Luganda:\n"Gyebale ko Boss! Webale okugula mu KFS. Ebiryo byo bitandise okutwalibwa. Osasula ku ${PAY}. Tukubira!"`;}
-else if(q.includes('thank')){ans=`🙏 Thank You:\n"Hello ${orders[0]?.name||'Customer'}! Thanks for order #${orders[0]?.id||''} ${orders[0]?.kg||''}kg. Delivering to ${orders[0]?.loc||'you'}. Pay ${PAY}. Wilson - KFS 🙏"`;}
-else if(q.includes('price')){ans=`💰 Price Advice: Beans rising! Increase to 3800 for profit. Keep Posho 2500 to attract. Total stock value UGX ${totalVal.toLocaleString()}. Bundle offer: 20kg Rice+10kg Beans discount 5k.`;}
-else if(q.includes('stock value')||q.includes('value')){ans=`📊 Stock Value:\n${PRODUCTS.map(p=>`• ${p.name}: ${p.stock}kg x ${p.price}=UGX ${(p.stock*p.price).toLocaleString()}`).join('\n')}\nTOTAL UGX ${totalVal.toLocaleString()}\nOrders: ${orders.length}, Sold ${orders.reduce((a,b)=>a+b.kg,0)}kg`;}
-else{ans=`🤖 KFS AI: Try:\n"low stock" "advert" "luganda" "thank you" "price beans" "stock value"\nYou: "${q}"\nBoss you have ${PRODUCTS.length} products, ${orders.length} orders, Pay ${PAY}`;}
-chat.innerHTML+=`<br><br><b style="color:#ffcc00">You:</b> ${q}<br><b style="color:#a855f7">AI:</b> ${ans.replace(/\n/g,'<br>')}`;chat.scrollTop=chat.scrollHeight;document.getElementById('aiInput').value='';}
-renderShop();
-</script></body></html>
+function render(){const c=document.getElementById('products');c.innerHTML='';products.forEach((p,i)=>{
+c.innerHTML+=`<div class="card"><b>${p.name}</b><br>UGX ${p.price}/kg • Stock ${p.stock}kg<br><input id="qty${i}" type="number" placeholder="Type KG e.g 80000"><button class="btn" onclick="addToCart(${i})">ADD</button></div>`;
+});}
+function addToCart(i){let q=parseFloat(document.getElementById('qty'+i).value);if(!q||q<=0)return alert('Type KG first');if(q>products[i].stock)return alert('Not enough stock');cart.push({i,qty:q,price:products[i].price});updateCart();}
+function updateCart(){let tot=0,kg=0;cart.forEach(x=>{tot+=x.qty*x.price;kg+=x.qty});document.getElementById('cartInfo').innerText=`${cart.length} types • ${kg}kg • UGX ${tot.toLocaleString()}`;}
+function showAdmin(){let u=prompt('Username:');let p=prompt('Password:');if(u==='wilson'&&p==='wilson321'){document.getElementById('adminPanel').style.display='block';renderAdmin();}else{alert('Wrong login!');}}
+function closeAdmin(){document.getElementById('adminPanel').style.display='none';}
+function renderAdmin(){let d=document.getElementById('adminProducts');d.innerHTML='';products.forEach((p,i)=>{
+d.innerHTML+=`<div style="border:1px solid #ddd;padding:8px;margin:6px 0;border-radius:8px"><input value="${p.name}" onchange="products[${i}].name=this.value;save()"> | <input type="number" value="${p.price}" onchange="products[${i}].price=parseFloat(this.value);save()" style="width:80px"> | <input type="number" value="${p.stock}" onchange="products[${i}].stock=parseFloat(this.value);save()" style="width:80px"> <button onclick="products.splice(${i},1);save();renderAdmin();render()">X</button></div>`;
+});}
+function save(){localStorage.setItem('kfs_products',JSON.stringify(products));render();}
+function addNewProduct(){let n=prompt('Product name:');if(!n)return;let pr=parseFloat(prompt('Price per kg:'));let st=parseFloat(prompt('Stock kg:'));products.push({name:n,price:pr,stock:st});save();renderAdmin();}
+function resetShop(){if(confirm('Reset shop?')){localStorage.clear();products=[...defaultProducts];render();updateCart();}}
+function aiAsk(t){document.getElementById('aiInput').value=t;askAI();}
+function askAI(){let q=document.getElementById('aiInput').value.toLowerCase();let out=document.getElementById('aiOutput');let txt='';if(q.includes('low')){let low=products.filter(p=>p.stock<100);txt=low.length?`Low stock: ${low.map(p=>p.name+' ('+p.stock+'kg)').join(', ')}`:'All stock is good! ✅'}else if(q.includes('advert')){txt=`🔥 KFS KAMPALA FOOD SHOP - Kisenyi! 🔥\nRice ${products[0]?.price}/kg, Beans ${products[1]?.price}/kg!\nCall 0700892386 - Free Delivery!\nType any KG - even 80000kg!`}else if(q.includes('luganda')){txt=`Wasuze otya? KFS erina omuceere, ebihimba, ne posho! Sente: ${products[0]?.price}/kg. Kuba 0700892386`}else if(q.includes('thank')){txt=`Webale nnyo! Thank you for buying at KFS! Call again: 0700892386 🙏`}else if(q.includes('price')){txt=`Advice: Keep rice at ${products[0]?.price}, beans competitive. Increase if stock < 50kg.`}else if(q.includes('value')){let v=products.reduce((s,p)=>s+p.price*p.stock,0);txt=`Total stock value: UGX ${v.toLocaleString()}`}else{txt=`I am KFS AI Helper! Try: Low Stock, Make Advert, Luganda, Thank You, Price Advice, Stock Value`}out.innerText=txt;}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('data:text/javascript;base64,'+btoa("self.addEventListener('fetch',e=>{});"));}
+render();updateCart();
+</script>
+</body>
+</html>
