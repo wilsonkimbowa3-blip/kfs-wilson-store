@@ -1,107 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KFS • Kampala Food Shop + AI</title>
-<link id="manifestLink" rel="manifest">
-<meta name="theme-color" content="#0a1931">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#08152b;color:#fff}
-header{background:#08152b;padding:10px 12px;position:sticky;top:0;z-index:100;border-bottom:2px solid #ffcc00}
-.badge{display:inline-block;background:#ffcc00;color:#000;padding:4px 10px;border-radius:20px;font-weight:800;font-size:12px;margin:4px 2px}
-.topBtn{background:#ffcc00;color:#000;border:2px solid #ffcc00;padding:8px 14px;border-radius:20px;font-weight:900;margin:4px;cursor:pointer}
-.topBtn.outline{background:transparent;color:#ffcc00}
-#installBanner{background:#0a1931;border:2px solid #00e676;border-radius:14px;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin:8px}
-#installBtn{background:#00e676;color:#000;border:none;padding:12px 22px;border-radius:22px;font-weight:900;cursor:pointer;animation:pulse 1.5s infinite}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
-.card{background:#10264d;border:1.5px solid #ffcc33;border-radius:14px;padding:10px;margin:8px;display:flex;gap:10px;align-items:center}
-.icon{width:50px;height:50px;background:#0a1931;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:28px}
-.info{flex:1}
-.price{color:#ffcc00;font-weight:900}
-.qtyBox{display:flex;align-items:center;gap:6px;margin-top:6px}
-.qBtn{width:36px;height:36px;background:#1a365d;border:none;border-radius:8px;color:#fff;font-weight:900}
-.qInput{width:70px;background:#08152b;border:2px solid #ffcc33;border-radius:10px;color:#ffcc00;text-align:center;padding:6px;font-weight:900}
-.addBtn{background:#10264d;border:1.5px solid #ffcc33;color:#fff;padding:6px 10px;border-radius:8px;font-weight:800}
-#cartBar{background:#ffcc00;color:#000;padding:10px 12px;position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;z-index:90}
-#checkoutBtn{background:#000;color:#ffcc00;border:none;padding:10px 18px;border-radius:20px;font-weight:900}
-</style>
-</head>
-<body>
-<header>
-<div style="font-weight:900;font-size:18px">KFS • <span style="color:#ffcc00">Kampala Food Shop + AI</span> 🤖</div>
-<div><span class="badge">⚙️ ADMIN + 🤖 AI • Kisenyi • Type KG</span></div>
-<div style="margin-top:6px">
-<button class="topBtn">🛒 SHOP</button>
-<button class="topBtn outline" onclick="showAdmin()">⚙️ AI ADMIN</button>
-<button class="topBtn outline" onclick="resetShop()">🔒 RESET</button>
-</div>
-</header>
-
-<div id="installBanner">
-<div><b style="color:#00e676">📲 Install KFS APP</b><br><small>AI Inside! Works Offline • 5-10 sec</small></div>
-<button id="installBtn">INSTALL APP</button>
-</div>
-
-<div id="products"></div>
-<div style="height:70px"></div>
-
-<div id="cartBar">
-<div><b id="cartInfo">0 types • 0kg • UGX 0</b><br><small>Pay 0700892386 • Type KG • COD</small></div>
-<button id="checkoutBtn" onclick="checkout()">CHECKOUT 🧾</button>
-</div>
-
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>KFS • Kampala Food Shop + AI</title><link id="manifestLink" rel="manifest"><meta name="theme-color" content="#0a1931">
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#08152b;color:#fff}header{background:#08152b;padding:10px 12px;position:sticky;top:0;z-index:100;border-bottom:2px solid #ffcc00}.badge{display:inline-block;background:#ffcc00;color:#000;padding:4px 10px;border-radius:20px;font-weight:800;font-size:12px;margin:4px 2px}.topBtn{background:#ffcc00;color:#000;border:2px solid #ffcc00;padding:8px 14px;border-radius:20px;font-weight:900;margin:4px;cursor:pointer}.topBtn.outline{background:transparent;color:#ffcc00}#installBanner{background:#0a1931;border:2px solid #00e676;border-radius:14px;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin:8px}#installBtn{background:#00e676;color:#000;border:none;padding:12px 22px;border-radius:22px;font-weight:900;cursor:pointer;animation:pulse 1.5s infinite}@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}.card{background:#10264d;border:1.5px solid #ffcc33;border-radius:14px;padding:10px;margin:8px;display:flex;gap:10px;align-items:center}.icon{width:60px;height:60px;background:#0a1931;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:28px;overflow:hidden}.icon img{width:100%;height:100%;object-fit:cover;border-radius:10px}.info{flex:1}.price{color:#ffcc00;font-weight:900}.qtyBox{display:flex;align-items:center;gap:6px;margin-top:6px}.qBtn{width:36px;height:36px;background:#1a365d;border:none;border-radius:8px;color:#fff;font-weight:900}.qInput{width:70px;background:#08152b;border:2px solid #ffcc33;border-radius:10px;color:#ffcc00;text-align:center;padding:6px;font-weight:900}.addBtn{background:#10264d;border:1.5px solid #ffcc33;color:#fff;padding:6px 10px;border-radius:8px;font-weight:800}#cartBar{background:#ffcc00;color:#000;padding:10px 12px;position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;z-index:90}#checkoutBtn{background:#000;color:#ffcc00;border:none;padding:10px 18px;border-radius:20px;font-weight:900}.adminRow{border:1px solid #ffcc33;padding:8px;margin:6px 0;border-radius:8px;background:#10264d}</style></head><body>
+<header><div style="font-weight:900;font-size:18px">KFS • <span style="color:#ffcc00">Kampala Food Shop + AI</span> 🤖</div><div><span class="badge">⚙️ ADMIN + 🤖 AI • Kisenyi • Type KG</span></div><div style="margin-top:6px"><button class="topBtn">🛒 SHOP</button><button class="topBtn outline" onclick="showAdmin()">⚙️ AI ADMIN</button><button class="topBtn outline" onclick="resetShop()">🔒 RESET</button></div></header>
+<div id="installBanner"><div><b style="color:#00e676">📲 Install KFS APP</b><br><small>AI Inside! Works Offline • 5-10 sec</small></div><button id="installBtn">INSTALL APP</button></div>
+<div id="products"></div><div style="height:70px"></div>
+<div id="cartBar"><div><b id="cartInfo">0 types • 0kg • UGX 0</b><br><small>Pay 0700892386 • Type KG • COD</small></div><button id="checkoutBtn" onclick="checkout()">CHECKOUT 🧾</button></div>
 <div id="adminPanel" style="display:none;position:fixed;inset:0;background:#08152b;z-index:200;overflow:auto;padding:16px">
 <h2>⚙️ ADMIN + 🤖 AI</h2>
-<div style="background:#10264d;padding:12px;border-radius:10px;margin:10px 0;border:1px solid #00e676">
-<b style="color:#00e676">🤖 KFS AI — Wilson's Helper</b>
-<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
-<button onclick="aiAsk('Low Stock?')" class="topBtn">Low Stock?</button>
-<button onclick="aiAsk('Make Advert')" class="topBtn">Make Advert</button>
-<button onclick="aiAsk('Luganda')" class="topBtn">Luganda</button>
-</div>
-<div style="display:flex;gap:8px;margin-top:10px"><input id="aiInput" placeholder="Ask AI anything..." style="flex:1;padding:8px;border-radius:8px"><button onclick="askAI()" class="topBtn">ASK AI</button></div>
-<div id="aiOutput" style="margin-top:10px;background:#08152b;padding:8px;border-radius:8px;min-height:40px;color:#ffcc00"></div>
-</div>
-<h3 style="color:#ffcc00">✏️ EDIT SHOP AT ANY TIME</h3>
+<div style="background:#10264d;padding:12px;border-radius:10px;margin:10px 0;border:1px solid #00e676"><b style="color:#00e676">🤖 KFS AI — Wilson's Helper</b><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><button onclick="aiAsk('Low Stock?')" class="topBtn">Low Stock?</button><button onclick="aiAsk('Make Advert')" class="topBtn">Make Advert</button><button onclick="aiAsk('Luganda')" class="topBtn">Luganda</button></div><div style="display:flex;gap:8px;margin-top:10px"><input id="aiInput" placeholder="Ask AI anything..." style="flex:1;padding:8px;border-radius:8px"><button onclick="askAI()" class="topBtn">ASK AI</button></div><div id="aiOutput" style="margin-top:10px;background:#08152b;padding:8px;border-radius:8px;min-height:40px;color:#ffcc00"></div></div>
+<h3 style="color:#ffcc00">✏️ EDIT SHOP AT ANY TIME + 📸 ADD YOUR PHOTO</h3>
 <div id="adminProducts"></div>
 <button class="topBtn" onclick="addNewProduct()">+ Add Product</button>
 <button class="topBtn outline" onclick="closeAdmin()">Close Admin</button>
+<p style="margin-top:12px;color:#00e676;font-size:13px">💡 TIP: Tap 📷 to choose image from Gallery for each product!</p>
 </div>
-
 <script>
-const defaultProducts=[
-{name:"50kg Super Rice",desc:"Premium Tanzania Rice",price:4000,stock:500,icon:"🍚"},
-{name:"50kg Nambale Beans",desc:"Yellow Beans Clean",price:3500,stock:400,icon:"🫘"},
-{name:"50kg Posho Flour",desc:"Fine Maize Fortified",price:2500,stock:800,icon:"🌽"},
-{name:"50kg Matooke",desc:"Fresh Kisenyi Direct",price:2000,stock:300,icon:"🍌"}
-];
+const defaultProducts=[{name:"50kg Super Rice",desc:"Premium Tanzania Rice",price:4000,stock:500,icon:"🍚",image:""},{name:"50kg Nambale Beans",desc:"Yellow Beans Clean",price:3500,stock:400,icon:"🫘",image:""},{name:"50kg Posho Flour",desc:"Fine Maize Fortified",price:2500,stock:800,icon:"🌽",image:""},{name:"50kg Matooke",desc:"Fresh Kisenyi Direct",price:2000,stock:300,icon:"🍌",image:""}];
 let products=JSON.parse(localStorage.getItem('kfs_products')||'null')||defaultProducts;
-let cart=[];
-let deferredPrompt=null;
+let cart=[];let deferredPrompt=null;
 const manifest={name:"KFS Kampala Food Shop",short_name:"KFS",start_url:".",display:"standalone",background_color:"#08152b",theme_color:"#0a1931",icons:[{src:"https://cdn-icons-png.flaticon.com/512/3081/3081559.png",sizes:"512x512",type:"image/png"}]};
-const blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
-document.getElementById('manifestLink').href=URL.createObjectURL(blob);
+const blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});document.getElementById('manifestLink').href=URL.createObjectURL(blob);
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
 document.getElementById('installBtn').onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;}else{alert('Tap browser menu (3 dots) → Add to Home Screen / Install App');}};
-function render(){const c=document.getElementById('products');c.innerHTML='';products.forEach((p,i)=>{
-c.innerHTML+=`<div class="card"><div class="icon">${p.icon||'📦'}</div><div class="info"><b>${p.name}</b><br><small style="opacity:.8">${p.desc} • Stock ${p.stock}kg</small><br><span class="price">UGX ${p.price.toLocaleString()}/kg</span><div class="qtyBox"><button class="qBtn" onclick="chg(${i},-1)">-</button><input id="qty${i}" class="qInput" type="number" value="0"><button class="qBtn" onclick="chg(${i},1)">+</button><button class="addBtn" onclick="addToCart(${i})">ADD</button></div></div></div>`;
-});}
+function render(){const c=document.getElementById('products');c.innerHTML='';products.forEach((p,i)=>{let imgHtml=p.image?`<img src="${p.image}">`:p.icon;c.innerHTML+=`<div class="card"><div class="icon">${imgHtml}</div><div class="info"><b>${p.name}</b><br><small style="opacity:.8">${p.desc} • Stock ${p.stock}kg</small><br><span class="price">UGX ${p.price.toLocaleString()}/kg</span><div class="qtyBox"><button class="qBtn" onclick="chg(${i},-1)">-</button><input id="qty${i}" class="qInput" type="number" value="0"><button class="qBtn" onclick="chg(${i},1)">+</button><button class="addBtn" onclick="addToCart(${i})">ADD</button></div></div></div>`;});}
 function chg(i,d){let el=document.getElementById('qty'+i);let v=parseFloat(el.value)||0;v+=d;if(v<0)v=0;el.value=v;}
 function addToCart(i){let q=parseFloat(document.getElementById('qty'+i).value);if(!q||q<=0)return alert('Type KG first!');if(q>products[i].stock)return alert('Not enough stock!');let f=cart.find(x=>x.i===i);if(f)f.qty+=q;else cart.push({i,qty:q,price:products[i].price});updateCart();document.getElementById('qty'+i).value=0;}
 function updateCart(){let tot=0,kg=0;cart.forEach(x=>{tot+=x.qty*x.price;kg+=x.qty});document.getElementById('cartInfo').innerText=`${cart.length} types • ${kg}kg • UGX ${tot.toLocaleString()}`;}
 function checkout(){if(cart.length===0)return alert('Cart empty!');let msg=`Hello Wilson, I want:\n`;cart.forEach(x=>{msg+=`${products[x.i].name} - ${x.qty}kg = UGX ${(x.qty*x.price).toLocaleString()}\n`;});let tot=cart.reduce((s,x)=>s+x.qty*x.price,0);msg+=`Total: UGX ${tot.toLocaleString()}\nPay to: 0700892386`;window.open(`https://wa.me/256700892386?text=${encodeURIComponent(msg)}`,'_blank');}
 function showAdmin(){let u=prompt('Username:');let p=prompt('Password:');if(u==='wilson'&&p==='wilson321'){document.getElementById('adminPanel').style.display='block';renderAdmin();}else{alert('Wrong!');}}
 function closeAdmin(){document.getElementById('adminPanel').style.display='none';}
-function renderAdmin(){let d=document.getElementById('adminProducts');d.innerHTML='';products.forEach((p,i)=>{d.innerHTML+=`<div style="border:1px solid #ffcc33;padding:8px;margin:6px 0;border-radius:8px"><input value="${p.name}" onchange="products[${i}].name=this.value;save()" style="width:40%"> <input type="number" value="${p.price}" onchange="products[${i}].price=parseFloat(this.value);save()" style="width:70px"> <input type="number" value="${p.stock}" onchange="products[${i}].stock=parseFloat(this.value);save()" style="width:70px"> <button onclick="products.splice(${i},1);save();renderAdmin();render()">X</button></div>`;});}
+function renderAdmin(){let d=document.getElementById('adminProducts');d.innerHTML='';products.forEach((p,i)=>{d.innerHTML+=`<div class="adminRow"><input value="${p.name}" onchange="products[${i}].name=this.value;save()" style="width:32%;padding:6px;border-radius:6px"> <input type="number" value="${p.price}" onchange="products[${i}].price=parseFloat(this.value);save()" style="width:18%;padding:6px;border-radius:6px"> <input type="number" value="${p.stock}" onchange="products[${i}].stock=parseFloat(this.value);save()" style="width:15%;padding:6px;border-radius:6px"><br><div style="margin-top:6px;display:flex;align-items:center;gap:8px"><label style="background:#ffcc00;color:#000;padding:6px 10px;border-radius:12px;font-weight:800;cursor:pointer">📷 Gallery<input type="file" accept="image/*" style="display:none" onchange="uploadImg(${i},this)"></label><span style="font-size:12px">${p.image?'✅ Photo added':'No photo yet - using '+p.icon}</span> <button onclick="products.splice(${i},1);save();renderAdmin();render()" style="margin-left:auto;background:#ff4444;color:#fff;border:none;padding:6px 10px;border-radius:8px">X</button></div></div>`;});}
+function uploadImg(i,input){let file=input.files[0];if(!file)return;let reader=new FileReader();reader.onload=e=>{products[i].image=e.target.result;save();renderAdmin();render();alert('✅ Photo added!');};reader.readAsDataURL(file);}
 function save(){localStorage.setItem('kfs_products',JSON.stringify(products));render();}
-function addNewProduct(){let n=prompt('Name:');if(!n)return;let pr=parseFloat(prompt('Price:'));let st=parseFloat(prompt('Stock:'));products.push({name:n,desc:"Kisenyi",price:pr,stock:st,icon:"📦"});save();renderAdmin();}
-function resetShop(){if(confirm('Reset shop?')){localStorage.clear();products=[...defaultProducts];cart=[];render();updateCart();}}
+function addNewProduct(){let n=prompt('Name:');if(!n)return;let pr=parseFloat(prompt('Price per kg:'));let st=parseFloat(prompt('Stock kg:'));products.push({name:n,desc:"Kisenyi",price:pr,stock:st,icon:"📦",image:""});save();renderAdmin();}
+function resetShop(){if(confirm('Reset shop? This will remove your gallery photos too!')){localStorage.clear();products=[...defaultProducts];cart=[];render();updateCart();}}
 function aiAsk(t){document.getElementById('aiInput').value=t;askAI();}
 function askAI(){let q=document.getElementById('aiInput').value.toLowerCase();let out=document.getElementById('aiOutput');let txt='';if(q.includes('low')){let low=products.filter(p=>p.stock<100);txt=low.length?`Low: ${low.map(p=>p.name).join(', ')}`:'All good ✅'}else if(q.includes('advert')){txt=`🔥 KFS KISENYI! Rice ${products[0].price}/kg, Beans ${products[1].price}/kg! Call 0700892386`}else if(q.includes('luganda')){txt=`Wasuze otya? KFS erina omuceere! 0700892386`}else{txt=`Try: Low Stock, Make Advert, Luganda`}out.innerText=txt;}
 if('serviceWorker' in navigator){navigator.serviceWorker.register('data:text/javascript;base64,'+btoa("self.addEventListener('fetch',e=>{});"));}
 render();updateCart();
-</script>
-</body>
-</html>
+</script></body></html>
