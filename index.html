@@ -1,16 +1,15 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KFS v7.1 GOLD EDITION</title>
+<title>KFS v7.2 GOLD FORCE NEVER EMPTY</title>
 <meta name="theme-color" content="#0a1931">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#0a1931;color:#fff;padding-bottom:120px}
-:root{--gold:#D4AF37;--gold-light:#FFD700;--gold-dark:#B8960C}
+:root{--gold:#D4AF37}
 header{padding:12px}
 .card{border:2px solid var(--gold);border-radius:16px;padding:12px;margin:10px 12px;background:#102a54}
 .card-green{border-color:#00FF88}
 .btn{border:2px solid var(--gold);color:var(--gold);background:transparent;padding:10px 18px;border-radius:22px;font-weight:900;cursor:pointer;font-size:13px}
 .btn-gold{background:var(--gold);color:#000;border-color:var(--gold)}
-.btn-small{padding:8px 14px;font-size:12px}
 .product-card{border:2px solid var(--gold);border-radius:16px;padding:10px;margin:12px;background:#102a54;display:flex;gap:12px;align-items:center}
 .p-img{width:74px;height:74px;background:#fff;border-radius:12px;display:grid;place-items:center;font-size:42px;flex-shrink:0}
 .qty-box{display:flex;align-items:center;gap:6px;background:#0a1931;border:2px solid var(--gold);border-radius:12px;padding:4px}
@@ -22,58 +21,110 @@ header{padding:12px}
 </style>
 </head><body>
 <div id="toast"></div>
-
 <header>
-<div class="card" style="text-align:center;background:#0f2140;border-color:var(--gold)">
-<div style="display:flex;gap:10px;align-items:center;justify-content:center"><div style="width:44px;height:44px;background:var(--gold);border-radius:10px;display:grid;place-items:center;font-weight:900;color:#000">KFS</div><div><div style="font-weight:900;font-size:16px">KFS • Kampala Food Shop • AI</div><div style="font-size:13px">Kisenyi • Type KG • AI Powered</div><div style="font-size:13px;color:var(--gold)">💰 Pay: 0700892386</div></div></div>
-</div>
-
-<div class="card" style="text-align:center">
-<div style="font-weight:900;color:var(--gold)">💰 SEND MONEY / PAY TO:</div>
-<div style="font-size:14px;margin-top:4px">Airtel Money: <b>0700892386 - WILSON</b></div>
-<div style="font-size:12px;color:#aaa;margin-top:2px" id="payInfoTop">MTN: To be added | Bank: To be added</div>
-<div style="font-size:11px;color:#00FF88;margin-top:6px">v7.1 GOLD • Namasuba 6km • Munyonyo 10km • NEVER EMPTY</div>
-</div>
-
-<div class="card card-green" style="display:flex;justify-content:space-between;align-items:center">
-<div><div style="color:#00FF88;font-weight:900;font-size:16px">📲 Install KFS APP</div><div style="font-size:12px;color:#aaa">AI Inside!</div></div>
-<button class="btn" style="background:#00FF88;color:#000;border-color:#00FF88;font-weight:900" onclick="doInstall()">INSTALL APP</button>
-</div>
-
-<div style="display:flex;gap:8px;margin:12px;flex-wrap:wrap">
-<button class="btn btn-gold" onclick="showShop()">🛒 SHOP</button>
-<button class="btn" onclick="openAdminNow()" style="background:#102a54">🤖 AI ADMIN</button>
-<button class="btn" onclick="doHardReset()" style="background:#102a54">🔒 RESET</button>
-</div>
+<div class="card" style="text-align:center;background:#0f2140"><div style="display:flex;gap:10px;align-items:center;justify-content:center"><div style="width:44px;height:44px;background:var(--gold);border-radius:10px;display:grid;place-items:center;font-weight:900;color:#000">KFS</div><div><div style="font-weight:900;font-size:16px">KFS • Kampala Food Shop • AI</div><div style="font-size:13px">Kisenyi • Type KG • AI Powered</div><div style="font-size:13px;color:var(--gold)">💰 Pay: 0700892386</div></div></div></div>
+<div class="card" style="text-align:center"><div style="font-weight:900;color:var(--gold)">💰 SEND MONEY / PAY TO:</div><div style="font-size:14px;margin-top:4px">Airtel Money: <b>0700892386 - WILSON</b></div><div style="font-size:12px;color:#aaa;margin-top:2px" id="payInfoTop">MTN: To be added | Bank: To be added</div><div style="font-size:11px;color:#00FF88;margin-top:6px">v7.2 GOLD FORCE • Namasuba 6km • Munyonyo 10km • NEVER EMPTY FORCE</div></div>
+<div class="card card-green" style="display:flex;justify-content:space-between;align-items:center"><div><div style="color:#00FF88;font-weight:900;font-size:16px">📲 Install KFS APP</div><div style="font-size:12px;color:#aaa">AI Inside!</div></div><button class="btn" style="background:#00FF88;color:#000;border-color:#00FF88;font-weight:900" onclick="doInstall()">INSTALL APP</button></div>
+<div style="display:flex;gap:8px;margin:12px;flex-wrap:wrap"><button class="btn btn-gold" onclick="forceRender()">🛒 SHOP</button><button class="btn" onclick="openAdminNow()" style="background:#102a54">🤖 AI ADMIN</button><button class="btn" onclick="doHardReset()" style="background:#102a54">🔒 RESET</button></div>
 </header>
 
-<div id="shopView"></div>
+<!-- STATIC PRODUCTS - WILL SHOW EVEN IF JS FAILS - NEVER EMPTY -->
+<div id="shopView">
+<div class="product-card"><div class="p-img">🍚</div><div style="flex:1"><div style="font-weight:900">50kg Super Rice</div><div style="font-size:12px;color:#aaa">UGX 4000/kg • 3500kg</div></div><div style="text-align:center"><div class="qty-box"><button class="q-btn" onclick="changeQty(1,-1)">-</button><div class="q-val" id="val-1">0</div><button class="q-btn" onclick="changeQty(1,1)">+</button></div><button class="add-btn" onclick="changeQty(1,1)">ADD 1KG</button></div></div>
+<div class="product-card"><div class="p-img">🫘</div><div style="flex:1"><div style="font-weight:900">50kg Nambale Beans</div><div style="font-size:12px;color:#aaa">UGX 4000/kg • 1500kg</div></div><div style="text-align:center"><div class="qty-box"><button class="q-btn" onclick="changeQty(2,-1)">-</button><div class="q-val" id="val-2">0</div><button class="q-btn" onclick="changeQty(2,1)">+</button></div><button class="add-btn" onclick="changeQty(2,1)">ADD 1KG</button></div></div>
+<div class="product-card"><div class="p-img">🌽</div><div style="flex:1"><div style="font-weight:900">50kg Posho Flour</div><div style="font-size:12px;color:#aaa">UGX 3000/kg • 2000kg</div></div><div style="text-align:center"><div class="qty-box"><button class="q-btn" onclick="changeQty(3,-1)">-</button><div class="q-val" id="val-3">0</div><button class="q-btn" onclick="changeQty(3,1)">+</button></div><button class="add-btn" onclick="changeQty(3,1)">ADD 1KG</button></div></div>
+<div class="product-card"><div class="p-img">🍌</div><div style="flex:1"><div style="font-weight:900">50kg Matooke</div><div style="font-size:12px;color:#aaa">UGX 2000/kg • 300kg</div></div><div style="text-align:center"><div class="qty-box"><button class="q-btn" onclick="changeQty(4,-1)">-</button><div class="q-val" id="val-4">0</div><button class="q-btn" onclick="changeQty(4,1)">+</button></div><button class="add-btn" onclick="changeQty(4,1)">ADD 1KG</button></div></div>
+</div>
 
-<div id="cartBar"><div><div style="font-weight:900" id="cartInfo">0 types • 0kg • UGX 0</div><div style="font-size:11px">Pay to 0700892386 • Type KG</div></div><button style="background:#000;color:var(--gold);border:none;padding:12px 20px;border-radius:22px;font-weight:900" onclick="doCheckout()">CHECKOUT</button></div>
+<div id="cartBar"><div><div style="font-weight:900" id="cartInfo">0 types • 0kg • UGX 0</div><div style="font-size:11px">Pay to 0700892386 • v7.2 GOLD FORCE</div></div><button style="background:#000;color:var(--gold);border:none;padding:12px 20px;border-radius:22px;font-weight:900" onclick="doCheckout()">CHECKOUT</button></div>
 
-<div id="checkoutModal" class="modal"><div class="box">
-<h2 style="color:var(--gold)">🧾 CHECKOUT v7.1 GOLD</h2>
-<div id="checkoutSummary" style="background:#0a1931;padding:10px;border-radius:10px;margin:10px 0;min-height:40px"></div>
-<input id="cName" class="inp" placeholder="Customer Name *"><input id="cPhone" class="inp" placeholder="Phone * 07...">
-<input id="cDistrict" class="inp" placeholder="District e.g. Wakiso" oninput="doVillage()">
-<input id="cVillage" class="inp" placeholder="VILLAGE * Namasuba 6km / Munyonyo 10km" style="border:2px solid #00FF88;background:#102a54;font-weight:900" oninput="doVillage()">
-<input type="hidden" id="cDistance"><input type="hidden" id="cWeightShow"><input type="hidden" id="gpsLink">
-<div id="transportBox" style="display:none;background:#102a54;border:2px solid #00FF88;border-radius:12px;padding:12px;margin:10px 0"><div id="autoDistDisplay" style="color:#00FF88;font-weight:900"></div><div id="transportText" style="color:var(--gold);font-weight:900;font-size:16px;margin-top:6px"></div></div>
-<div id="transportHint" style="background:#0a1931;border:1px dashed var(--gold);border-radius:10px;padding:10px;font-size:12px;color:#aaa">Namasuba 6km, Zana 6km, Munyonyo 10km, Wankulukuku 4.4km, Wakiso 15km</div>
-<div style="background:#0a1931;border:2px dashed var(--gold);border-radius:12px;padding:12px;margin:10px 0"><button class="btn btn-gold" style="width:100%" onclick="doGPS()">📍 GET LOCATION</button><div id="gpsText" style="display:none;background:#102a54;padding:8px;border-radius:8px;margin-top:8px;font-size:12px"></div></div>
-<div style="background:#0a1931;border:2px solid #00FF88;border-radius:12px;padding:12px;margin:12px 0"><div style="color:#00FF88;font-weight:900">💰 PAYMENT</div>
-<label style="display:block;background:#102a54;border:1px solid #333;border-radius:10px;padding:10px;margin:4px 0"><input type="radio" name="pay" checked onchange="doPay('mtn')"> 📱 Airtel/MTN 0700892386</label>
-<label style="display:block;background:#102a54;border:1px solid #333;border-radius:10px;padding:10px;margin:4px 0"><input type="radio" name="pay" onchange="doPay('bank')"> 🏦 BANK <span id="bankShort">To be added</span></label>
-<label style="display:block;background:#102a54;border:1px solid #333;border-radius:10px;padding:10px;margin:4px 0"><input type="radio" name="pay" onchange="doPay('cod')"> 💵 COD</label>
-<div id="payHint" style="background:#102a54;border:1px solid var(--gold);border-radius:10px;padding:10px;margin-top:8px;font-size:12px"></div></div>
-<div id="finalReceipt" class="receipt">Add KG first</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px"><button class="btn" style="background:#fff;color:#000;font-weight:900;padding:14px" onclick="closeCheckout()">CLOSE</button><button class="btn btn-gold" style="padding:14px" onclick="doSendWA()">SEND WA 📱</button></div>
-<button class="btn btn-gold" style="width:100%;margin-top:10px;padding:16px;font-size:16px" onclick="doDownloadPDF()">⬇️ DOWNLOAD PDF</button>
-</div></div>
+<div id="checkoutModal" class="modal"><div class="box"><h2 style="color:var(--gold)">🧾 CHECKOUT v7.2 GOLD FORCE</h2><div id="checkoutSummary" style="background:#0a1931;padding:10px;border-radius:10px;margin:10px 0;min-height:40px">Add KG first</div><input id="cName" class="inp" placeholder="Customer Name *"><input id="cPhone" class="inp" placeholder="Phone * 07..."><input id="cDistrict" class="inp" placeholder="District e.g. Wakiso" oninput="doVillage()"><input id="cVillage" class="inp" placeholder="VILLAGE * Namasuba 6km / Munyonyo 10km" style="border:2px solid #00FF88;background:#102a54;font-weight:900" oninput="doVillage()"><input type="hidden" id="cDistance"><input type="hidden" id="cWeightShow"><input type="hidden" id="gpsLink"><div id="transportBox" style="display:none;background:#102a54;border:2px solid #00FF88;border-radius:12px;padding:12px;margin:10px 0"><div id="autoDistDisplay" style="color:#00FF88;font-weight:900"></div><div id="transportText" style="color:var(--gold);font-weight:900;margin-top:6px"></div></div><div id="transportHint" style="background:#0a1931;border:1px dashed var(--gold);border-radius:10px;padding:10px;font-size:12px;color:#aaa">Namasuba 6km, Zana 6km, Munyonyo 10km, Wankulukuku 4.4km, Wakiso 15km</div><div style="background:#0a1931;border:2px dashed var(--gold);border-radius:12px;padding:12px;margin:10px 0"><button class="btn btn-gold" style="width:100%" onclick="doGPS()">📍 GET LOCATION</button><div id="gpsText" style="display:none;background:#102a54;padding:8px;border-radius:8px;margin-top:8px;font-size:12px"></div></div><div id="finalReceipt" class="receipt">Receipt here</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px"><button class="btn" style="background:#fff;color:#000;font-weight:900;padding:14px" onclick="closeCheckout()">CLOSE</button><button class="btn btn-gold" style="padding:14px" onclick="doSendWA()">SEND WA 📱</button></div><button class="btn btn-gold" style="width:100%;margin-top:10px;padding:16px" onclick="doDownloadPDF()">⬇️ DOWNLOAD PDF</button></div></div>
 
-<div id="adminModal" class="modal"><div class="box">
-<h2 style="color:var(--gold)">🤖 AI ADMIN v7.1 GOLD</h2>
-<div style="background:#102a54;border:2px solid #00FF88;border-radius:12px;padding:12px;margin:10px 0"><div style="color:#00FF88;font-weight:900">💰 SET PAYMENT</div>
-<input id="adminMoMo" class="inp" placeholder="Airtel/MTN"><input id="adminBankName" class="inp" placeholder="Bank Name"><input id="adminAccNo" class="inp" placeholder="Account No"><input id="adminAccName" class="inp" placeholder="Account Name">
-<button class="btn btn-gold" style="width:100%;margin-top:8px" onclick="doSaveBank()">💾 SAVE - SHOW ON TOP</button><div id="bankSaveMsg" style="color:#00FF88;text-align:center;margin-top:8px;font-weight:900"></div></div>
-<div style="background:#0a1931;border:1px solid var(--gold);border-radius:12px;padding:10px"><div style="color:var(--gold);font-weight:900">🚚 TRANSPORT</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><input id="t
+<div id="adminModal" class="modal"><div class="box"><h2 style="color:var(--gold)">🤖 AI ADMIN v7.2</h2><div style="background:#102a54;border:2px solid #00FF88;border-radius:12px;padding:12px;margin:10px 0"><input id="adminMoMo" class="inp" placeholder="Airtel/MTN"><input id="adminBankName" class="inp" placeholder="Bank Name"><input id="adminAccNo" class="inp" placeholder="Account No"><input id="adminAccName" class="inp" placeholder="Account Name"><button class="btn btn-gold" style="width:100%;margin-top:8px" onclick="doSaveBank()">💾 SAVE</button><div id="bankSaveMsg" style="color:#00FF88;text-align:center;margin-top:8px;font-weight:900"></div></div><div id="adminList"></div><button class="btn" style="width:100%;margin-top:16px;background:#fff;color:#000;font-weight:900" onclick="closeAdmin()">CLOSE ADMIN</button></div></div>
+
+<script>
+// FORCE NEVER EMPTY - DELETE ALL OLD BAD KEYS THAT CAUSED EMPTY
+(function(){
+ try{
+  var bad=['kfs_products_v7','kfs_cart_v7','kfs_products_v6','kfs_cart_v6','kfs_products_v5','kfs_cart_v5','kfs_products_final','kfs_cart_final'];
+  for(var i=0;i<bad.length;i++){
+   var v=localStorage.getItem(bad[i]);
+   if(v==='[]' || v==='{}' || (v&&v.length<5)) localStorage.removeItem(bad[i]);
+  }
+  // If cart is empty array string, remove
+  var sp=localStorage.getItem('kfs_products_v7');
+  if(sp){ try{ var arr=JSON.parse(sp); if(!arr||arr.length===0) localStorage.removeItem('kfs_products_v7'); }catch(e){ localStorage.removeItem('kfs_products_v7'); } }
+ }catch(e){}
+})();
+
+function toast(m){var t=document.getElementById('toast'); if(!t) return; t.innerText=m; t.style.display='block'; setTimeout(function(){t.style.display='none';},3000);}
+var bankInfo={momo:'0700892386',bankName:'To be added',accNo:'To be added',accName:'WILSON'}; try{var b=JSON.parse(localStorage.getItem('kfs_bank_gold')||'null'); if(b) bankInfo=b;}catch(e){}
+var selectedPay='mtn'; var autoDistanceKm=0;
+var defaultProducts=[
+ {id:1,name:'50kg Super Rice',desc:'UGX 4000/kg',stock:3500,price:4000,icon:'🍚'},
+ {id:2,name:'50kg Nambale Beans',desc:'UGX 4000/kg',stock:1500,price:4000,icon:'🫘'},
+ {id:3,name:'50kg Posho Flour',desc:'UGX 3000/kg',stock:2000,price:3000,icon:'🌽'},
+ {id:4,name:'50kg Matooke',desc:'UGX 2000/kg',stock:300,price:2000,icon:'🍌'}
+];
+var products=defaultProducts.slice(); var cart={};
+try{
+ var sp=localStorage.getItem('kfs_products_gold_v7');
+ if(sp){var arr=JSON.parse(sp); if(arr&&arr.length>0) products=arr;}
+ var sc=localStorage.getItem('kfs_cart_gold_v7');
+ if(sc){cart=JSON.parse(sc);}
+ if(!products||products.length===0) products=defaultProducts.slice();
+}catch(e){products=defaultProducts.slice(); cart={};}
+function saveAll(){try{localStorage.setItem('kfs_products_gold_v7',JSON.stringify(products)); localStorage.setItem('kfs_cart_gold_v7',JSON.stringify(cart)); localStorage.setItem('kfs_bank_gold',JSON.stringify(bankInfo));}catch(e){}}
+
+function forceRender(){
+ // ALWAYS USE DEFAULT IF EMPTY
+ if(!products||products.length===0) products=defaultProducts.slice();
+ var html='';
+ for(var i=0;i<products.length;i++){
+  var p=products[i]; var q=cart[p.id]||0;
+  html+='<div class="product-card"><div class="p-img">'+p.icon+'</div><div style="flex:1"><div style="font-weight:900">'+p.name+'</div><div style="font-size:12px;color:#aaa">'+p.desc+' • '+p.stock+'kg</div></div><div style="text-align:center"><div class="qty-box"><button class="q-btn" onclick="changeQty('+p.id+',-1)">-</button><div class="q-val" id="val-'+p.id+'">'+q+'</div><button class="q-btn" onclick="changeQty('+p.id+',1)">+</button></div><button class="add-btn" onclick="changeQty('+p.id+',1)">ADD 1KG</button></div></div>';
+ }
+ var sv=document.getElementById('shopView');
+ if(html.length>50) sv.innerHTML=html;
+ updateCartBar();
+}
+function changeQty(id,delta){
+ var cur=parseInt(cart[id]||0); var v=cur+delta; if(v<0) v=0;
+ var p=null; for(var i=0;i<products.length;i++) if(products[i].id==id) p=products[i];
+ if(p&&v>p.stock){toast('Only '+p.stock+'kg'); v=p.stock;}
+ if(v==0) delete cart[id]; else cart[id]=v;
+ var el=document.getElementById('val-'+id); if(el) el.textContent=v;
+ saveAll(); updateCartBar();
+}
+function updateCartBar(){
+ var types=0,kg=0,ugx=0;
+ for(var id in cart){var qty=parseInt(cart[id]||0); if(qty<=0) continue; var p=null; for(var i=0;i<products.length;i++) if(products[i].id==parseInt(id)) p=products[i]; if(!p) continue; types++; kg+=qty; ugx+=qty*p.price;}
+ var info=document.getElementById('cartInfo'); if(info) info.innerText=types+' types • '+kg+'kg • UGX '+ugx.toLocaleString();
+ var w=document.getElementById('cWeightShow'); if(w) w.value=kg;
+ return {kg:kg};
+}
+function doHardReset(){
+ try{localStorage.removeItem('kfs_cart_gold_v7'); localStorage.removeItem('kfs_products_gold_v7'); localStorage.removeItem('kfs_products_v7'); localStorage.removeItem('kfs_cart_v7');}catch(e){}
+ cart={}; products=defaultProducts.slice(); saveAll(); forceRender(); toast('✅ FIXED - 4 products forced!'); setTimeout(function(){location.reload();},800);
+}
+function toRad(d){return d*Math.PI/180;} function calcHav(a,b,c,d){var R=6371;var dLat=toRad(c-a);var dLon=toRad(d-b);var aa=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(toRad(a))*Math.cos(toRad(c))*Math.sin(dLon/2)*Math.sin(dLon/2);return R*2*Math.atan2(Math.sqrt(aa),Math.sqrt(1-aa));}
+function round5(km){if(km<=3.5) return 3.5; return Math.ceil(km/5)*5;}
+function getVillageKm(t){if(!t) return 0; t=t.toLowerCase(); var m={'kisenyi':3.5,'katwe':2.3,'kibuye':2.5,'wankulukuku':4.4,'kabowa':4.3,'mutundwe':5.5,'kansanga':4.9,'bunga':7.0,'ggaba':7.8,'munyonyo':10.0,'nateete':5.0,'zana':6.0,'namasuba':6.0,'seguku':6.5,'lweza':7.5,'kajjansi':11.0,'nansana':7.8,'yesu amala':8.0,'kyengera':8.5,'bulenga':9.5,'wakiso':15.2,'kawempe':7.0,'kisigula':19.0,'entebbe':35}; var f=0; for(var k in m){if(t.indexOf(k)!==-1 && m[k]>f) f=m[k];} if(f==0&&t.length>4) f=12; if(f==0) f=3.5; return f;}
+function doVillage(){var v=document.getElementById('cVillage').value||''; var d=document.getElementById('cDistrict').value||''; var use=v||d; if(!use){document.getElementById('cDistance').value=''; autoDistanceKm=0;}else{var km=getVillageKm(use); autoDistanceKm=km; document.getElementById('cDistance').value=km;} calcTransport(); updateReceipt();}
+function calcTransport(){var village=document.getElementById('cVillage').value||''; var gps=document.getElementById('gpsLink').value||''; var weight=parseInt(document.getElementById('cWeightShow').value||0); var distVal=parseFloat(document.getElementById('cDistance').value||0); var box=document.getElementById('transportBox'); if(!village&&!gps&&!distVal){if(box) box.style.display='none'; return 0;} var dist=distVal||autoDistanceKm||0; var trans=5000; if(dist>3.5) trans+=(dist-3.5)*1500; if(weight>100) trans+=2000; trans=Math.round(trans); var rounded=round5(dist); var txt=document.getElementById('transportText'); if(txt) txt.innerText='Transport: UGX '+trans.toLocaleString()+' (~'+rounded+'km, '+weight+'kg)'; var disp=document.getElementById('autoDistDisplay'); if(disp) disp.innerText='📍 '+(village||'Location')+' • ~'+rounded+'km'; if(box) box.style.display='block'; return trans;}
+function doCheckout(){var c=updateCartBar(); if(c.kg==0){toast('Tap ADD 1KG first'); return;} updateReceipt(); document.getElementById('checkoutModal').classList.add('open');}
+function closeCheckout(){document.getElementById('checkoutModal').classList.remove('open');}
+function updateReceipt(){var name=document.getElementById('cName').value||'Customer'; var vill=document.getElementById('cVillage').value||''; var dist=document.getElementById('cDistance').value||''; var weight=document.getElementById('cWeightShow').value||'0'; var gps=document.getElementById('gpsLink').value||''; var trans=calcTransport(); var ugx=0,lines=[]; for(var id in cart){var qty=parseInt(cart[id]||0); if(qty<=0) continue; var p=null; for(var i=0;i<products.length;i++) if(products[i].id==parseInt(id)) p=products[i]; if(p){var tot=qty*p.price; ugx+=tot; lines.push(qty+'kg '+p.name+' — UGX '+tot.toLocaleString());}} var rounded=dist?round5(parseFloat(dist)):'?'; var sum=document.getElementById('checkoutSummary'); if(sum){sum.innerHTML=lines.join('<br>')+'<br><br>Products UGX '+ugx.toLocaleString()+'<br>Transport UGX '+trans.toLocaleString()+'<br><b style="color:var(--gold)">TOTAL UGX '+(ugx+trans).toLocaleString()+'</b>';} var fin=document.getElementById('finalReceipt'); if(fin){fin.innerHTML='Customer: '+name+'<br>LIVE: '+vill+'<br>~'+rounded+'km '+weight+'kg<br>GPS '+gps+'<hr>'+lines.join('<br>')+'<hr>TOTAL UGX '+(ugx+trans).toLocaleString();} return {name:name,vill:vill,dist:dist,weight:weight,gps:gps,trans:trans,ugx:ugx,lines:lines,rounded:rounded};}
+function doGPS(){var gt=document.getElementById('gpsText'); gt.style.display='block'; gt.innerText='📡 Getting GPS...'; if(!navigator.geolocation){gt.innerText='No GPS'; return;} navigator.geolocation.getCurrentPosition(function(pos){var lat=pos.coords.latitude; var lon=pos.coords.longitude; var link='https://maps.google.com/?q='+lat+','+lon; document.getElementById('gpsLink').value=link; var km=calcHav(0.3136,32.5763,lat,lon); autoDistanceKm=km; document.getElementById('cDistance').value=km.toFixed(1); var r=round5(km); gt.innerHTML='✅ GPS Real '+km.toFixed(1)+'km → ~'+r+'km<br><a href="'+link+'" target="_blank" style="color:#00FF88">Open Maps</a>'; calcTransport(); updateReceipt(); toast('✅ GPS ~'+r+'km');},function(e){gt.innerHTML='❌ '+e.message;},{enableHighAccuracy:true,timeout:12000});}
+function doSendWA(){var d=updateReceipt(); if(d.lines.length==0){toast('Add KG first'); return;} var msg='*KFS v7.2 GOLD FORCE '+d.weight+'kg ~'+d.rounded+'km*%0A'+d.lines.join('%0A')+'%0AProducts UGX '+d.ugx.toLocaleString()+'%0ATransport UGX '+d.trans.toLocaleString()+'%0A*TOTAL UGX '+(d.ugx+d.trans).toLocaleString()+'*%0ALIVE '+d.vill+'%0AGPS '+d.gps; window.open('https://wa.me/256700892386?text='+msg,'_blank');}
+function doDownloadPDF(){var d=updateReceipt(); if(d.lines.length==0){toast('Add KG first'); return;} var w=window.open('','_blank'); w.document.write('<html><body style="font-family:system-ui;padding:16px"><h2 style="color:#D4AF37">KFS v7.2 GOLD FORCE</h2><p>LIVE: '+d.vill+'<br>~'+d.rounded+'km '+d.weight+'kg</p><hr>'+d.lines.join('<br>')+'<hr><p>TOTAL UGX '+(d.ugx+d.trans).toLocaleString()+'</p><script>window.print()<\/script></body></html>'); w.document.close();}
+function openAdminNow(){var pass=prompt('🔐 Password wilson321:'); if(pass===null) return; if(pass==='wilson321'||pass==='Wilson@2024'){var list=document.getElementById('adminList'); if(list){var html=''; for(var i=0;i<products.length;i++){var p=products[i]; html+='<div style="background:#0a1931;padding:10px;border-radius:10px;margin:6px 0">'+p.icon+' '+p.name+' - UGX '+p.price+'</div>';} list.innerHTML=html;} document.getElementById('adminModal').classList.add('open');} else toast('❌ Wrong');}
+function closeAdmin(){document.getElementById('adminModal').classList.remove('open');}
+function doSaveBank(){var m=document.getElementById('adminMoMo').value; if(m) bankInfo.momo=m; saveAll(); toast('✅ Saved');}
+function doInstall(){toast('Chrome ⋮ → Install app');}
+
+// FORCE RENDER ON LOAD - EVEN IF OLD EMPTY LIST
+window.addEventListener('DOMContentLoaded', function(){ forceRender(); setTimeout(forceRender,500); });
+forceRender();
+setTimeout(forceRender,1000);
+</script></body></html>
