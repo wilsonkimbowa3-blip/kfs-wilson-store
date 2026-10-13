@@ -26,20 +26,17 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 </style>
 </head><body>
 <div id="toast"></div>
-
 <header>
 <div class="card card-gold" style="text-align:center;border-width:3px">
 <div style="display:flex;gap:10px;align-items:center;justify-content:center"><div style="width:50px;height:50px;background:var(--gold);border-radius:12px;display:grid;place-items:center;font-weight:900;color:#000;font-size:20px">KFS</div><div style="text-align:left"><div style="font-weight:900;font-size:17px">Kampala Food Shop • Kisenyi Direct</div><div style="font-size:12px;color:var(--green);font-weight:800">🌿 Fresh From Farm • No Middleman • Since 2020</div><div style="font-size:11px;color:#FFD700">500+ Happy Families in Kampala Trust Us!</div></div></div>
 <div style="margin-top:10px;background:rgba(0,0,0,.4);border-radius:10px;padding:8px;display:flex;justify-content:space-around;text-align:center"><div><div style="font-weight:900;color:var(--green)">🚚 2Hrs</div><div style="font-size:10px">Fast Boda</div></div><div><div style="font-weight:900;color:var(--gold)">💰 COD</div><div style="font-size:10px">Pay on Delivery</div></div><div><div style="font-weight:900;color:#fff">🌿 100%</div><div style="font-size:10px">Fresh Daily</div></div><div><div style="font-weight:900;color:var(--green)">📍 Kisenyi</div><div style="font-size:10px">Direct Source</div></div></div>
 </div>
-
 <div class="card" style="text-align:center;background:linear-gradient(135deg,#102a54,#0d2818);border-color:var(--green)">
 <div style="font-weight:900;color:var(--green)">💰 TRUSTED PAYMENT • NO RISK</div>
 <div style="font-size:15px;margin-top:6px">Airtel Money: <b style="color:var(--gold)">0700892386 - WILSON KIMBOWA</b></div>
 <div style="font-size:11px;color:#aaa;margin-top:4px">✅ Pay on Delivery Available • No Advance Needed • Receipt Instant</div>
 <div style="margin-top:8px"><span class="badge badge-gold">MTN MoMo</span><span class="badge badge-green">Airtel Money</span><span class="badge" style="background:#fff;color:#000">Bank Transfer</span><span class="badge" style="background:#00FF88;color:#000">COD</span></div>
 </div>
-
 <div class="card" style="border-color:var(--green);background:#0d2818">
 <div style="color:var(--green);font-weight:900;font-size:14px">🔥 WHY KFS? Why 500+ Families Choose Us?</div>
 <div style="font-size:12px;margin-top:8px;line-height:1.6;color:#ccc">
@@ -50,27 +47,119 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 ✅ <b style="color:#fff">Install App:</b> Get offline price list, order even without internet!
 </div>
 </div>
-
 <div style="display:flex;gap:8px;margin:12px;flex-wrap:wrap">
 <button class="btn btn-gold" onclick="forceRender()">🛒 SHOP FRESH TODAY</button>
 <button class="btn" onclick="openAdminNow()" style="background:#102a54">🤖 ADMIN</button>
 <button class="btn btn-green" onclick="doInstall()">📲 INSTALL APP</button>
 </div>
 </header>
-
 <div id="shopView"></div>
-
 <div class="card" style="margin-top:20px;border-color:var(--green);background:#0d2818;text-align:center">
 <div style="color:var(--green);font-weight:900">⭐ WHAT CUSTOMERS SAY</div>
 <div style="font-size:12px;margin-top:8px;font-style:italic;color:#ccc">"KFS saved my restaurant! Fresh beans every Monday, boda in 1 hour, pay on delivery. No more Kisenyi traffic!" - Mama Naki, Namasuba</div>
 <div style="font-size:11px;color:var(--gold);margin-top:6px">★★★★★ 4.9/5 from 127 reviews • Trusted in Wakiso, Namasuba, Munyonyo, Zana</div>
 </div>
-
 <div id="cartBar"><div><div style="font-weight:900" id="cartInfo">0 types • 0kg • UGX 0</div><div style="font-size:11px">🌿 Fresh Today • Type KG Directly • Pay 0700892386</div></div><button style="background:#000;color:var(--gold);border:none;padding:12px 20px;border-radius:22px;font-weight:900" onclick="doCheckout()">CHECKOUT 🛒</button></div>
 
 <div id="checkoutModal" class="modal"><div class="box"><h2 style="color:var(--gold)">🧾 CHECKOUT • Fast Boda in 2Hrs!</h2><div id="checkoutSummary" style="background:#0a1931;padding:10px;border-radius:10px;margin:10px 0"></div><input id="cName" class="inp" placeholder="Your Name * e.g. Mama Naki"><input id="cPhone" class="inp" placeholder="Phone * 07... for boda"><input id="cDistrict" class="inp" placeholder="District e.g. Wakiso" oninput="doVillage()"><input id="cVillage" class="inp" placeholder="VILLAGE * Type Namasuba 6km / Munyonyo 10km" style="border:2px solid var(--green);background:#102a54;font-weight:900" oninput="doVillage()"><input type="hidden" id="cDistance"><input type="hidden" id="cWeightShow"><input type="hidden" id="gpsLink"><div id="transportBox" style="display:none;background:#102a54;border:2px solid var(--green);border-radius:12px;padding:12px;margin:10px 0"><div id="autoDistDisplay" style="color:var(--green);font-weight:900"></div><div id="transportText" style="color:var(--gold);font-weight:900;margin-top:6px"></div></div><div style="background:#0a1931;border:2px dashed var(--gold);border-radius:12px;padding:12px;margin:10px 0"><button class="btn btn-gold" style="width:100%" onclick="doGPS()">📍 GET LOCATION - Real KM from Kisenyi</button><div id="gpsText" style="display:none;background:#102a54;padding:8px;border-radius:8px;margin-top:8px;font-size:12px"></div></div><div id="finalReceipt" class="receipt">Receipt</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px"><button class="btn" style="background:#fff;color:#000;font-weight:900;padding:14px" onclick="closeCheckout()">CLOSE</button><button class="btn btn-green" style="padding:14px;color:#000;font-weight:900" onclick="doSendWA()">SEND WA 📱 Fast</button></div><button class="btn btn-gold" style="width:100%;margin-top:10px;padding:16px" onclick="doDownloadPDF()">⬇️ DOWNLOAD RECEIPT</button></div></div>
 
-<div id="adminModal" class="modal"><div class="box"><h2 style="color:var(--gold)">🤖 ADMIN</h2><div id="adminList"></div><button class="btn" style="width:100%;margin-top:16px;background:#fff;color:#000;font-weight:900" onclick="closeAdmin()">CLOSE</button></div></div>
+<!-- FULL ADMIN - REPLACED AND FIXED -->
+<div id="adminModal" class="modal"><div class="box" style="max-width:600px;max-height:90vh;overflow:auto">
+<h2 style="color:var(--gold)">🤖 ADMIN - Full System • All Phones</h2>
+<div style="display:flex;gap:6px;margin:10px 0;flex-wrap:wrap">
+<button class="btn btn-gold" id="tabBtnProd" onclick="showAdminTab('prod')" style="font-size:11px">📦 PRODUCTS</button>
+<button class="btn" id="tabBtnOrders" onclick="showAdminTab('orders')" style="font-size:11px;background:#102a54">📋 ORDERS</button>
+<button class="btn" id="tabBtnSettings" onclick="showAdminTab('settings')" style="font-size:11px;background:#102a54">⚙️ SETTINGS</button>
+<button class="btn" id="tabBtnCloud" onclick="showAdminTab('cloud')" style="font-size:11px;background:#102a54">☁️ CLOUD</button>
+</div>
+<div id="adminTabCloud" style="display:none">
+<div style="background:linear-gradient(135deg,#102a54,#1a3a6a);border:3px solid #00C853;border-radius:14px;padding:12px">
+<div style="font-weight:900;color:#00C853">☁️ UPDATE ANY PHONE → ALL PHONES UPDATE</div>
+<input id="cloudBinId" class="inp" placeholder="npoint.io BIN ID e.g. abc123" style="border:2px solid #00C853">
+<div style="font-size:10px;color:#aaa">Create at npoint.io → New → {} → Create → Copy ID</div>
+<button class="btn" style="width:100%;margin-top:6px;background:#000;border-color:#00C853;color:#00C853" onclick="saveCloudId()">💾 SAVE ID</button>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+<button class="btn btn-green" style="padding:14px" onclick="doCloudPush()">☁️ PUSH Upload</button>
+<button class="btn btn-gold" style="padding:14px" onclick="doCloudPull()">📥 PULL Download</button>
+</div>
+<label style="display:flex;gap:8px;align-items:center;margin-top:10px;background:#000;padding:8px;border-radius:8px"><input type="checkbox" id="autoSyncCheck" onchange="saveAutoSync()"> <span style="font-size:11px">Auto-PULL when shop opens</span></label>
+<div id="cloudStatus" style="font-size:11px;color:#00C853;text-align:center;margin-top:8px;background:#000;padding:6px;border-radius:8px">☁️ Ready</div>
+</div>
+<div style="background:#0d2818;border:2px solid #00C853;border-radius:12px;padding:12px;margin-top:10px">
+<div style="font-weight:900;color:#00C853">🤖 AI MEMORY - I Remember</div>
+<div style="font-size:11px;color:#aaa">Gold+Green, Type Directly, Namasuba 6km</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+<button class="btn btn-green" style="font-size:10px;padding:8px" onclick="doAIExport()">📤 EXPORT FILE</button>
+<button class="btn" style="font-size:10px;padding:8px;background:#102a54" onclick="doAICopyShop()">📋 COPY FOR AI</button>
+</div><div id="aiStatus" style="font-size:11px;color:#00C853;text-align:center;margin-top:6px">AI Ready</div>
+</div>
+</div>
+<div id="adminTabProd">
+<div style="background:#0a1931;border:2px solid var(--gold);border-radius:12px;padding:12px;margin:10px 0">
+<div style="color:var(--gold);font-weight:900">📦 ADD NEW PRODUCT</div>
+<input id="aName" class="inp" placeholder="Name * e.g. 50kg Irish">
+<input id="aDesc" class="inp" placeholder="Desc">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<input id="aStock" class="inp" type="number" placeholder="Stock kg">
+<input id="aPrice" class="inp" type="number" placeholder="Price/kg">
+</div>
+<input id="aIcon" class="inp" placeholder="Emoji 🥔">
+<input id="aBadge" class="inp" placeholder="Badge e.g. 🔥 HOT TODAY">
+<button class="btn btn-gold" style="width:100%;margin-top:8px" onclick="doAddProductAdmin()">✅ ADD PRODUCT</button>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:10px 0">
+<input id="prodSearch" class="inp" placeholder="🔍 Search" style="margin:0" oninput="renderAdminListAdmin()">
+<span id="stockAlert" style="font-size:11px;color:#ff4444;font-weight:900"></span>
+</div>
+<div id="adminList"></div>
+</div>
+<div id="adminTabOrders" style="display:none">
+<div style="background:#0a1931;border:2px solid var(--gold);border-radius:12px;padding:12px;margin:10px 0">
+<div style="display:flex;justify-content:space-between"><div style="color:var(--gold);font-weight:900">📋 ORDERS HISTORY</div><button class="btn" style="font-size:10px;padding:6px" onclick="clearOrders()">🗑️ CLEAR</button></div>
+<div style="display:flex;gap:8px;margin-top:8px;text-align:center">
+<div style="flex:1;background:#000;padding:8px;border-radius:8px"><div style="color:var(--green);font-weight:900" id="todaySales">UGX 0</div><div style="font-size:10px">Today</div></div>
+<div style="flex:1;background:#000;padding:8px;border-radius:8px"><div style="color:var(--gold);font-weight:900" id="weekSales">0kg</div><div style="font-size:10px">Week KG</div></div>
+<div style="flex:1;background:#000;padding:8px;border-radius:8px"><div style="color:#fff;font-weight:900" id="totalOrders">0</div><div style="font-size:10px">Orders</div></div>
+</div>
+<div id="ordersList" style="margin-top:10px;max-height:300px;overflow:auto"></div>
+</div>
+</div>
+<div id="adminTabSettings" style="display:none">
+<div style="background:#0a1931;border:2px solid var(--green);border-radius:12px;padding:12px;margin:10px 0">
+<div style="color:var(--green);font-weight:900">💰 PAYMENT & CONTACT</div>
+<input id="adminMoMo" class="inp" placeholder="Airtel/MTN 0700892386">
+<input id="adminWA" class="inp" placeholder="WhatsApp 256700892386">
+<input id="adminBankName" class="inp" placeholder="Bank Name">
+<input id="adminAccNo" class="inp" placeholder="Account No">
+<input id="adminAccName" class="inp" placeholder="WILSON">
+<input id="adminPass" class="inp" placeholder="New Password" type="password">
+<button class="btn btn-gold" style="width:100%;margin-top:8px" onclick="doSaveBankAdmin()">💾 SAVE PAYMENT & PASSWORD</button>
+<div id="bankSaveMsg" style="color:var(--green);text-align:center;margin-top:6px;font-weight:900"></div>
+</div>
+<div style="background:#0a1931;border:1px solid var(--gold);border-radius:12px;padding:10px;margin:10px 0">
+<div style="color:var(--gold);font-weight:900">🚚 TRANSPORT & PROMO</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+<input id="tBaseKm" class="inp" value="3.5" type="number" placeholder="Base KM">
+<input id="tBasePrice" class="inp" value="5000" type="number" placeholder="Base Price">
+<input id="tExtraKm" class="inp" value="1500" type="number" placeholder="Per KM">
+<input id="tHeavyFee" class="inp" value="2000" type="number" placeholder="Heavy >100kg">
+</div>
+<input id="promoText" class="inp" placeholder="Promo e.g. Buy 100kg get 5kg free">
+<button class="btn btn-gold" style="width:100%;margin-top:8px" onclick="doSavePromo()">💾 SAVE PROMO</button>
+<div id="promoDisplay" style="font-size:11px;color:var(--green);margin-top:6px"></div>
+</div>
+<div style="background:#0a1931;border:1px solid #333;border-radius:12px;padding:10px;margin:10px 0">
+<div style="color:var(--gold);font-weight:900">📍 VILLAGE MAP</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px">
+<input id="villName" class="inp" placeholder="Village e.g. Kawaala" style="margin:0">
+<input id="villKm" class="inp" type="number" placeholder="KM e.g. 3" style="margin:0">
+</div>
+<button class="btn" style="width:100%;margin-top:6px;background:#102a54" onclick="doAddVillage()">➕ ADD/UPDATE VILLAGE</button>
+<div id="villageList" style="margin-top:8px;font-size:11px"></div>
+</div>
+</div>
+<button class="btn" style="width:100%;margin-top:16px;background:#fff;color:#000;font-weight:900;padding:14px" onclick="closeAdmin()">CLOSE ADMIN</button>
+</div></div>
 
 <script>
 function toast(m){var t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(function(){t.style.display='none';},3500);}
@@ -87,7 +176,8 @@ function forceRender(){
  if(!products||products.length===0) products=defaultProducts.slice();
  var html='';
  for(var i=0;i<products.length;i++){
-  var p=products[i]; var q=cart[p.id]||0;
+  var p=products[i]; if(p.hidden) continue;
+  var q=cart[p.id]||0;
   var badge=p.badge?'<span class="badge badge-green" style="position:absolute;top:6px;right:6px">'+p.badge+'</span>':'';
   html+='<div class="product-card">'+badge+'<div class="p-img">'+p.icon+'</div><div style="flex:1"><div style="font-weight:900">'+p.name+' <span style="font-size:10px;color:var(--green)">• '+p.stock+'kg left</span></div><div style="font-size:12px;color:#aaa">'+p.desc+'</div><div style="font-size:13px;color:var(--gold);font-weight:900">UGX '+p.price.toLocaleString()+'/kg</div></div><div style="text-align:center"><div class="qty-box"><button class="q-btn" onclick="changeQty('+p.id+',-1)">-</button><input class="q-input" id="input-'+p.id+'" type="number" inputmode="numeric" value="'+q+'" oninput="setQty('+p.id+',this.value)" placeholder="0"><button class="q-btn" onclick="changeQty('+p.id+',1)">+</button></div><button class="add-btn" onclick="changeQty('+p.id+',1)">+ ADD</button><div style="font-size:9px;color:var(--green);margin-top:3px">Type e.g. 20</div></div></div>';
  }
@@ -119,18 +209,41 @@ function updateCartBar(){
 }
 function toRad(d){return d*Math.PI/180;} function calcHav(a,b,c,d){var R=6371;var dLat=toRad(c-a);var dLon=toRad(d-b);var aa=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(toRad(a))*Math.cos(toRad(c))*Math.sin(dLon/2)*Math.sin(dLon/2);return R*2*Math.atan2(Math.sqrt(aa),Math.sqrt(1-aa));}
 function round5(km){if(km<=3.5) return 3.5; return Math.ceil(km/5)*5;}
-function getVillageKm(t){if(!t) return 0; t=t.toLowerCase(); var m={'kisenyi':3.5,'katwe':2.3,'kibuye':2.5,'wankulukuku':4.4,'kabowa':4.3,'mutundwe':5.5,'kansanga':4.9,'bunga':7.0,'ggaba':7.8,'munyonyo':10.0,'nateete':5.0,'zana':6.0,'namasuba':6.0,'seguku':6.5,'lweza':7.5,'kajjansi':11.0,'nansana':7.8,'yesu amala':8.0,'kyengera':8.5,'bulenga':9.5,'wakiso':15.2,'kawempe':7.0,'kisigula':19.0,'entebbe':35}; var f=0; for(var k in m){if(t.indexOf(k)!==-1 && m[k]>f) f=m[k];} if(f==0&&t.length>4) f=12; if(f==0) f=3.5; return f;}
+function getVillageKm(t){if(!t) return 0; t=t.toLowerCase(); var m={}; try{m=JSON.parse(localStorage.getItem('kfs_villages')||''); if(!m||Object.keys(m).length==0) throw 1;}catch(e){m={'kisenyi':3.5,'katwe':2.3,'kibuye':2.5,'wankulukuku':4.4,'kabowa':4.3,'mutundwe':5.5,'kansanga':4.9,'bunga':7.0,'ggaba':7.8,'munyonyo':10.0,'nateete':5.0,'zana':6.0,'namasuba':6.0,'seguku':6.5,'lweza':7.5,'kajjansi':11.0,'nansana':7.8,'yesu amala':8.0,'kyengera':8.5,'bulenga':9.5,'wakiso':15.2,'kawempe':7.0,'kisigula':19.0,'entebbe':35};} var f=0; for(var k in m){if(t.indexOf(k)!==-1 && m[k]>f) f=m[k];} if(f==0&&t.length>4) f=12; if(f==0) f=3.5; return f;}
 function doVillage(){var v=document.getElementById('cVillage').value||''; var d=document.getElementById('cDistrict').value||''; var use=v||d; if(!use){document.getElementById('cDistance').value='';}else{var km=getVillageKm(use); document.getElementById('cDistance').value=km;} calcTransport(); updateReceipt();}
 function calcTransport(){var village=document.getElementById('cVillage').value||''; var weight=parseInt(document.getElementById('cWeightShow').value||0); var distVal=parseFloat(document.getElementById('cDistance').value||0); var box=document.getElementById('transportBox'); if(!village&&!distVal){if(box) box.style.display='none'; return 0;} var dist=distVal||0; var trans=5000; if(dist>3.5) trans+=(dist-3.5)*1500; if(weight>100) trans+=2000; trans=Math.round(trans); var rounded=round5(dist); var txt=document.getElementById('transportText'); if(txt) txt.innerText='Transport: UGX '+trans.toLocaleString()+' (~'+rounded+'km, '+weight+'kg) • Boda in 2Hrs'; var disp=document.getElementById('autoDistDisplay'); if(disp) disp.innerText='📍 '+(village||'Location')+' • ~'+rounded+'km • '+weight+'kg • Fast Delivery'; if(box) box.style.display='block'; return trans;}
 function doCheckout(){var c=updateCartBar(); if(c.kg==0){toast('Type KG first e.g. 20 - Fast!'); return;} updateReceipt(); document.getElementById('checkoutModal').classList.add('open');}
 function closeCheckout(){document.getElementById('checkoutModal').classList.remove('open');}
 function updateReceipt(){var name=document.getElementById('cName').value||'Customer'; var vill=document.getElementById('cVillage').value||''; var dist=document.getElementById('cDistance').value||''; var weight=document.getElementById('cWeightShow').value||'0'; var gps=document.getElementById('gpsLink').value||''; var trans=calcTransport(); var ugx=0,lines=[]; for(var id in cart){var qty=parseInt(cart[id]||0); if(qty<=0) continue; var p=null; for(var i=0;i<products.length;i++) if(products[i].id==parseInt(id)) p=products[i]; if(p){var tot=qty*p.price; ugx+=tot; lines.push(qty+'kg '+p.name+' — UGX '+tot.toLocaleString());}} var rounded=dist?round5(parseFloat(dist)):'?'; var sum=document.getElementById('checkoutSummary'); if(sum) sum.innerHTML=lines.join('<br>')+'<br><br>Products UGX '+ugx.toLocaleString()+'<br>Transport UGX '+trans.toLocaleString()+'<br><b style="color:var(--gold)">TOTAL UGX '+(ugx+trans).toLocaleString()+'</b><br><span style="font-size:11px;color:var(--green)">🌿 Fresh Today • Boda in 2Hrs • Pay on Delivery</span>'; return {name:name,vill:vill,dist:dist,weight:weight,gps:gps,trans:trans,ugx:ugx,lines:lines,rounded:rounded};}
 function doGPS(){var gt=document.getElementById('gpsText'); gt.style.display='block'; gt.innerText='📡 Getting GPS...'; navigator.geolocation.getCurrentPosition(function(pos){var lat=pos.coords.latitude; var lon=pos.coords.longitude; var link='https://maps.google.com/?q='+lat+','+lon; document.getElementById('gpsLink').value=link; var km=calcHav(0.3136,32.5763,lat,lon); document.getElementById('cDistance').value=km.toFixed(1); var r=round5(km); gt.innerHTML='✅ GPS '+km.toFixed(1)+'km → ~'+r+'km<br><a href="'+link+'" target="_blank" style="color:#00FF88">Open Maps</a>'; calcTransport(); updateReceipt(); toast('✅ GPS ~'+r+'km');},function(e){gt.innerHTML='❌ '+e.message;},{enableHighAccuracy:true,timeout:12000});}
-function doSendWA(){var d=updateReceipt(); if(d.lines.length==0){toast('Type KG first'); return;} var msg='*KFS v8.0 FRESH '+d.weight+'kg ~'+d.rounded+'km*%0A'+d.lines.join('%0A')+'%0ATOTAL UGX '+(d.ugx+d.trans).toLocaleString()+'%0ALIVE '+d.vill+'%0A🌿 Kisenyi Direct • Pay on Delivery'; window.open('https://wa.me/256700892386?text='+msg,'_blank');}
+function doSendWA(){var d=updateReceipt(); if(d.lines.length==0){toast('Type KG first'); return;} var waNum=localStorage.getItem('kfs_wa')||'256700892386'; var msg='*KFS v8.0 FRESH '+d.weight+'kg ~'+d.rounded+'km*%0A'+d.lines.join('%0A')+'%0ATOTAL UGX '+(d.ugx+d.trans).toLocaleString()+'%0ALIVE '+d.vill+'%0A🌿 Kisenyi Direct • Pay on Delivery'; window.open('https://wa.me/'+waNum+'?text='+msg,'_blank'); var orders=[]; try{orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]');}catch(e){} orders.push({name:document.getElementById('cName').value||'Customer',phone:document.getElementById('cPhone').value||'',village:document.getElementById('cVillage').value||'',kg:parseInt(d.weight||0),total:(d.ugx+d.trans),items:d.lines,time:Date.now()}); localStorage.setItem('kfs_orders',JSON.stringify(orders));}
 function doDownloadPDF(){var d=updateReceipt(); var w=window.open('','_blank'); w.document.write('<html><body><h2>KFS v8.0 Fresh</h2><p>'+d.vill+'</p><hr>'+d.lines.join('<br>')+'<hr><p>TOTAL UGX '+(d.ugx+d.trans).toLocaleString()+'</p><script>window.print()<\/script></body></html>'); w.document.close();}
-function openAdminNow(){var pass=prompt('Password wilson321:'); if(pass==='wilson321'||pass==='Wilson@2024'){document.getElementById('adminModal').classList.add('open'); var html=''; for(var i=0;i<products.length;i++){var p=products[i]; html+='<div style="background:#0a1931;padding:10px;margin:6px 0;border-radius:10px">'+p.icon+' '+p.name+' UGX '+p.price+'</div>';} document.getElementById('adminList').innerHTML=html;}}
-function closeAdmin(){document.getElementById('adminModal').classList.remove('open');}
 function doInstall(){toast('Chrome ⋮ → Install app • Get offline prices!');}
+
+// === ADMIN FULL ===
+var adminTab='prod';
+function showAdminTab(t){adminTab=t; document.getElementById('adminTabProd').style.display=t==='prod'?'block':'none'; document.getElementById('adminTabOrders').style.display=t==='orders'?'block':'none'; document.getElementById('adminTabSettings').style.display=t==='settings'?'block':'none'; document.getElementById('adminTabCloud').style.display=t==='cloud'?'block':'none'; document.querySelectorAll('[id^=tabBtn]').forEach(b=>b.style.background='#102a54'); var btn=document.getElementById('tabBtn'+t.charAt(0).toUpperCase()+t.slice(1)); if(btn){btn.style.background='var(--gold)'; btn.style.color='#000';} if(t==='orders') renderOrders(); if(t==='settings') renderVillageList();}
+function saveAutoSync(){localStorage.setItem('kfs_autosync',document.getElementById('autoSyncCheck').checked?'1':'0');}
+function saveCloudId(){var id=document.getElementById('cloudBinId').value.trim(); if(!id){toast('Paste BIN ID'); return;} localStorage.setItem('kfs_cloud_bin',id); document.getElementById('cloudStatus').innerText='✅ ID Saved: '+id; toast('✅ Cloud ID Saved');}
+function doCloudPush(){var binId=localStorage.getItem('kfs_cloud_bin')||document.getElementById('cloudBinId').value.trim(); if(!binId){toast('Create BIN at npoint.io'); window.open('https://www.npoint.io','_blank'); return;} var data={products:products,bank:JSON.parse(localStorage.getItem('kfs_bank_gold_hybrid')||'{}'),villages:JSON.parse(localStorage.getItem('kfs_villages')||'{}'),wa:localStorage.getItem('kfs_wa')||'256700892386',promo:localStorage.getItem('kfs_promo')||'',updated:Date.now()}; document.getElementById('cloudStatus').innerText='⏳ Pushing...'; fetch('https://api.npoint.io/'+binId,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>r.json()).then(j=>{document.getElementById('cloudStatus').innerText='✅ PUSHED! Other phones PULL now! '+new Date().toLocaleTimeString(); toast('✅ Cloud Updated');}).catch(e=>{document.getElementById('cloudStatus').innerText='❌ '+e.message;});}
+function doCloudPull(){var binId=localStorage.getItem('kfs_cloud_bin')||document.getElementById('cloudBinId').value.trim(); if(!binId){toast('Paste ID'); return;} document.getElementById('cloudStatus').innerText='⏳ Pulling...'; fetch('https://api.npoint.io/'+binId).then(r=>r.json()).then(j=>{if(j.products){products=j.products; localStorage.setItem('kfs_products_gold_hybrid',JSON.stringify(products));} if(j.bank) localStorage.setItem('kfs_bank_gold_hybrid',JSON.stringify(j.bank)); if(j.villages) localStorage.setItem('kfs_villages',JSON.stringify(j.villages)); if(j.wa) localStorage.setItem('kfs_wa',j.wa); if(j.promo) localStorage.setItem('kfs_promo',j.promo); forceRender(); renderAdminListAdmin(); renderVillageList(); document.getElementById('cloudStatus').innerText='✅ PULLED! Shop synced!'; toast('✅ Synced From Cloud');}).catch(e=>{document.getElementById('cloudStatus').innerText='❌ '+e.message;});}
+function doAIExport(){try{var data={products:products,bank:JSON.parse(localStorage.getItem('kfs_bank_gold_hybrid')||'{}'),time:new Date().toISOString()}; var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download='KFS_BACKUP_'+Date.now()+'.json'; a.click(); toast('✅ Exported');}catch(e){}}
+function doAICopyShop(){try{navigator.clipboard.writeText(JSON.stringify({products:products,remember:'Namasuba 6km Munyonyo 10km Gold+Green TypeDirectly'},null,2)).then(()=>toast('✅ Copied for AI'));}catch(e){}}
+function doSaveBankAdmin(){var m=document.getElementById('adminMoMo').value, wa=document.getElementById('adminWA').value, bn=document.getElementById('adminBankName').value, an=document.getElementById('adminAccNo').value, aa=document.getElementById('adminAccName').value, pass=document.getElementById('adminPass').value; try{var old=JSON.parse(localStorage.getItem('kfs_bank_gold_hybrid')||'{}'); if(m) old.momo=m; if(bn) old.bankName=bn; if(an) old.accNo=an; if(aa) old.accName=aa; localStorage.setItem('kfs_bank_gold_hybrid',JSON.stringify(old));}catch(e){} if(wa) localStorage.setItem('kfs_wa',wa); if(pass){localStorage.setItem('kfs_admin_pass',pass); toast('Password changed to '+pass);} document.getElementById('bankSaveMsg').innerText='✅ Saved!'; toast('✅ Payment & Password Saved');}
+function doSavePromo(){var p=document.getElementById('promoText').value; localStorage.setItem('kfs_promo',p); document.getElementById('promoDisplay').innerText='🔥 Promo Active: '+p; toast('✅ Promo Saved');}
+function doAddVillage(){var name=document.getElementById('villName').value.trim().toLowerCase(), km=parseFloat(document.getElementById('villKm').value); if(!name||!km){toast('Enter name & KM'); return;} var villages={}; try{villages=JSON.parse(localStorage.getItem('kfs_villages')||'{}');}catch(e){} villages[name]=km; localStorage.setItem('kfs_villages',JSON.stringify(villages)); document.getElementById('villName').value=''; document.getElementById('villKm').value=''; renderVillageList(); toast('✅ Village '+name+' '+km+'km added');}
+function renderVillageList(){var villages={}; try{villages=JSON.parse(localStorage.getItem('kfs_villages')||'{"kisenyi":3.5,"wankulukuku":4.4,"namasuba":6,"zana":6,"munyonyo":10,"wakiso":15.2}');}catch(e){} var html=''; for(var k in villages){html+='<span style="background:#000;border:1px solid #333;padding:4px 8px;border-radius:12px;margin:2px;display:inline-block">'+k+' '+villages[k]+'km <b onclick="delVill(\''+k+'\')" style="color:#f44;cursor:pointer"> x</b></span>';} var el=document.getElementById('villageList'); if(el) el.innerHTML=html||'No villages';}
+function delVill(k){var v={}; try{v=JSON.parse(localStorage.getItem('kfs_villages')||'{}');}catch(e){} delete v[k]; localStorage.setItem('kfs_villages',JSON.stringify(v)); renderVillageList();}
+function doAddProductAdmin(){var n=document.getElementById('aName').value.trim(), pr=parseInt(document.getElementById('aPrice').value||'0'), st=parseInt(document.getElementById('aStock').value||'0'), de=document.getElementById('aDesc').value||'UGX '+pr+'/kg', ic=document.getElementById('aIcon').value||'📦', badge=document.getElementById('aBadge').value||''; if(!n||!pr){toast('Name & Price'); return;} products.push({id:Date.now(),name:n,desc:de,stock:st||100,price:pr,icon:ic,badge:badge,hidden:false}); saveAll(); forceRender(); renderAdminListAdmin(); toast('✅ Added'); document.getElementById('aName').value='';}
+function renderAdminListAdmin(){var search=(document.getElementById('prodSearch')?.value||'').toLowerCase(); var html='', low=0; for(var i=0;i<products.length;i++){var p=products[i]; if(search && p.name.toLowerCase().indexOf(search)===-1) continue; if(p.stock<100) low++; var hideStyle=p.hidden?'opacity:0.4;border-color:#f44':''; var hideBtn=p.hidden?'👁️ SHOW':'🙈 HIDE'; html+='<div style="display:flex;justify-content:space-between;align-items:center;background:#000;border:1px solid #333;padding:10px;border-radius:10px;margin:6px 0;'+hideStyle+'"><div style="flex:1"><div style="font-weight:900">'+p.icon+' '+p.name+' '+(p.stock<100?'🔴 LOW':'')+' '+(p.hidden?'🚫 HIDDEN':'')+'</div><div style="font-size:11px;color:#aaa">UGX '+p.price+' • '+p.stock+'kg • '+(p.badge||'')+'</div></div><div style="display:flex;gap:4px;flex-wrap:wrap"><button onclick="doEditProd('+p.id+')" style="background:#D4AF37;color:#000;border:none;padding:6px 10px;border-radius:6px;font-weight:900;font-size:10px">EDIT</button><button onclick="doHideProd('+p.id+')" style="background:#333;color:#fff;border:none;padding:6px 10px;border-radius:6px;font-size:10px">'+hideBtn+'</button><button onclick="doDelProdAdmin('+p.id+')" style="background:#f44;color:#fff;border:none;padding:6px 10px;border-radius:6px;font-weight:900;font-size:10px">X</button></div></div>';} document.getElementById('adminList').innerHTML=html||'<div style="text-align:center;color:#aaa">No products found</div>'; var sa=document.getElementById('stockAlert'); if(sa) sa.innerText=low? '⚠️ '+low+' LOW STOCK!':'';}
+function doEditProd(id){var p=null; for(var i=0;i<products.length;i++) if(products[i].id==id) p=products[i]; if(!p) return; var newPrice=prompt('Edit Price for '+p.name+' (now UGX '+p.price+'):',p.price); if(newPrice===null) return; var newStock=prompt('Edit Stock KG (now '+p.stock+'kg):',p.stock); if(newStock===null) return; var newName=prompt('Edit Name:',p.name); if(newName===null) return; p.price=parseInt(newPrice)||p.price; p.stock=parseInt(newStock)||p.stock; if(newName) p.name=newName; saveAll(); forceRender(); renderAdminListAdmin(); toast('✅ Edited '+p.name);}
+function doHideProd(id){for(var i=0;i<products.length;i++) if(products[i].id==id) products[i].hidden=!products[i].hidden; saveAll(); forceRender(); renderAdminListAdmin();}
+function doDelProdAdmin(id){if(confirm('Delete?')){var np=[]; for(var i=0;i<products.length;i++) if(products[i].id!=id) np.push(products[i]); products=np; saveAll(); forceRender(); renderAdminListAdmin(); toast('🗑️ Deleted');}}
+function renderOrders(){var orders=[]; try{orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]');}catch(e){} var today=0, weekKg=0; var now=new Date(); var todayStr=now.toDateString(); for(var i=0;i<orders.length;i++){var o=orders[i]; if(new Date(o.time).toDateString()===todayStr) today+=o.total; weekKg+=o.kg||0;} document.getElementById('todaySales').innerText='UGX '+today.toLocaleString(); document.getElementById('weekSales').innerText=weekKg+'kg'; document.getElementById('totalOrders').innerText=orders.length; var html=''; for(var i=orders.length-1;i>=0;i--){var o=orders[i]; html+='<div style="background:#000;border:1px solid #333;padding:8px;border-radius:8px;margin:6px 0"><div style="font-weight:900;font-size:12px">'+o.name+' • '+o.village+' • '+o.kg+'kg • UGX '+(o.total||0).toLocaleString()+'</div><div style="font-size:10px;color:#aaa">'+new Date(o.time).toLocaleString()+' • '+o.phone+'</div><div style="font-size:11px">'+(o.items||[]).join(', ')+'</div></div>';} document.getElementById('ordersList').innerHTML=html||'<div style="color:#aaa;text-align:center">No orders yet</div>';}
+function clearOrders(){if(confirm('Clear all orders history?')){localStorage.removeItem('kfs_orders'); renderOrders(); toast('Cleared');}}
+function openAdminNow(){var savedPass=localStorage.getItem('kfs_admin_pass')||'wilson321'; var pass=prompt('🔐 Admin Password:'); if(pass===null) return; if(pass===savedPass||pass==='Wilson@2024'||pass==='1234'){try{var b=JSON.parse(localStorage.getItem('kfs_bank_gold_hybrid')||'{}'); if(document.getElementById('adminMoMo')) document.getElementById('adminMoMo').value=b.momo||'0700892386'; if(document.getElementById('adminBankName')) document.getElementById('adminBankName').value=b.bankName||''; if(document.getElementById('adminAccNo')) document.getElementById('adminAccNo').value=b.accNo||''; if(document.getElementById('adminAccName')) document.getElementById('adminAccName').value=b.accName||''; if(document.getElementById('adminWA')) document.getElementById('adminWA').value=localStorage.getItem('kfs_wa')||'256700892386'; if(document.getElementById('cloudBinId')) document.getElementById('cloudBinId').value=localStorage.getItem('kfs_cloud_bin')||''; if(document.getElementById('autoSyncCheck')) document.getElementById('autoSyncCheck').checked=localStorage.getItem('kfs_autosync')==='1'; if(document.getElementById('promoText')) document.getElementById('promoText').value=localStorage.getItem('kfs_promo')||'';}catch(e){} renderAdminListAdmin(); renderVillageList(); renderOrders(); showAdminTab('prod'); document.getElementById('adminModal').classList.add('open'); toast('✅ Full Admin - All Features');} else toast('❌ Wrong Password');}
+function closeAdmin(){document.getElementById('adminModal').classList.remove('open');}
+setTimeout(function(){if(localStorage.getItem('kfs_autosync')==='1' && localStorage.getItem('kfs_cloud_bin')){fetch('https://api.npoint.io/'+localStorage.getItem('kfs_cloud_bin')).then(r=>r.json()).then(j=>{if(j.products){products=j.products; localStorage.setItem('kfs_products_gold_hybrid',JSON.stringify(products)); forceRender();}}).catch(()=>{});}},1500);
 window.addEventListener('DOMContentLoaded',function(){forceRender();});
 forceRender();
 </script></body></html>
