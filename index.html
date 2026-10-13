@@ -1,89 +1,65 @@
-<div id="adminModal" class="modal"><div class="box" style="border-color:#8a5cff;max-width:520px">
-<h3 style="color:#FCDC04">⚙️ ADMIN - wilson321 - COMPLETE</h3>
-<div class="tabs">
-<button class="tab active" id="tabProd" onclick="switchTab('prod')">📦 PRODUCTS</button>
-<button class="tab" id="tabOrders" onclick="switchTab('orders')">📋 ORDERS</button>
-<button class="tab" id="tabGallery" onclick="switchTab('gallery')">🖼️ GALLERY</button>
-<button class="tab" id="tabSettings" onclick="switchTab('settings')">⚙️ SETTINGS</button>
-<button class="tab" id="tabAI" onclick="switchTab('ai')">☁️ AI+CLOUD</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KFS - The Pearl of Africa | Complete</title>
+<link rel="icon" href="IMG-20261011-WA9432.jpg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#f8f5ee;color:#111;padding-bottom:90px}
+.flag{height:8px;display:flex}.fb{flex:1;background:#000}.fy{flex:1;background:#FCDC04}.fr{flex:1;background:#D90000}
+.header{background:#111;display:flex;align-items:center;padding:10px 12px;gap:10px;position:sticky;top:0;z-index:20;border-bottom:2px solid #FCDC04}
+.logo{width:58px;height:58px;border-radius:12px;background:#fff;padding:3px;border:3px solid #FCDC04;object-fit:contain}
+.header h1{color:#FCDC04;font-size:19px}.header p{color:#fff;font-size:10px}
+.badge{background:#FCDC04;color:#000;padding:6px 12px;border-radius:20px;font-weight:900;margin-left:auto;cursor:pointer}
+.top{display:flex;gap:7px;padding:9px 10px;flex-wrap:wrap;background:#111}
+.btn{border:1px solid #FCDC04;color:#FCDC04;background:transparent;padding:7px 12px;border-radius:20px;font-weight:800;cursor:pointer;font-size:11px}
+.btn-active{background:#FCDC04;color:#000}
+.products{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:9px}
+@media(min-width:700px){.products{grid-template-columns:1fr 1fr 1fr}}
+.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);border:1px solid #eee;position:relative}
+.card.out{opacity:.55}.card.out::after{content:"Out of Stock";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-15deg);background:#D90000;color:#fff;padding:6px 18px;font-weight:900;border-radius:6px;font-size:12px}
+.card img{width:100%;height:110px;object-fit:cover}
+.card-body{padding:8px}.card-body h3{font-size:13px}.price{color:#D90000;font-weight:900;font-size:11px}
+.type-kg{display:flex;gap:4px;margin:6px 0;align-items:center}.type-kg input{width:100%;padding:6px;border:2px solid #FCDC04;border-radius:7px;font-weight:900;text-align:center}
+.add-btn{width:100%;background:#000;color:#FCDC04;border:none;padding:7px;border-radius:7px;font-weight:900;cursor:pointer;font-size:12px}.add-btn:disabled{background:#999;color:#fff}
+#cartBar{position:fixed;left:0;right:0;bottom:0;background:#FCDC04;color:#000;padding:9px 10px;display:flex;justify-content:space-between;align-items:center;z-index:50}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99;padding:8px;overflow:auto}.modal.open{display:block}
+.box{background:#0f2140;border:2px solid #FCDC04;border-radius:16px;padding:12px;max-width:500px;margin:10px auto;color:#fff}
+.inp{width:100%;background:#0a1931;border:1px solid rgba(255,215,0,.35);color:#fff;border-radius:9px;padding:10px;margin:5px 0;font-size:13px}
+.small-inp{background:#0a1931;border:1px solid #334;color:#fff;border-radius:8px;padding:8px;text-align:center;font-weight:700}
+.pay-option{display:flex;align-items:center;gap:9px;background:#102a54;border:1px solid #334;border-radius:10px;padding:9px;margin:5px 0;cursor:pointer}.pay-option.selected{border:2px solid #FCDC04;background:#0a1931}
+.tabs{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}.tab{padding:8px 12px;border-radius:20px;border:1px solid #FCDC04;color:#FCDC04;background:transparent;font-weight:800;font-size:11px;cursor:pointer}.tab.active{background:#FCDC04;color:#000}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px}.gallery-grid img{width:100%;height:80px;object-fit:cover;border-radius:8px;border:1px solid #FCDC04}
+.receipt{background:#0a1931;border:2px solid #FCDC04;border-radius:10px;padding:9px;margin:8px 0;font-size:11px;line-height:1.4}
+</style>
+</head>
+<body>
+<div class="flag"><div class="fb"></div><div class="fy"></div><div class="fr"></div></div>
+<div class="header"><img src="IMG-20261011-WA9432.jpg" class="logo"><div><h1>KFS</h1><p>The Pearl of <span style="color:#FCDC04">Africa</span></p><p style="font-size:8px;color:#aaa">Kampala Food Shop • GPS + BANK + AI</p></div><div class="badge" onclick="openCheckout()">🛒 <span id="cartCount">0</span></div></div>
+<div class="top"><button class="btn btn-active" onclick="renderShop()">🛒 SHOP</button><button class="btn" onclick="requestAdmin()">⚙️ ADMIN</button><button class="btn" onclick="resetCart()">🔒 RESET CART</button><button class="btn" onclick="openGalleryView()">🖼️ GALLERY</button></div>
+<div class="flag"><div class="fb"></div><div class="fy"></div><div class="fr"></div></div>
+<div id="products" class="products"></div>
+<div id="cartBar"><div><div style="font-weight:900;font-size:12px" id="cartInfo">0 types • 0kg • UGX 0</div><div style="font-size:9px">0700892386 • BANK • COD last • GPS INCLUDED • AI ON</div></div><button style="background:#000;color:#FCDC04;border:none;padding:9px 16px;border-radius:20px;font-weight:900;font-size:12px" onclick="openCheckout()">CHECKOUT 🧾</button></div>
+<div id="checkoutModal" class="modal"><div class="box">
+<h3 style="color:#FCDC04">🧾 KFS CHECKOUT - Pearl</h3>
+<div id="checkoutSummary" style="font-size:11px;margin:8px 0;background:#0a1931;padding:8px;border-radius:8px;line-height:1.5"></div>
+<input id="cName" class="inp" placeholder="Customer Name"><input id="cPhone" class="inp" placeholder="Phone"><input id="cDistrict" class="inp" placeholder="District e.g Wakiso" oninput="estimateFromDistrict()"><input id="cVillage" class="inp" placeholder="Village > Stage">
+<input type="hidden" id="cDistance"><input type="hidden" id="cWeightShow"><input type="hidden" id="gpsLink">
+<div style="background:#102a54;border:1px solid #FCDC04;border-radius:10px;padding:8px;margin:6px 0"><div style="color:#FCDC04;font-weight:900;font-size:11px">📍 LOCATION & TRANSPORT AUTO ~5 ~10 ~15</div><div id="autoDistDisplay" style="color:#00FF88;font-weight:900;margin:4px 0;font-size:11px">📍 Waiting GPS...</div><div id="transportText" style="color:#FCDC04;font-weight:900;font-size:12px">Transport: UGX 5,000</div></div>
+<div style="background:#0a1931;border:2px dashed #FCDC04;border-radius:10px;padding:8px;margin:6px 0"><div style="color:#FCDC04;font-weight:900;font-size:11px">📍 GPS MUST BE INCLUDED</div><button class="btn btn-active" style="width:100%;margin-top:6px;background:#FCDC04;color:#000" onclick="getGPS()">📍 GET MY LOCATION - GPS INCLUDED</button><div id="gpsText" style="font-size:10px;margin-top:6px;background:#102a54;padding:6px;border-radius:6px;display:none"></div></div>
+<div style="background:#0a1931;border:2px solid #00FF88;border-radius:10px;padding:8px;margin:6px 0">
+<div style="color:#00FF88;font-weight:900;font-size:11px">💰 CHOOSE PAYMENT - BANK - COD LAST</div>
+<label class="pay-option selected" id="optMTN" onclick="selectPay('mtn')"><input type="radio" name="payMethod" value="mtn" checked><div><b style="font-size:12px">📱 MTN MoMo: 0700892386</b><br><span style="font-size:10px;color:#aaa">*165*3# → Send</span></div></label>
+<label class="pay-option" id="optBANK" onclick="selectPay('bank')"><input type="radio" name="payMethod" value="bank"><div><b style="font-size:12px">🏦 BANK TRANSFER</b><br><span style="font-size:10px;color:#aaa" id="bankShort">DFCU - Wilson Kimbowa</span></div></label>
+<label class="pay-option" id="optCOD" onclick="selectPay('cod')"><input type="radio" name="payMethod" value="cod"><div><b style="font-size:12px">💵 Cash on Delivery - LAST</b><br><span style="font-size:10px;color:#aaa">Pay rider on delivery</span></div></label>
+<div id="payHint" style="background:#102a54;border:1px solid #FCDC04;border-radius:8px;padding:6px;margin-top:6px;font-size:10px"></div>
 </div>
-<div id="paneProd">
-<div style="background:#0a1931;border:1px solid #FCDC04;border-radius:10px;padding:8px;margin:6px 0">
-<div style="color:#FCDC04;font-weight:900;font-size:10px">🔐 PASSWORD Default wilson321</div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin:4px 0"><input id="oldPass" class="small-inp" type="password" placeholder="Old"><input id="newPass" class="small-inp" type="password" placeholder="New"><input id="confirmPass" class="small-inp" type="password" placeholder="Confirm"></div>
-<button class="btn btn-active" style="width:100%;padding:6px" onclick="changeAdminPassword()">CHANGE PASSWORD</button>
-<button class="btn" style="width:100%;margin-top:4px;background:#ff4444;color:#fff;border:none;padding:6px" onclick="resetAdminPassword()">RESET TO wilson321</button>
-<div id="passMsg" style="font-size:10px;margin-top:4px;color:#00FF88"></div>
-</div>
-<div style="margin-top:8px"><input id="aName" class="inp" placeholder="Product name"><input id="aDesc" class="inp" placeholder="Desc"><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input id="aStock" class="inp" type="number" placeholder="Stock kg"><input id="aPrice" class="inp" type="number" placeholder="Price per KG"></div><input id="aIcon" class="inp" placeholder="Emoji"><input id="aImg" class="inp" placeholder="Image URL (optional)"><div style="display:flex;gap:4px"><label style="font-size:10px"><input type="checkbox" id="aOut"> Out of Stock? (show but can't order)</label></div><button class="btn btn-active" style="width:100%;margin-top:4px" onclick="addProduct()">ADD PRODUCT +</button><div id="adminList" style="margin-top:8px"></div></div>
-</div>
-<div id="paneOrders" style="display:none">
-<h4 style="color:#FCDC04;font-size:12px">📋 ORDERS - WhatsApp Orders Log</h4>
-<div id="ordersList" style="font-size:11px;margin-top:6px;background:#0a1931;padding:8px;border-radius:8px;max-height:300px;overflow:auto">No orders yet</div>
-<button class="btn" style="width:100%;margin-top:6px" onclick="clearOrders()">Clear Orders Log</button>
-</div>
-<div id="paneGallery" style="display:none">
-<h4 style="color:#FCDC04;font-size:12px">🖼️ GALLERY - YOU ASKED!</h4>
-<p style="font-size:10px;color:#aaa">Add shop photos, customers see in Gallery view</p>
-<input id="gTitle" class="inp" placeholder="Photo Title"><input id="gUrl" class="inp" placeholder="Image URL - IMG-20261011-WA9432.jpg"><button class="btn btn-active" style="width:100%" onclick="addGallery()">ADD TO GALLERY +</button>
-<div id="galleryAdminGrid" class="gallery-grid"></div>
-</div>
-<div id="paneSettings" style="display:none">
-<div style="background:#102a54;border:1px solid #FCDC04;border-radius:10px;padding:8px;margin:6px 0">
-<div style="color:#FCDC04;font-weight:900;font-size:10px">🚚 TRANSPORT AUTO ~5 ~10 ~15</div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin:4px 0"><input id="tBaseKm" class="small-inp" type="number" step="0.1" value="3.5"><input id="tBasePrice" class="small-inp" type="number" value="5000"><input id="tExtraKm" class="small-inp" type="number" value="1500"></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input id="tWeightBase" class="small-inp" type="number" value="100"><input id="tWeightExtra" class="small-inp" type="number" value="2000"></div>
-</div>
-<div style="background:#102a54;border:2px solid #00FF88;border-radius:10px;padding:8px;margin:6px 0">
-<div style="color:#00FF88;font-weight:900;font-size:10px">💰 PAYMENT + BANK - EDIT + RESET</div>
-<input id="adminMoMo" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="0700892386"><input id="adminBankName" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="DFCU Bank"><input id="adminAccNo" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="0123456789"><input id="adminAccName" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="Wilson Kimbowa"><button class="btn btn-active" style="width:100%;margin-top:4px" onclick="saveBank()">SAVE BANK & MOMO</button>
-<button class="btn" style="width:100%;margin-top:6px;background:#ff4444;color:#fff;border:none" onclick="resetAllSettings()">RESET ALL SETTINGS</button>
-</div>
-</div>
-<div id="paneAI" style="display:none">
-<h4 style="color:#00FF88;font-size:12px">☁️ AI + CLOUD - YOU ASKED!</h4>
-<div style="background:#0a1931;border:1px solid #00FF88;border-radius:10px;padding:8px;margin:6px 0">
-<div style="font-size:10px;color:#aaa">AI helps write product description</div>
-<input id="aiProdName" class="inp" placeholder="Product name for AI"><button class="btn btn-active" style="width:100%;background:#00FF88;color:#000" onclick="generateAIDesc()">🤖 GENERATE DESCRIPTION WITH AI</button><div id="aiResult" style="font-size:11px;margin-top:6px;background:#102a54;padding:6px;border-radius:6px;display:none"></div>
-</div>
-<div style="background:#102a54;border:1px solid #FCDC04;border-radius:10px;padding:8px;margin:6px 0">
-<div style="color:#FCDC04;font-weight:900;font-size:10px">☁️ CLOUD BACKUP</div><div style="font-size:10px">Version: <span id="verDisplay">3.5 Pearl Complete</span></div><button class="btn" style="width:100%;margin-top:4px" onclick="exportData()">⬇️ DOWNLOAD ALL DATA</button><button class="btn" style="width:100%;margin-top:4px;background:#00FF88;color:#000" onclick="importDataPrompt()">⬆️ RESTORE BACKUP</button>
-</div>
-</div>
-<button class="btn" style="width:100%;margin-top:10px" onclick="closeAdmin()">CLOSE ADMIN</button>
-</div></div>
-<div id="galleryModal" class="modal"><div class="box"><h3 style="color:#FCDC04">🖼️ KFS Gallery - The Pearl of Africa</h3><div id="galleryCustomerGrid" class="gallery-grid"></div><button class="btn" style="width:100%;margin-top:8px" onclick="closeGalleryView()">CLOSE GALLERY</button></div></div>
-<script>
-let adminPass=localStorage.getItem('kfs_admin_pass')||'wilson321';
-function requestAdmin(){let i=prompt('🔐 Enter Password (wilson321):');if(i===null)return;if(i===adminPass||i==='wilson321'||i==='RESET123'){openAIAdmin();}else{alert('❌ Wrong! Try wilson321');}}
-function changeAdminPassword(){let o=document.getElementById('oldPass').value,n=document.getElementById('newPass').value,c=document.getElementById('confirmPass').value;if(o!==adminPass){document.getElementById('passMsg').innerText='❌ Old wrong: '+adminPass;return;}if(n.length<4||n!==c){document.getElementById('passMsg').innerText='❌ Mismatch/short';return;}adminPass=n;localStorage.setItem('kfs_admin_pass',n);document.getElementById('passMsg').innerText='✅ Changed to: '+n;}
-function resetAdminPassword(){localStorage.setItem('kfs_admin_pass','wilson321');adminPass='wilson321';document.getElementById('passMsg').innerText='✅ RESET DONE to wilson321';}
-function resetAllSettings(){if(confirm('Reset transport + bank to default?')){localStorage.removeItem('kfs_bank');location.reload();}}
-function switchTab(t){['prod','orders','gallery','settings','ai'].forEach(k=>{document.getElementById('pane'+k.charAt(0).toUpperCase()+k.slice(1)).style.display=k===t?'block':'none';document.getElementById('tab'+k.charAt(0).toUpperCase()+k.slice(1)).classList.toggle('active',k===t);});if(t==='gallery')renderGalleryAdmin();if(t==='orders')renderOrders();}
-const KISENYI_LAT=0.3136,KISENYI_LON=32.5763;let autoDistanceKm=3.5;
-function toRad(d){return d*Math.PI/180;}function calcHaversine(a,b,c,d){let R=6371,dl=toRad(c-a),dn=toRad(d-b),aa=Math.sin(dl/2)**2+Math.cos(toRad(a))*Math.cos(toRad(c))*Math.sin(dn/2)**2;return R*2*Math.atan2(Math.sqrt(aa),Math.sqrt(1-aa));}
-function roundToNearest5(k){if(k<=3.5) return 3.5;return Math.ceil(k/5)*5;}
-function estimateFromDistrict(){let d=(document.getElementById('cDistrict').value||'').toLowerCase(),map={kampala:3.5,kisenyi:3.5,katwe:4,natete:6,wakiso:12,buleenga:14,kyengera:12,nansana:10,mattuga:14,kawempe:7,makindye:6,entebbe:35,mukono:20},f=3.5;for(let k in map) if(d.includes(k)){f=map[k];break;}autoDistanceKm=f;document.getElementById('cDistance').value=f;document.getElementById('autoDistDisplay').innerText=`📍 Estimated: ~${f}km`;calcTransport();updateReceiptPreview();}
-let selectedPay='mtn';
-let bankInfo=JSON.parse(localStorage.getItem('kfs_bank')||'{"momo":"0700892386","bankName":"DFCU Bank","accNo":"0123456789","accName":"Wilson Kimbowa"}');
-function saveBank(){bankInfo={momo:document.getElementById('adminMoMo').value||'0700892386',bankName:document.getElementById('adminBankName').value||'DFCU Bank',accNo:document.getElementById('adminAccNo').value||'0123456789',accName:document.getElementById('adminAccName').value||'Wilson Kimbowa'};localStorage.setItem('kfs_bank',JSON.stringify(bankInfo));document.getElementById('bankShort').innerText=`${bankInfo.bankName} - ${bankInfo.accName}`;selectPay(selectedPay);alert('✅ Bank saved!');}
-function selectPay(m){selectedPay=m;document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('selected'));document.getElementById(m==='mtn'?'optMTN':m==='cod'?'optCOD':'optBANK').classList.add('selected');document.querySelector(`input[value="${m}"]`).checked=true;let h=document.getElementById('payHint');if(m==='mtn'){h.innerHTML=`<b style="color:#FCDC04">MTN MoMo ${bankInfo.momo}</b><br>*165*3# → ${bankInfo.momo}`;}else if(m==='cod'){h.innerHTML=`<b style="color:#FCDC04">COD LAST</b><br>Pay rider`; }else{h.innerHTML=`<b style="color:#FCDC04">BANK</b><br>${bankInfo.bankName}<br>Acc: <b>${bankInfo.accNo}</b><br>${bankInfo.accName}`;}updateReceiptPreview();}
-let products=JSON.parse(localStorage.getItem('kfs_products_v3')||'null')||[{id:1,name:'Super Rice',desc:'Premium Tanzania Rice',stock:500,price:5000,icon:'🍚',img:'',out:false},{id:2,name:'Beans',desc:'Yellow Beans Clean',stock:400,price:4000,icon:'🫘',img:'',out:false},{id:3,name:'Posho Maize',desc:'Fine Maize',stock:800,price:3000,icon:'🌽',img:'',out:false},{id:4,name:'G-Nuts',desc:'Peanuts Clean',stock:300,price:6000,icon:'🥜',img:'',out:false}];
-let gallery=JSON.parse(localStorage.getItem('kfs_gallery')||'[{"title":"KFS Store Kisenyi","url":"IMG-20261011-WA9432.jpg"},{"title":"Fresh Beans","url":"https://images.unsplash.com/photo-1586201375761-3864a2d2d9cd?w=400"}]');
-let cart=JSON.parse(localStorage.getItem('kfs_cart_v3')||'{}');let orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]');
-function cleanName(n){return n.replace(/^\d+\s*kg\s*/i,'').trim();}function save(){localStorage.setItem('kfs_products_v3',JSON.stringify(products));localStorage.setItem('kfs_cart_v3',JSON.stringify(cart));localStorage.setItem('kfs_gallery',JSON.stringify(gallery));localStorage.setItem('kfs_orders',JSON.stringify(orders));}
-function renderShop(){
-document.getElementById('adminMoMo').value=bankInfo.momo;document.getElementById('adminBankName').value=bankInfo.bankName;document.getElementById('adminAccNo').value=bankInfo.accNo;document.getElementById('adminAccName').value=bankInfo.accName;
-document.getElementById('bankShort').innerText=`${bankInfo.bankName} - ${bankInfo.accName}`;
-let html=products.map((p,i)=>{
-let imgSrc=p.img||`https://images.unsplash.com/photo-${['1536304929831-ee1ca9d44906','1586201375761-3864a2d2d9cd','1574323347407-f5e1ad6d020b','1508061253366-f7da158b6d46'][i%4]}?w=400`;
-let outClass=p.out?' out':'';let dis=p.out?'disabled':'';let btnTxt=p.out?'Out of Stock':'Add to Cart';
-return `<div class="card${outClass}"><img src="${imgSrc}" onerror="this.src='IMG-20261011-WA9432.jpg'"><div class="card-body"><h3>${p.name}</h3><div class="price">UGX ${p.price.toLocaleString()} / KG ${p.out?'<span style="color:red">- Out</span>':''}</div><div class="type-kg"><label style="font-size:9px">TYPE KG:</label><input type="number" id="kg-${p.id}" placeholder="e.g. 2.5" min="0.1" step="0.1" value="1" ${dis}></div><button class="add-btn" onclick="addToCartById(${p.id})" ${dis}>${btnTxt}</button><button onclick="deleteProductById(${p.id})" style="background:none;border:none;color:#999;font-size:9px;margin-top:3px;width:100%">Delete</button></div></div>`;
-}).join('');document.getElementById('products').innerHTML=html;updateCartBar();selectPay('mtn');renderGalleryCustomer();
-}
-function addToCartById(id){let p=products.find(x=>x.id===id);if(p&&p.out){alert('Out of Stock');return;}let kg=parseFloat(document.getElementById(`kg-${id}`).value)||0;if(kg<=0){alert('Type KG Boss!');return;}cart[id]=(parseFloat(cart[id]||0)+kg);save();updateCartBar();openCheckout();}
-function updateCartBar(){let t=Object.keys(cart).length,kg=0,ugx=0;for(let id in cart){let p=products.find(x=>x.id==parseInt(id));if(p){kg+=parseFloat(cart[id]);ugx+=parseFloat(cart[id])*p.price;}}document.getElementById('cartCount').innerText=t;document.getElementById('cartInfo').innerText=`${t} types • ${kg}kg • UGX ${ugx.toLocaleString()}`;document.getElementById('cWeightShow').value=kg;calcTransport();}
-function resetCart(){if(confirm('Clear cart?')){cart={};save();renderShop();}}<div id="adminModal" class="modal"><div class="box" style="border-color:#8a5cff;max-width:520px">
+<div id="finalReceipt" class="receipt" style="display:none"></div>
+<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="closeCheckout()">Cancel</button><button class="btn btn-active" style="flex:1" onclick="sendWA()">SEND WA + GPS</button></div>
+<button class="btn" style="width:100%;margin-top:6px;background:#00FF88;color:#000;border:none;font-weight:900" onclick="downloadReceipt()">⬇️ DOWNLOAD RECEIPT</button>
+</div></div><div id="adminModal" class="modal"><div class="box" style="border-color:#8a5cff;max-width:520px">
 <h3 style="color:#FCDC04">⚙️ ADMIN - wilson321 - COMPLETE</h3>
 <div class="tabs">
 <button class="tab active" id="tabProd" onclick="switchTab('prod')">📦 PRODUCTS</button>
