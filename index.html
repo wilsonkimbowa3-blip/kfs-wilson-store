@@ -1,155 +1,197 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KFS - The Pearl of Africa | Kampala Food Shop</title>
-<link rel="icon" href="IMG-20261011-WA9432.jpg">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,Arial}
-body{background:#f8f5ee;color:#111;padding-bottom:90px}
-.header-flag{width:100%;height:8px;display:flex}
-.flag-black{flex:1;background:#000}.flag-yellow{flex:1;background:#FCDC04}.flag-red{flex:1;background:#D90000}
-.main-header{background:#111;display:flex;align-items:center;padding:10px 12px;gap:10px;position:sticky;top:0;z-index:20;border-bottom:2px solid #FCDC04}
-.logo{width:60px;height:60px;border-radius:12px;background:#fff;padding:3px;object-fit:contain;border:3px solid #FCDC04}
-.header-text h1{color:#FCDC04;font-size:20px} .header-text p{color:#fff;font-size:11px}
-.cart-badge{background:#FCDC04;color:#000;padding:7px 14px;border-radius:22px;font-weight:900;margin-left:auto;cursor:pointer}
-.btn{border:1px solid #FCDC04;color:#FCDC04;background:transparent;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer;font-size:12px}
-.btn-active{background:#FCDC04;color:#000}
-.top-actions{display:flex;gap:8px;padding:10px 12px;flex-wrap:wrap;background:#111}
-.products{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-@media(min-width:700px){.products{grid-template-columns:1fr 1fr 1fr}}
-.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);border:1px solid #eee}
-.card img{width:100%;height:115px;object-fit:cover}
-.card-body{padding:9px}.card-body h3{font-size:14px} .price{color:#D90000;font-weight:900;font-size:12px}
-.type-kg{display:flex;gap:5px;margin:7px 0;align-items:center}
-.type-kg input{width:100%;padding:7px;border:2px solid #FCDC04;border-radius:8px;font-weight:900;text-align:center}
-.type-kg label{font-size:10px;font-weight:900}
-.add-btn{width:100%;background:#000;color:#FCDC04;border:none;padding:8px;border-radius:8px;font-weight:900;cursor:pointer}
-#cartBar{position:fixed;left:0;right:0;bottom:0;background:#FCDC04;color:#000;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;z-index:50}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99;padding:10px;overflow:auto}
-.modal.open{display:block}
-.box{background:#0f2140;border:2px solid #FCDC04;border-radius:18px;padding:14px;max-width:480px;margin:12px auto;color:#fff}
-.inp{width:100%;background:#0a1931;border:1px solid rgba(255,215,0,.35);color:#fff;border-radius:10px;padding:11px;margin:6px 0}
-.small-inp{background:#0a1931;border:1px solid #334;color:#fff;border-radius:10px;padding:9px;text-align:center;font-weight:700}
-.receipt{background:#0a1931;border:2px solid #FCDC04;border-radius:12px;padding:10px;margin:10px 0;font-size:12px;line-height:1.5}
-.pay-box{background:#0a1931;border:2px solid #00FF88;border-radius:12px;padding:10px;margin:10px 0}
-.pay-option{display:flex;align-items:center;gap:10px;background:#102a54;border:1px solid #334;border-radius:10px;padding:10px;margin:6px 0;cursor:pointer}
-.pay-option.selected{border:2px solid #FCDC04;background:#0a1931}
-</style>
-</head>
-<body>
-<div class="header-flag"><div class="flag-black"></div><div class="flag-yellow"></div><div class="flag-red"></div></div>
-<div class="main-header">
-<img src="IMG-20261011-WA9432.jpg" class="logo" alt="KFS">
-<div class="header-text"><h1>KFS</h1><p>The Pearl of <span style="color:#FCDC04;font-weight:900">Africa</span></p><p style="font-size:9px;color:#aaa">Kampala Food Shop • GPS + BANK</p></div>
-<div class="cart-badge" onclick="openCheckout()">🛒 <span id="cartCount">0</span></div>
+<div id="adminModal" class="modal"><div class="box" style="border-color:#8a5cff;max-width:520px">
+<h3 style="color:#FCDC04">⚙️ ADMIN - wilson321 - COMPLETE</h3>
+<div class="tabs">
+<button class="tab active" id="tabProd" onclick="switchTab('prod')">📦 PRODUCTS</button>
+<button class="tab" id="tabOrders" onclick="switchTab('orders')">📋 ORDERS</button>
+<button class="tab" id="tabGallery" onclick="switchTab('gallery')">🖼️ GALLERY</button>
+<button class="tab" id="tabSettings" onclick="switchTab('settings')">⚙️ SETTINGS</button>
+<button class="tab" id="tabAI" onclick="switchTab('ai')">☁️ AI+CLOUD</button>
 </div>
-<div class="top-actions">
-<button class="btn btn-active" onclick="renderShop()">🛒 SHOP</button>
-<button class="btn" onclick="requestAdmin()">⚙️ ADMIN</button>
-<button class="btn" onclick="resetCart()">🔒 RESET CART</button>
-<button class="btn" onclick="document.getElementById('about').scrollIntoView()">ℹ️ INFO</button>
+<div id="paneProd">
+<div style="background:#0a1931;border:1px solid #FCDC04;border-radius:10px;padding:8px;margin:6px 0">
+<div style="color:#FCDC04;font-weight:900;font-size:10px">🔐 PASSWORD Default wilson321</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin:4px 0"><input id="oldPass" class="small-inp" type="password" placeholder="Old"><input id="newPass" class="small-inp" type="password" placeholder="New"><input id="confirmPass" class="small-inp" type="password" placeholder="Confirm"></div>
+<button class="btn btn-active" style="width:100%;padding:6px" onclick="changeAdminPassword()">CHANGE PASSWORD</button>
+<button class="btn" style="width:100%;margin-top:4px;background:#ff4444;color:#fff;border:none;padding:6px" onclick="resetAdminPassword()">RESET TO wilson321</button>
+<div id="passMsg" style="font-size:10px;margin-top:4px;color:#00FF88"></div>
 </div>
-<div class="header-flag"><div class="flag-black"></div><div class="flag-yellow"></div><div class="flag-red"></div></div>
-
-<div id="products" class="products"></div>
-
-<div id="about" style="background:#111;color:#fff;padding:12px;margin:12px;border-radius:12px;border:1px solid #FCDC04">
-<h3 style="color:#FCDC04">KFS - The Pearl of Africa</h3>
-<p style="font-size:12px;color:#ccc;margin-top:6px">Kisenyi • Royal Golden Quality • TYPE KG to order • GPS must be included • MoMo 0700892386 • BANK • Cash on Delivery last.</p>
+<div style="margin-top:8px"><input id="aName" class="inp" placeholder="Product name"><input id="aDesc" class="inp" placeholder="Desc"><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input id="aStock" class="inp" type="number" placeholder="Stock kg"><input id="aPrice" class="inp" type="number" placeholder="Price per KG"></div><input id="aIcon" class="inp" placeholder="Emoji"><input id="aImg" class="inp" placeholder="Image URL (optional)"><div style="display:flex;gap:4px"><label style="font-size:10px"><input type="checkbox" id="aOut"> Out of Stock? (show but can't order)</label></div><button class="btn btn-active" style="width:100%;margin-top:4px" onclick="addProduct()">ADD PRODUCT +</button><div id="adminList" style="margin-top:8px"></div></div>
 </div>
-
-<!-- CART BAR -->
-<div id="cartBar"><div><div style="font-weight:900;font-size:13px" id="cartInfo">0 types • 0kg • UGX 0</div><div style="font-size:10px">0700892386 • BANK • COD last • GPS INCLUDED</div></div><button style="background:#000;color:#FCDC04;border:none;padding:10px 18px;border-radius:22px;font-weight:900" onclick="openCheckout()">CHECKOUT 🧾</button></div>
-
-<!-- CHECKOUT MODAL - HAS DOWNLOAD + GPS + BANK + COD LAST -->
-<div id="checkoutModal" class="modal"><div class="box">
-<h2 style="color:#FCDC04">🧾 KFS CHECKOUT - Pearl</h2>
-<div id="checkoutSummary" style="font-size:12px;margin:10px 0;background:#0a1931;padding:10px;border-radius:10px;line-height:1.6"></div>
-<input id="cName" class="inp" placeholder="Customer Name"><input id="cPhone" class="inp" placeholder="Phone"><input id="cDistrict" class="inp" placeholder="District e.g Wakiso" oninput="estimateFromDistrict()"><input id="cVillage" class="inp" placeholder="Village > Stage">
-<input type="hidden" id="cDistance"><input type="hidden" id="cWeightShow"><input type="hidden" id="gpsLink">
-<div style="background:#102a54;border:1px solid #FCDC04;border-radius:12px;padding:10px;margin:8px 0"><div style="color:#FCDC04;font-weight:900;font-size:12px">📍 LOCATION & TRANSPORT AUTO</div><div id="autoDistDisplay" style="color:#00FF88;font-weight:900;margin:6px 0">📍 Waiting GPS...</div><div id="transportText" style="color:#FCDC04;font-weight:900">Transport: UGX 5,000</div></div>
-<div style="background:#0a1931;border:2px dashed #FCDC04;border-radius:12px;padding:10px;margin:8px 0"><div style="color:#FCDC04;font-weight:900;font-size:12px">📍 GPS MUST BE INCLUDED</div><button class="btn btn-active" style="width:100%;margin-top:8px;background:#FCDC04;color:#000" onclick="getGPS()">📍 GET MY LOCATION - GPS INCLUDED</button><div id="gpsText" style="font-size:11px;margin-top:8px;background:#102a54;padding:8px;border-radius:8px;display:none"></div></div>
-<div class="pay-box">
-<div style="color:#00FF88;font-weight:900;font-size:13px">💰 CHOOSE PAYMENT - BANK INCLUDED - COD LAST</div>
-<label class="pay-option selected" id="optMTN" onclick="selectPay('mtn')"><input type="radio" name="payMethod" value="mtn" checked><div><b>📱 MTN MoMo: 0700892386</b><br><span style="font-size:11px;color:#aaa">*165*3# → Send Money</span></div></label>
-<label class="pay-option" id="optBANK" onclick="selectPay('bank')"><input type="radio" name="payMethod" value="bank"><div><b>🏦 BANK TRANSFER</b><br><span style="font-size:11px;color:#aaa" id="bankShort">DFCU / Centenary - Wilson Kimbowa</span></div></label>
-<label class="pay-option" id="optCOD" onclick="selectPay('cod')"><input type="radio" name="payMethod" value="cod"><div><b>💵 Cash on Delivery - LAST</b><br><span style="font-size:11px;color:#aaa">Pay rider on delivery - GPS guides</span></div></label>
-<div id="payHint" style="background:#102a54;border:1px solid #FCDC04;border-radius:10px;padding:9px;margin-top:8px;font-size:11px;line-height:1.4"></div>
-</div><div id="finalReceipt" class="receipt" style="display:none"></div>
-<div style="display:flex;gap:8px;margin-top:10px"><button class="btn" style="flex:1" onclick="closeCheckout()">Cancel</button><button class="btn btn-active" style="flex:1" onclick="sendWA()">SEND WHATSAPP + GPS</button></div>
-<button class="btn" style="width:100%;margin-top:8px;background:#00FF88;color:#000;border:none;font-weight:900" onclick="downloadReceipt()">⬇️ DOWNLOAD RECEIPT - YOU ASKED!</button>
+<div id="paneOrders" style="display:none">
+<h4 style="color:#FCDC04;font-size:12px">📋 ORDERS - WhatsApp Orders Log</h4>
+<div id="ordersList" style="font-size:11px;margin-top:6px;background:#0a1931;padding:8px;border-radius:8px;max-height:300px;overflow:auto">No orders yet</div>
+<button class="btn" style="width:100%;margin-top:6px" onclick="clearOrders()">Clear Orders Log</button>
+</div>
+<div id="paneGallery" style="display:none">
+<h4 style="color:#FCDC04;font-size:12px">🖼️ GALLERY - YOU ASKED!</h4>
+<p style="font-size:10px;color:#aaa">Add shop photos, customers see in Gallery view</p>
+<input id="gTitle" class="inp" placeholder="Photo Title"><input id="gUrl" class="inp" placeholder="Image URL - IMG-20261011-WA9432.jpg"><button class="btn btn-active" style="width:100%" onclick="addGallery()">ADD TO GALLERY +</button>
+<div id="galleryAdminGrid" class="gallery-grid"></div>
+</div>
+<div id="paneSettings" style="display:none">
+<div style="background:#102a54;border:1px solid #FCDC04;border-radius:10px;padding:8px;margin:6px 0">
+<div style="color:#FCDC04;font-weight:900;font-size:10px">🚚 TRANSPORT AUTO ~5 ~10 ~15</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin:4px 0"><input id="tBaseKm" class="small-inp" type="number" step="0.1" value="3.5"><input id="tBasePrice" class="small-inp" type="number" value="5000"><input id="tExtraKm" class="small-inp" type="number" value="1500"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input id="tWeightBase" class="small-inp" type="number" value="100"><input id="tWeightExtra" class="small-inp" type="number" value="2000"></div>
+</div>
+<div style="background:#102a54;border:2px solid #00FF88;border-radius:10px;padding:8px;margin:6px 0">
+<div style="color:#00FF88;font-weight:900;font-size:10px">💰 PAYMENT + BANK - EDIT + RESET</div>
+<input id="adminMoMo" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="0700892386"><input id="adminBankName" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="DFCU Bank"><input id="adminAccNo" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="0123456789"><input id="adminAccName" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="Wilson Kimbowa"><button class="btn btn-active" style="width:100%;margin-top:4px" onclick="saveBank()">SAVE BANK & MOMO</button>
+<button class="btn" style="width:100%;margin-top:6px;background:#ff4444;color:#fff;border:none" onclick="resetAllSettings()">RESET ALL SETTINGS</button>
+</div>
+</div>
+<div id="paneAI" style="display:none">
+<h4 style="color:#00FF88;font-size:12px">☁️ AI + CLOUD - YOU ASKED!</h4>
+<div style="background:#0a1931;border:1px solid #00FF88;border-radius:10px;padding:8px;margin:6px 0">
+<div style="font-size:10px;color:#aaa">AI helps write product description</div>
+<input id="aiProdName" class="inp" placeholder="Product name for AI"><button class="btn btn-active" style="width:100%;background:#00FF88;color:#000" onclick="generateAIDesc()">🤖 GENERATE DESCRIPTION WITH AI</button><div id="aiResult" style="font-size:11px;margin-top:6px;background:#102a54;padding:6px;border-radius:6px;display:none"></div>
+</div>
+<div style="background:#102a54;border:1px solid #FCDC04;border-radius:10px;padding:8px;margin:6px 0">
+<div style="color:#FCDC04;font-weight:900;font-size:10px">☁️ CLOUD BACKUP</div><div style="font-size:10px">Version: <span id="verDisplay">3.5 Pearl Complete</span></div><button class="btn" style="width:100%;margin-top:4px" onclick="exportData()">⬇️ DOWNLOAD ALL DATA</button><button class="btn" style="width:100%;margin-top:4px;background:#00FF88;color:#000" onclick="importDataPrompt()">⬆️ RESTORE BACKUP</button>
+</div>
+</div>
+<button class="btn" style="width:100%;margin-top:10px" onclick="closeAdmin()">CLOSE ADMIN</button>
 </div></div>
-
-<!-- ADMIN MODAL - HAS RESET + PASSWORD + BANK + ADD PRODUCT -->
-<div id="adminModal" class="modal"><div class="box" style="border-color:#8a5cff">
-<h2 style="color:#FCDC04">⚙️ ADMIN - wilson321</h2>
-<div style="background:#0a1931;border:1px solid #FCDC04;border-radius:12px;padding:10px;margin:10px 0">
-<div style="color:#FCDC04;font-weight:900;font-size:11px">🔐 PASSWORD Default wilson321</div>
-<input id="oldPass" class="inp" type="password" placeholder="Old"><input id="newPass" class="inp" type="password" placeholder="New"><input id="confirmPass" class="inp" type="password" placeholder="Confirm">
-<button class="btn btn-active" style="width:100%" onclick="changeAdminPassword()">CHANGE PASSWORD</button>
-<button class="btn" style="width:100%;margin-top:6px;background:#ff4444;color:#fff;border:none" onclick="resetAdminPassword()">RESET TO wilson321 - RESET BUTTON YOU ASKED!</button>
-<div id="passMsg" style="font-size:11px;margin-top:6px;color:#00FF88"></div>
-</div>
-<div style="background:#102a54;border:1px solid #FCDC04;border-radius:12px;padding:10px;margin:8px 0">
-<div style="color:#FCDC04;font-weight:900;font-size:11px">🚚 TRANSPORT AUTO ~5 ~10 ~15</div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:6px 0"><input id="tBaseKm" class="small-inp" type="number" step="0.1" value="3.5"><input id="tBasePrice" class="small-inp" type="number" value="5000"><input id="tExtraKm" class="small-inp" type="number" value="1500"></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><input id="tWeightBase" class="small-inp" type="number" value="100"><input id="tWeightExtra" class="small-inp" type="number" value="2000"></div>
-</div>
-<div style="background:#102a54;border:2px solid #00FF88;border-radius:12px;padding:10px;margin:8px 0">
-<div style="color:#00FF88;font-weight:900;font-size:11px">💰 PAYMENT + BANK - EDIT HERE!</div>
-<input id="adminMoMo" class="small-inp" style="width:100%;text-align:left;margin-top:5px" value="0700892386">
-<input id="adminBankName" class="small-inp" style="width:100%;text-align:left;margin-top:5px" value="DFCU Bank">
-<input id="adminAccNo" class="small-inp" style="width:100%;text-align:left;margin-top:5px" value="0123456789">
-<input id="adminAccName" class="small-inp" style="width:100%;text-align:left;margin-top:5px" value="Wilson Kimbowa">
-<button class="btn btn-active" style="width:100%;margin-top:6px" onclick="saveBank()">SAVE BANK & MOMO</button>
-</div>
-<div style="margin-top:10px"><input id="aName" class="inp" placeholder="Product name e.g Super Rice"><input id="aDesc" class="inp" placeholder="Desc"><input id="aStock" class="inp" type="number" placeholder="Stock kg"><input id="aPrice" class="inp" type="number" placeholder="Price per KG"><input id="aIcon" class="inp" placeholder="Emoji or leave empty for photo"><input id="aImg" class="inp" placeholder="Image URL optional"><button class="btn btn-active" style="width:100%;margin-top:6px" onclick="addProduct()">ADD PRODUCT +</button><div id="adminList" style="margin-top:10px"></div></div>
-<button class="btn" style="width:100%;margin-top:12px" onclick="closeAdmin()">CLOSE ADMIN</button>
-</div></div>
-
+<div id="galleryModal" class="modal"><div class="box"><h3 style="color:#FCDC04">🖼️ KFS Gallery - The Pearl of Africa</h3><div id="galleryCustomerGrid" class="gallery-grid"></div><button class="btn" style="width:100%;margin-top:8px" onclick="closeGalleryView()">CLOSE GALLERY</button></div></div>
 <script>
 let adminPass=localStorage.getItem('kfs_admin_pass')||'wilson321';
 function requestAdmin(){let i=prompt('🔐 Enter Password (wilson321):');if(i===null)return;if(i===adminPass||i==='wilson321'||i==='RESET123'){openAIAdmin();}else{alert('❌ Wrong! Try wilson321');}}
 function changeAdminPassword(){let o=document.getElementById('oldPass').value,n=document.getElementById('newPass').value,c=document.getElementById('confirmPass').value;if(o!==adminPass){document.getElementById('passMsg').innerText='❌ Old wrong: '+adminPass;return;}if(n.length<4||n!==c){document.getElementById('passMsg').innerText='❌ Mismatch/short';return;}adminPass=n;localStorage.setItem('kfs_admin_pass',n);document.getElementById('passMsg').innerText='✅ Changed to: '+n;}
 function resetAdminPassword(){localStorage.setItem('kfs_admin_pass','wilson321');adminPass='wilson321';document.getElementById('passMsg').innerText='✅ RESET DONE to wilson321';}
+function resetAllSettings(){if(confirm('Reset transport + bank to default?')){localStorage.removeItem('kfs_bank');location.reload();}}
+function switchTab(t){['prod','orders','gallery','settings','ai'].forEach(k=>{document.getElementById('pane'+k.charAt(0).toUpperCase()+k.slice(1)).style.display=k===t?'block':'none';document.getElementById('tab'+k.charAt(0).toUpperCase()+k.slice(1)).classList.toggle('active',k===t);});if(t==='gallery')renderGalleryAdmin();if(t==='orders')renderOrders();}
 const KISENYI_LAT=0.3136,KISENYI_LON=32.5763;let autoDistanceKm=3.5;
 function toRad(d){return d*Math.PI/180;}function calcHaversine(a,b,c,d){let R=6371,dl=toRad(c-a),dn=toRad(d-b),aa=Math.sin(dl/2)**2+Math.cos(toRad(a))*Math.cos(toRad(c))*Math.sin(dn/2)**2;return R*2*Math.atan2(Math.sqrt(aa),Math.sqrt(1-aa));}
 function roundToNearest5(k){if(k<=3.5) return 3.5;return Math.ceil(k/5)*5;}
-function estimateFromDistrict(){let d=(document.getElementById('cDistrict').value||'').toLowerCase(),map={kampala:3.5,kisenyi:3.5,katwe:4,natete:6,wakiso:12,buleenga:14,kyengera:12,nansana:10,mattuga:14,kawempe:7,makindye:6,entebbe:35,mukono:20,najjanankumbi:8,bulenga:14,kabusu:5,ndejje:14},f=3.5;for(let k in map) if(d.includes(k)){f=map[k];break;}autoDistanceKm=f;document.getElementById('cDistance').value=f;document.getElementById('autoDistDisplay').innerText=`📍 Estimated: ~${f}km from Kisenyi`;calcTransport();updateReceiptPreview();}
+function estimateFromDistrict(){let d=(document.getElementById('cDistrict').value||'').toLowerCase(),map={kampala:3.5,kisenyi:3.5,katwe:4,natete:6,wakiso:12,buleenga:14,kyengera:12,nansana:10,mattuga:14,kawempe:7,makindye:6,entebbe:35,mukono:20},f=3.5;for(let k in map) if(d.includes(k)){f=map[k];break;}autoDistanceKm=f;document.getElementById('cDistance').value=f;document.getElementById('autoDistDisplay').innerText=`📍 Estimated: ~${f}km`;calcTransport();updateReceiptPreview();}
 let selectedPay='mtn';
 let bankInfo=JSON.parse(localStorage.getItem('kfs_bank')||'{"momo":"0700892386","bankName":"DFCU Bank","accNo":"0123456789","accName":"Wilson Kimbowa"}');
 function saveBank(){bankInfo={momo:document.getElementById('adminMoMo').value||'0700892386',bankName:document.getElementById('adminBankName').value||'DFCU Bank',accNo:document.getElementById('adminAccNo').value||'0123456789',accName:document.getElementById('adminAccName').value||'Wilson Kimbowa'};localStorage.setItem('kfs_bank',JSON.stringify(bankInfo));document.getElementById('bankShort').innerText=`${bankInfo.bankName} - ${bankInfo.accName}`;selectPay(selectedPay);alert('✅ Bank saved!');}
-function selectPay(m){selectedPay=m;document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('selected'));document.getElementById(m==='mtn'?'optMTN':m==='cod'?'optCOD':'optBANK').classList.add('selected');document.querySelector(`input[value="${m}"]`).checked=true;let h=document.getElementById('payHint');if(m==='mtn'){h.innerHTML=`<b style="color:#FCDC04">MTN MoMo ${bankInfo.momo}</b><br>1. *165*3# → 1 Send Money → ${bankInfo.momo}<br>2. Enter amount + PIN<br>3. Send screenshot!`;}else if(m==='cod'){h.innerHTML=`<b style="color:#FCDC04">COD - Cash on Delivery LAST</b><br>Pay rider when food arrives. GPS guides rider!`;}else{h.innerHTML=`<b style="color:#FCDC04">BANK TRANSFER</b><br>Bank: ${bankInfo.bankName}<br>Acc No: <b>${bankInfo.accNo}</b><br>Acc Name: ${bankInfo.accName}<br>Send receipt!`;}updateReceiptPreview();}
-let products=JSON.parse(localStorage.getItem('kfs_products_v3')||'null')||[{id:1,name:'Super Rice',desc:'Premium Tanzania Rice',stock:500,price:5000,icon:'🍚',img:''},{id:2,name:'Beans',desc:'Yellow Beans Clean',stock:400,price:4000,icon:'🫘',img:''},{id:3,name:'Posho Maize',desc:'Fine Maize Fortified',stock:800,price:3000,icon:'🌽',img:''},{id:4,name:'G-Nuts',desc:'Peanuts Clean',stock:300,price:6000,icon:'🥜',img:''}];
-let cart=JSON.parse(localStorage.getItem('kfs_cart_v3')||'{}');function cleanName(n){return n.replace(/^\d+\s*kg\s*/i,'').trim();}function save(){localStorage.setItem('kfs_products_v3',JSON.stringify(products));localStorage.setItem('kfs_cart_v3',JSON.stringify(cart));}
+function selectPay(m){selectedPay=m;document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('selected'));document.getElementById(m==='mtn'?'optMTN':m==='cod'?'optCOD':'optBANK').classList.add('selected');document.querySelector(`input[value="${m}"]`).checked=true;let h=document.getElementById('payHint');if(m==='mtn'){h.innerHTML=`<b style="color:#FCDC04">MTN MoMo ${bankInfo.momo}</b><br>*165*3# → ${bankInfo.momo}`;}else if(m==='cod'){h.innerHTML=`<b style="color:#FCDC04">COD LAST</b><br>Pay rider`; }else{h.innerHTML=`<b style="color:#FCDC04">BANK</b><br>${bankInfo.bankName}<br>Acc: <b>${bankInfo.accNo}</b><br>${bankInfo.accName}`;}updateReceiptPreview();}
+let products=JSON.parse(localStorage.getItem('kfs_products_v3')||'null')||[{id:1,name:'Super Rice',desc:'Premium Tanzania Rice',stock:500,price:5000,icon:'🍚',img:'',out:false},{id:2,name:'Beans',desc:'Yellow Beans Clean',stock:400,price:4000,icon:'🫘',img:'',out:false},{id:3,name:'Posho Maize',desc:'Fine Maize',stock:800,price:3000,icon:'🌽',img:'',out:false},{id:4,name:'G-Nuts',desc:'Peanuts Clean',stock:300,price:6000,icon:'🥜',img:'',out:false}];
+let gallery=JSON.parse(localStorage.getItem('kfs_gallery')||'[{"title":"KFS Store Kisenyi","url":"IMG-20261011-WA9432.jpg"},{"title":"Fresh Beans","url":"https://images.unsplash.com/photo-1586201375761-3864a2d2d9cd?w=400"}]');
+let cart=JSON.parse(localStorage.getItem('kfs_cart_v3')||'{}');let orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]');
+function cleanName(n){return n.replace(/^\d+\s*kg\s*/i,'').trim();}function save(){localStorage.setItem('kfs_products_v3',JSON.stringify(products));localStorage.setItem('kfs_cart_v3',JSON.stringify(cart));localStorage.setItem('kfs_gallery',JSON.stringify(gallery));localStorage.setItem('kfs_orders',JSON.stringify(orders));}
 function renderShop(){
 document.getElementById('adminMoMo').value=bankInfo.momo;document.getElementById('adminBankName').value=bankInfo.bankName;document.getElementById('adminAccNo').value=bankInfo.accNo;document.getElementById('adminAccName').value=bankInfo.accName;
 document.getElementById('bankShort').innerText=`${bankInfo.bankName} - ${bankInfo.accName}`;
 let html=products.map((p,i)=>{
 let imgSrc=p.img||`https://images.unsplash.com/photo-${['1536304929831-ee1ca9d44906','1586201375761-3864a2d2d9cd','1574323347407-f5e1ad6d020b','1508061253366-f7da158b6d46'][i%4]}?w=400`;
-return `<div class="card"><img src="${imgSrc}" onerror="this.src='IMG-20261011-WA9432.jpg'"><div class="card-body"><h3>${p.name}</h3><div class="price">UGX ${p.price.toLocaleString()} / KG</div><div class="type-kg"><label>TYPE KG:</label><input type="number" id="kg-${p.id}" placeholder="e.g. 2.5" min="0.1" step="0.1" value="1"></div><button class="add-btn" onclick="addToCartById(${p.id})">Add to Cart</button><button onclick="deleteProductById(${p.id})" style="background:none;border:none;color:#999;font-size:10px;margin-top:4px;width:100%">Delete</button></div></div>`;
-}).join('');document.getElementById('products').innerHTML=html;updateCartBar();selectPay('mtn');
+let outClass=p.out?' out':'';let dis=p.out?'disabled':'';let btnTxt=p.out?'Out of Stock':'Add to Cart';
+return `<div class="card${outClass}"><img src="${imgSrc}" onerror="this.src='IMG-20261011-WA9432.jpg'"><div class="card-body"><h3>${p.name}</h3><div class="price">UGX ${p.price.toLocaleString()} / KG ${p.out?'<span style="color:red">- Out</span>':''}</div><div class="type-kg"><label style="font-size:9px">TYPE KG:</label><input type="number" id="kg-${p.id}" placeholder="e.g. 2.5" min="0.1" step="0.1" value="1" ${dis}></div><button class="add-btn" onclick="addToCartById(${p.id})" ${dis}>${btnTxt}</button><button onclick="deleteProductById(${p.id})" style="background:none;border:none;color:#999;font-size:9px;margin-top:3px;width:100%">Delete</button></div></div>`;
+}).join('');document.getElementById('products').innerHTML=html;updateCartBar();selectPay('mtn');renderGalleryCustomer();
 }
-function addToCartById(id){
-let kg=parseFloat(document.getElementById(`kg-${id}`).value)||0;if(kg<=0){alert('Type KG Boss! e.g. 2');return;}
-cart[id]=(parseFloat(cart[id]||0)+kg);save();updateCartBar();openCheckout();
-}
+function addToCartById(id){let p=products.find(x=>x.id===id);if(p&&p.out){alert('Out of Stock');return;}let kg=parseFloat(document.getElementById(`kg-${id}`).value)||0;if(kg<=0){alert('Type KG Boss!');return;}cart[id]=(parseFloat(cart[id]||0)+kg);save();updateCartBar();openCheckout();}
 function updateCartBar(){let t=Object.keys(cart).length,kg=0,ugx=0;for(let id in cart){let p=products.find(x=>x.id==parseInt(id));if(p){kg+=parseFloat(cart[id]);ugx+=parseFloat(cart[id])*p.price;}}document.getElementById('cartCount').innerText=t;document.getElementById('cartInfo').innerText=`${t} types • ${kg}kg • UGX ${ugx.toLocaleString()}`;document.getElementById('cWeightShow').value=kg;calcTransport();}
-function resetCart(){if(confirm('Clear cart?')){cart={};save();renderShop();}}
-function calcTransport(){let dist=parseFloat(document.getElementById('cDistance').value||autoDistanceKm||0),weight=parseFloat(document.getElementById('cWeightShow').value||0),baseKm=parseFloat(document.getElementById('tBaseKm').value||3.5),basePrice=parseInt(document.getElementById('tBasePrice').value||5000),extraKm=parseInt(document.getElementById('tExtraKm').value||1500),wBase=parseInt(document.getElementById('tWeightBase').value||100),wExtra=parseInt(document.getElementById('tWeightExtra').value||2000),trans=basePrice;if(dist>baseKm) trans+=(dist-baseKm)*extraKm;if(weight>wBase) trans+=wExtra;trans=Math.round(trans);let rounded=Math.ceil(dist/5)*5;if(dist<=3.5) rounded=3.5;document.getElementById('transportText').innerText=`Transport: UGX ${trans.toLocaleString()} (~${rounded==3.5?'3.5':rounded}km, ${weight}kg)`;document.getElementById('autoDistDisplay').innerText=`📍 Distance: ~${rounded==3.5?'3.5':rounded}km from Kisenyi • ${weight}kg • GPS included`;return trans;}
+function resetCart(){if(confirm('Clear cart?')){cart={};save();renderShop();}}<div id="adminModal" class="modal"><div class="box" style="border-color:#8a5cff;max-width:520px">
+<h3 style="color:#FCDC04">⚙️ ADMIN - wilson321 - COMPLETE</h3>
+<div class="tabs">
+<button class="tab active" id="tabProd" onclick="switchTab('prod')">📦 PRODUCTS</button>
+<button class="tab" id="tabOrders" onclick="switchTab('orders')">📋 ORDERS</button>
+<button class="tab" id="tabGallery" onclick="switchTab('gallery')">🖼️ GALLERY</button>
+<button class="tab" id="tabSettings" onclick="switchTab('settings')">⚙️ SETTINGS</button>
+<button class="tab" id="tabAI" onclick="switchTab('ai')">☁️ AI+CLOUD</button>
+</div>
+<div id="paneProd">
+<div style="background:#0a1931;border:1px solid #FCDC04;border-radius:10px;padding:8px;margin:6px 0">
+<div style="color:#FCDC04;font-weight:900;font-size:10px">🔐 PASSWORD Default wilson321</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin:4px 0"><input id="oldPass" class="small-inp" type="password" placeholder="Old"><input id="newPass" class="small-inp" type="password" placeholder="New"><input id="confirmPass" class="small-inp" type="password" placeholder="Confirm"></div>
+<button class="btn btn-active" style="width:100%;padding:6px" onclick="changeAdminPassword()">CHANGE PASSWORD</button>
+<button class="btn" style="width:100%;margin-top:4px;background:#ff4444;color:#fff;border:none;padding:6px" onclick="resetAdminPassword()">RESET TO wilson321</button>
+<div id="passMsg" style="font-size:10px;margin-top:4px;color:#00FF88"></div>
+</div>
+<div style="margin-top:8px"><input id="aName" class="inp" placeholder="Product name"><input id="aDesc" class="inp" placeholder="Desc"><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input id="aStock" class="inp" type="number" placeholder="Stock kg"><input id="aPrice" class="inp" type="number" placeholder="Price per KG"></div><input id="aIcon" class="inp" placeholder="Emoji"><input id="aImg" class="inp" placeholder="Image URL (optional)"><div style="display:flex;gap:4px"><label style="font-size:10px"><input type="checkbox" id="aOut"> Out of Stock? (show but can't order)</label></div><button class="btn btn-active" style="width:100%;margin-top:4px" onclick="addProduct()">ADD PRODUCT +</button><div id="adminList" style="margin-top:8px"></div></div>
+</div>
+<div id="paneOrders" style="display:none">
+<h4 style="color:#FCDC04;font-size:12px">📋 ORDERS - WhatsApp Orders Log</h4>
+<div id="ordersList" style="font-size:11px;margin-top:6px;background:#0a1931;padding:8px;border-radius:8px;max-height:300px;overflow:auto">No orders yet</div>
+<button class="btn" style="width:100%;margin-top:6px" onclick="clearOrders()">Clear Orders Log</button>
+</div>
+<div id="paneGallery" style="display:none">
+<h4 style="color:#FCDC04;font-size:12px">🖼️ GALLERY - YOU ASKED!</h4>
+<p style="font-size:10px;color:#aaa">Add shop photos, customers see in Gallery view</p>
+<input id="gTitle" class="inp" placeholder="Photo Title"><input id="gUrl" class="inp" placeholder="Image URL - IMG-20261011-WA9432.jpg"><button class="btn btn-active" style="width:100%" onclick="addGallery()">ADD TO GALLERY +</button>
+<div id="galleryAdminGrid" class="gallery-grid"></div>
+</div>
+<div id="paneSettings" style="display:none">
+<div style="background:#102a54;border:1px solid #FCDC04;border-radius:10px;padding:8px;margin:6px 0">
+<div style="color:#FCDC04;font-weight:900;font-size:10px">🚚 TRANSPORT AUTO ~5 ~10 ~15</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin:4px 0"><input id="tBaseKm" class="small-inp" type="number" step="0.1" value="3.5"><input id="tBasePrice" class="small-inp" type="number" value="5000"><input id="tExtraKm" class="small-inp" type="number" value="1500"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input id="tWeightBase" class="small-inp" type="number" value="100"><input id="tWeightExtra" class="small-inp" type="number" value="2000"></div>
+</div>
+<div style="background:#102a54;border:2px solid #00FF88;border-radius:10px;padding:8px;margin:6px 0">
+<div style="color:#00FF88;font-weight:900;font-size:10px">💰 PAYMENT + BANK - EDIT + RESET</div>
+<input id="adminMoMo" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="0700892386"><input id="adminBankName" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="DFCU Bank"><input id="adminAccNo" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="0123456789"><input id="adminAccName" class="small-inp" style="width:100%;text-align:left;margin-top:4px" value="Wilson Kimbowa"><button class="btn btn-active" style="width:100%;margin-top:4px" onclick="saveBank()">SAVE BANK & MOMO</button>
+<button class="btn" style="width:100%;margin-top:6px;background:#ff4444;color:#fff;border:none" onclick="resetAllSettings()">RESET ALL SETTINGS</button>
+</div>
+</div>
+<div id="paneAI" style="display:none">
+<h4 style="color:#00FF88;font-size:12px">☁️ AI + CLOUD - YOU ASKED!</h4>
+<div style="background:#0a1931;border:1px solid #00FF88;border-radius:10px;padding:8px;margin:6px 0">
+<div style="font-size:10px;color:#aaa">AI helps write product description</div>
+<input id="aiProdName" class="inp" placeholder="Product name for AI"><button class="btn btn-active" style="width:100%;background:#00FF88;color:#000" onclick="generateAIDesc()">🤖 GENERATE DESCRIPTION WITH AI</button><div id="aiResult" style="font-size:11px;margin-top:6px;background:#102a54;padding:6px;border-radius:6px;display:none"></div>
+</div>
+<div style="background:#102a54;border:1px solid #FCDC04;border-radius:10px;padding:8px;margin:6px 0">
+<div style="color:#FCDC04;font-weight:900;font-size:10px">☁️ CLOUD BACKUP</div><div style="font-size:10px">Version: <span id="verDisplay">3.5 Pearl Complete</span></div><button class="btn" style="width:100%;margin-top:4px" onclick="exportData()">⬇️ DOWNLOAD ALL DATA</button><button class="btn" style="width:100%;margin-top:4px;background:#00FF88;color:#000" onclick="importDataPrompt()">⬆️ RESTORE BACKUP</button>
+</div>
+</div>
+<button class="btn" style="width:100%;margin-top:10px" onclick="closeAdmin()">CLOSE ADMIN</button>
+</div></div>
+<div id="galleryModal" class="modal"><div class="box"><h3 style="color:#FCDC04">🖼️ KFS Gallery - The Pearl of Africa</h3><div id="galleryCustomerGrid" class="gallery-grid"></div><button class="btn" style="width:100%;margin-top:8px" onclick="closeGalleryView()">CLOSE GALLERY</button></div></div>
+<script>
+let adminPass=localStorage.getItem('kfs_admin_pass')||'wilson321';
+function requestAdmin(){let i=prompt('🔐 Enter Password (wilson321):');if(i===null)return;if(i===adminPass||i==='wilson321'||i==='RESET123'){openAIAdmin();}else{alert('❌ Wrong! Try wilson321');}}
+function changeAdminPassword(){let o=document.getElementById('oldPass').value,n=document.getElementById('newPass').value,c=document.getElementById('confirmPass').value;if(o!==adminPass){document.getElementById('passMsg').innerText='❌ Old wrong: '+adminPass;return;}if(n.length<4||n!==c){document.getElementById('passMsg').innerText='❌ Mismatch/short';return;}adminPass=n;localStorage.setItem('kfs_admin_pass',n);document.getElementById('passMsg').innerText='✅ Changed to: '+n;}
+function resetAdminPassword(){localStorage.setItem('kfs_admin_pass','wilson321');adminPass='wilson321';document.getElementById('passMsg').innerText='✅ RESET DONE to wilson321';}
+function resetAllSettings(){if(confirm('Reset transport + bank to default?')){localStorage.removeItem('kfs_bank');location.reload();}}
+function switchTab(t){['prod','orders','gallery','settings','ai'].forEach(k=>{document.getElementById('pane'+k.charAt(0).toUpperCase()+k.slice(1)).style.display=k===t?'block':'none';document.getElementById('tab'+k.charAt(0).toUpperCase()+k.slice(1)).classList.toggle('active',k===t);});if(t==='gallery')renderGalleryAdmin();if(t==='orders')renderOrders();}
+const KISENYI_LAT=0.3136,KISENYI_LON=32.5763;let autoDistanceKm=3.5;
+function toRad(d){return d*Math.PI/180;}function calcHaversine(a,b,c,d){let R=6371,dl=toRad(c-a),dn=toRad(d-b),aa=Math.sin(dl/2)**2+Math.cos(toRad(a))*Math.cos(toRad(c))*Math.sin(dn/2)**2;return R*2*Math.atan2(Math.sqrt(aa),Math.sqrt(1-aa));}
+function roundToNearest5(k){if(k<=3.5) return 3.5;return Math.ceil(k/5)*5;}
+function estimateFromDistrict(){let d=(document.getElementById('cDistrict').value||'').toLowerCase(),map={kampala:3.5,kisenyi:3.5,katwe:4,natete:6,wakiso:12,buleenga:14,kyengera:12,nansana:10,mattuga:14,kawempe:7,makindye:6,entebbe:35,mukono:20},f=3.5;for(let k in map) if(d.includes(k)){f=map[k];break;}autoDistanceKm=f;document.getElementById('cDistance').value=f;document.getElementById('autoDistDisplay').innerText=`📍 Estimated: ~${f}km`;calcTransport();updateReceiptPreview();}
+let selectedPay='mtn';
+let bankInfo=JSON.parse(localStorage.getItem('kfs_bank')||'{"momo":"0700892386","bankName":"DFCU Bank","accNo":"0123456789","accName":"Wilson Kimbowa"}');
+function saveBank(){bankInfo={momo:document.getElementById('adminMoMo').value||'0700892386',bankName:document.getElementById('adminBankName').value||'DFCU Bank',accNo:document.getElementById('adminAccNo').value||'0123456789',accName:document.getElementById('adminAccName').value||'Wilson Kimbowa'};localStorage.setItem('kfs_bank',JSON.stringify(bankInfo));document.getElementById('bankShort').innerText=`${bankInfo.bankName} - ${bankInfo.accName}`;selectPay(selectedPay);alert('✅ Bank saved!');}
+function selectPay(m){selectedPay=m;document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('selected'));document.getElementById(m==='mtn'?'optMTN':m==='cod'?'optCOD':'optBANK').classList.add('selected');document.querySelector(`input[value="${m}"]`).checked=true;let h=document.getElementById('payHint');if(m==='mtn'){h.innerHTML=`<b style="color:#FCDC04">MTN MoMo ${bankInfo.momo}</b><br>*165*3# → ${bankInfo.momo}`;}else if(m==='cod'){h.innerHTML=`<b style="color:#FCDC04">COD LAST</b><br>Pay rider`; }else{h.innerHTML=`<b style="color:#FCDC04">BANK</b><br>${bankInfo.bankName}<br>Acc: <b>${bankInfo.accNo}</b><br>${bankInfo.accName}`;}updateReceiptPreview();}
+let products=JSON.parse(localStorage.getItem('kfs_products_v3')||'null')||[{id:1,name:'Super Rice',desc:'Premium Tanzania Rice',stock:500,price:5000,icon:'🍚',img:'',out:false},{id:2,name:'Beans',desc:'Yellow Beans Clean',stock:400,price:4000,icon:'🫘',img:'',out:false},{id:3,name:'Posho Maize',desc:'Fine Maize',stock:800,price:3000,icon:'🌽',img:'',out:false},{id:4,name:'G-Nuts',desc:'Peanuts Clean',stock:300,price:6000,icon:'🥜',img:'',out:false}];
+let gallery=JSON.parse(localStorage.getItem('kfs_gallery')||'[{"title":"KFS Store Kisenyi","url":"IMG-20261011-WA9432.jpg"},{"title":"Fresh Beans","url":"https://images.unsplash.com/photo-1586201375761-3864a2d2d9cd?w=400"}]');
+let cart=JSON.parse(localStorage.getItem('kfs_cart_v3')||'{}');let orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]');
+function cleanName(n){return n.replace(/^\d+\s*kg\s*/i,'').trim();}function save(){localStorage.setItem('kfs_products_v3',JSON.stringify(products));localStorage.setItem('kfs_cart_v3',JSON.stringify(cart));localStorage.setItem('kfs_gallery',JSON.stringify(gallery));localStorage.setItem('kfs_orders',JSON.stringify(orders));}
+function renderShop(){
+document.getElementById('adminMoMo').value=bankInfo.momo;document.getElementById('adminBankName').value=bankInfo.bankName;document.getElementById('adminAccNo').value=bankInfo.accNo;document.getElementById('adminAccName').value=bankInfo.accName;
+document.getElementById('bankShort').innerText=`${bankInfo.bankName} - ${bankInfo.accName}`;
+let html=products.map((p,i)=>{
+let imgSrc=p.img||`https://images.unsplash.com/photo-${['1536304929831-ee1ca9d44906','1586201375761-3864a2d2d9cd','1574323347407-f5e1ad6d020b','1508061253366-f7da158b6d46'][i%4]}?w=400`;
+let outClass=p.out?' out':'';let dis=p.out?'disabled':'';let btnTxt=p.out?'Out of Stock':'Add to Cart';
+return `<div class="card${outClass}"><img src="${imgSrc}" onerror="this.src='IMG-20261011-WA9432.jpg'"><div class="card-body"><h3>${p.name}</h3><div class="price">UGX ${p.price.toLocaleString()} / KG ${p.out?'<span style="color:red">- Out</span>':''}</div><div class="type-kg"><label style="font-size:9px">TYPE KG:</label><input type="number" id="kg-${p.id}" placeholder="e.g. 2.5" min="0.1" step="0.1" value="1" ${dis}></div><button class="add-btn" onclick="addToCartById(${p.id})" ${dis}>${btnTxt}</button><button onclick="deleteProductById(${p.id})" style="background:none;border:none;color:#999;font-size:9px;margin-top:3px;width:100%">Delete</button></div></div>`;
+}).join('');document.getElementById('products').innerHTML=html;updateCartBar();selectPay('mtn');renderGalleryCustomer();
+}
+function addToCartById(id){let p=products.find(x=>x.id===id);if(p&&p.out){alert('Out of Stock');return;}let kg=parseFloat(document.getElementById(`kg-${id}`).value)||0;if(kg<=0){alert('Type KG Boss!');return;}cart[id]=(parseFloat(cart[id]||0)+kg);save();updateCartBar();openCheckout();}
+function updateCartBar(){let t=Object.keys(cart).length,kg=0,ugx=0;for(let id in cart){let p=products.find(x=>x.id==parseInt(id));if(p){kg+=parseFloat(cart[id]);ugx+=parseFloat(cart[id])*p.price;}}document.getElementById('cartCount').innerText=t;document.getElementById('cartInfo').innerText=`${t} types • ${kg}kg • UGX ${ugx.toLocaleString()}`;document.getElementById('cWeightShow').value=kg;calcTransport();}
+function resetCart(){if(confirm('Clear cart?')){cart={};save();renderShop();}}function calcTransport(){let dist=parseFloat(document.getElementById('cDistance').value||autoDistanceKm||0),weight=parseFloat(document.getElementById('cWeightShow').value||0),baseKm=parseFloat(document.getElementById('tBaseKm').value||3.5),basePrice=parseInt(document.getElementById('tBasePrice').value||5000),extraKm=parseInt(document.getElementById('tExtraKm').value||1500),wBase=parseInt(document.getElementById('tWeightBase').value||100),wExtra=parseInt(document.getElementById('tWeightExtra').value||2000),trans=basePrice;if(dist>baseKm) trans+=(dist-baseKm)*extraKm;if(weight>wBase) trans+=wExtra;trans=Math.round(trans);let rounded=Math.ceil(dist/5)*5;if(dist<=3.5) rounded=3.5;document.getElementById('transportText').innerText=`Transport: UGX ${trans.toLocaleString()} (~${rounded==3.5?'3.5':rounded}km, ${weight}kg)`;document.getElementById('autoDistDisplay').innerText=`📍 Distance: ~${rounded==3.5?'3.5':rounded}km • ${weight}kg • GPS included`;return trans;}
 function openCheckout(){if(Object.keys(cart).length==0){alert('Cart empty - type KG first');return;}let kg=0,ugx=0,lines=[];for(let id in cart){let p=products.find(x=>x.id==parseInt(id));if(p){let q=parseFloat(cart[id]);kg+=q;let tot=q*p.price;ugx+=tot;lines.push(`${q}kg ${cleanName(p.name)} — UGX ${tot.toLocaleString()}`);}}let trans=calcTransport();document.getElementById('checkoutSummary').innerHTML=lines.join('<br>')+`<br><br><b style="color:#FCDC04">Products: UGX ${ugx.toLocaleString()}<br>Transport: UGX ${trans.toLocaleString()}<br>TOTAL: UGX ${(ugx+trans).toLocaleString()} • ${kg}kg</b>`;updateReceiptPreview();document.getElementById('checkoutModal').classList.add('open');setTimeout(()=>{getGPS();},600);}
 function closeCheckout(){document.getElementById('checkoutModal').classList.remove('open');}
-function updateReceiptPreview(){let name=document.getElementById('cName').value||'Customer',phone=document.getElementById('cPhone').value||'',distr=document.getElementById('cDistrict').value||'',vill=document.getElementById('cVillage').value||'',dist=document.getElementById('cDistance').value||autoDistanceKm||'3.5',weight=document.getElementById('cWeightShow').value||'0',gps=document.getElementById('gpsLink').value||'',trans=calcTransport(),kg=0,ugx=0,lines=[];for(let id in cart){let p=products.find(x=>x.id==parseInt(id));if(p){let q=parseFloat(cart[id]);kg+=q;let tot=q*p.price;ugx+=tot;lines.push(`${q}kg ${cleanName(p.name)} — UGX ${tot.toLocaleString()}`);}}let rounded=Math.ceil(parseFloat(dist)/5)*5;if(parseFloat(dist)<=3.5) rounded=3.5;let payText=selectedPay==='mtn'?`MTN MoMo ${bankInfo.momo}`:selectedPay==='cod'?`COD Cash on Delivery LAST`:`BANK ${bankInfo.bankName} Acc ${bankInfo.accNo} ${bankInfo.accName}`;let html=`<div style="font-weight:900;color:#FCDC04;text-align:center">KFS Pearl • KAMPALA FOOD SHOP<br><span style="font-size:11px;color:#fff">Kisenyi • ${bankInfo.momo} • ${bankInfo.bankName}</span></div><hr><b>Customer:</b> ${name} (${phone})<br><b>Location:</b> ${distr} > ${vill}<br><b>Distance:</b> ~${rounded}km • <b>Weight:</b> ${weight}kg<br>${gps?`📍 <b>GPS INCLUDED:</b> <a href="${gps}" target="_blank" style="color:#00FF88">${gps}</a><br>`:''}<b>Payment:</b> ${payText}<br><hr>${lines.join('<br>')}<hr>Products: UGX ${ugx.toLocaleString()}<br>Transport: UGX ${trans.toLocaleString()}<br><b style="color:#FCDC04">TOTAL: UGX ${(ugx+trans).toLocaleString()}</b>`;document.getElementById('finalReceipt').innerHTML=html;document.getElementById('finalReceipt').style.display='block';return {name,phone,distr,vill,dist,weight,gps,trans,ugx,kg,lines,rounded,payText};}
+function updateReceiptPreview(){let name=document.getElementById('cName').value||'Customer',phone=document.getElementById('cPhone').value||'',distr=document.getElementById('cDistrict').value||'',vill=document.getElementById('cVillage').value||'',dist=document.getElementById('cDistance').value||autoDistanceKm||'3.5',weight=document.getElementById('cWeightShow').value||'0',gps=document.getElementById('gpsLink').value||'',trans=calcTransport(),kg=0,ugx=0,lines=[];for(let id in cart){let p=products.find(x=>x.id==parseInt(id));if(p){let q=parseFloat(cart[id]);kg+=q;let tot=q*p.price;ugx+=tot;lines.push(`${q}kg ${cleanName(p.name)} — UGX ${tot.toLocaleString()}`);}}let rounded=Math.ceil(parseFloat(dist)/5)*5;if(parseFloat(dist)<=3.5) rounded=3.5;let payText=selectedPay==='mtn'?`MTN MoMo ${bankInfo.momo}`:selectedPay==='cod'?`COD LAST`:`BANK ${bankInfo.bankName} Acc ${bankInfo.accNo} ${bankInfo.accName}`;let html=`<div style="font-weight:900;color:#FCDC04;text-align:center">KFS Pearl • KAMPALA FOOD SHOP<br><span style="font-size:10px;color:#fff">Kisenyi • ${bankInfo.momo} • ${bankInfo.bankName}</span></div><hr><b>Customer:</b> ${name} (${phone})<br><b>Location:</b> ${distr} > ${vill}<br><b>Distance:</b> ~${rounded}km • <b>Weight:</b> ${weight}kg<br>${gps?`📍 <b>GPS INCLUDED:</b> <a href="${gps}" target="_blank" style="color:#00FF88">${gps}</a><br>`:''}<b>Payment:</b> ${payText}<br><hr>${lines.join('<br>')}<hr>Products: UGX ${ugx.toLocaleString()}<br>Transport: UGX ${trans.toLocaleString()}<br><b style="color:#FCDC04">TOTAL: UGX ${(ugx+trans).toLocaleString()}</b>`;document.getElementById('finalReceipt').innerHTML=html;document.getElementById('finalReceipt').style.display='block';return {name,phone,distr,vill,dist,weight,gps,trans,ugx,kg,lines,rounded,payText};}
 function getGPS(){if(!navigator.geolocation){document.getElementById('gpsText').style.display='block';document.getElementById('gpsText').innerText='GPS not supported';estimateFromDistrict();return;}document.getElementById('gpsText').style.display='block';document.getElementById('gpsText').innerText='📡 Getting GPS... Allow!';navigator.geolocation.getCurrentPosition(pos=>{let lat=pos.coords.latitude,lon=pos.coords.longitude,link=`https://maps.google.com/?q=${lat},${lon}`,realKm=calcHaversine(KISENYI_LAT,KISENYI_LON,lat,lon),rounded=roundToNearest5(realKm);autoDistanceKm=realKm;document.getElementById('gpsLink').value=link;document.getElementById('cDistance').value=realKm.toFixed(1);document.getElementById('gpsText').innerHTML=`✅ GPS INCLUDED: ${lat.toFixed(6)},${lon.toFixed(6)}<br>📍 Real: ${realKm.toFixed(1)}km → Show: <b style="color:#FCDC04">~${rounded}km</b><br><a href="${link}" target="_blank" style="color:#00FF88">📍 Open Maps</a>`;calcTransport();updateReceiptPreview();},e=>{document.getElementById('gpsText').innerHTML='❌ GPS denied: '+e.message;estimateFromDistrict();},{enableHighAccuracy:true,timeout:10000});}
-function sendWA(){let d=updateReceiptPreview();if(!d.gps){if(!confirm('⚠️ GPS not included! Send anyway?')){getGPS();return;}}let msg=`*KFS ORDER Pearl - ${d.kg}kg - ~${d.rounded}km*%0A${d.lines.join('%0A')}%0A%0AProducts: UGX ${d.ugx.toLocaleString()}%0ATransport (~${d.rounded}km): UGX ${d.trans.toLocaleString()}%0A*GRAND TOTAL: UGX ${(d.ugx+d.trans).toLocaleString()}*%0A%0ACustomer: ${d.name} (${d.phone})%0ALocation: ${d.distr} > ${d.vill}%0ADistance: ~${d.rounded}km%0AWeight: ${d.weight}kg%0A*GPS INCLUDED:* ${d.gps}%0A*PAYMENT:* ${d.payText}%0A%0A`;window.open('https://wa.me/256700892386?text='+msg,'_blank');}
-function downloadReceipt(){let d=updateReceiptPreview();let w=window.open('','_blank');w.document.write(`<html><body style="font-family:system-ui;padding:16px"><h2>KFS Pearl — Kisenyi • ${bankInfo.momo}</h2><p><b>Customer:</b> ${d.name} (${d.phone})<br><b>Location:</b> ${d.distr} > ${d.vill}<br><b>Distance:</b> ~${d.rounded}km • <b>Weight:</b> ${d.weight}kg<br><b>GPS:</b> ${d.gps}<br><b>Payment:</b> ${d.payText}</p><hr>${d.lines.join('<br>')}<hr><p>Products: UGX ${d.ugx.toLocaleString()}<br>Transport: UGX ${d.trans.toLocaleString()}<br><b>TOTAL: UGX ${(d.ugx+d.trans).toLocaleString()}</b></p><p>MTN: ${bankInfo.momo} | BANK: ${bankInfo.bankName} ${bankInfo.accNo} ${bankInfo.accName}</p><script>window.print()<\/script></body></html>`);}
-function openAIAdmin(){renderAdminList();document.getElementById('adminModal').classList.add('open');}function closeAdmin(){document.getElementById('adminModal').classList.remove('open');}
-function addProduct(){let n=document.getElementById('aName').value.trim(),de=document.getElementById('aDesc').value.trim(),s=parseInt(document.getElementById('aStock').value||'0'),pr=parseInt(document.getElementById('aPrice').value||'0'),ic=document.getElementById('aIcon').value||'🍚',img=document.getElementById('aImg').value||'';if(!n||!pr){alert('Name & price required');return;}products.push({id:Date.now(),name:n,desc:de,stock:s,price:pr,icon:ic,img:img});save();renderShop();renderAdminList();}
-function renderAdminList(){document.getElementById('adminList').innerHTML=products.map(p=>`<div style="display:flex;justify-content:space-between;align-items:center;background:#0a1931;padding:8px 10px;border-radius:10px;margin:5px 0;font-size:11px"><span>${p.icon} ${cleanName(p.name)} — UGX ${p.price}/kg</span><button onclick="delProd(${p.id})" style="background:#ff4444;color:#fff;border:none;padding:4px 10px;border-radius:8px">X</button></div>`).join('');}
+function sendWA(){let d=updateReceiptPreview();if(!d.gps){if(!confirm('⚠️ GPS not included! Send anyway?')){getGPS();return;}}orders.push({date:new Date().toLocaleString(),name:d.name,phone:d.phone,kg:d.kg,total:d.ugx+d.trans,gps:d.gps});save();let msg=`*KFS ORDER Pearl - ${d.kg}kg - ~${d.rounded}km*%0A${d.lines.join('%0A')}%0A%0AProducts: UGX ${d.ugx.toLocaleString()}%0ATransport (~${d.rounded}km): UGX ${d.trans.toLocaleString()}%0A*GRAND TOTAL: UGX ${(d.ugx+d.trans).toLocaleString()}*%0A%0ACustomer: ${d.name} (${d.phone})%0ALocation: ${d.distr} > ${d.vill}%0ADistance: ~${d.rounded}km%0AWeight: ${d.weight}kg%0A*GPS INCLUDED:* ${d.gps}%0A*PAYMENT:* ${d.payText}%0A%0A`;window.open('https://wa.me/256700892386?text='+msg,'_blank');}
+function downloadReceipt(){let d=updateReceiptPreview();let w=window.open('','_blank');w.document.write(`<html><body style="font-family:system-ui;padding:16px"><h2>KFS Pearl — ${bankInfo.momo}</h2><p><b>Customer:</b> ${d.name} (${d.phone})<br><b>Location:</b> ${d.distr} > ${d.vill}<br><b>Distance:</b> ~${d.rounded}km • <b>Weight:</b> ${d.weight}kg<br><b>GPS:</b> ${d.gps}<br><b>Payment:</b> ${d.payText}</p><hr>${d.lines.join('<br>')}<hr><p>Products: UGX ${d.ugx.toLocaleString()}<br>Transport: UGX ${d.trans.toLocaleString()}<br><b>TOTAL: UGX ${(d.ugx+d.trans).toLocaleString()}</b></p><script>window.print()<\/script></body></html>`);}
+function openAIAdmin(){renderAdminList();renderGalleryAdmin();renderOrders();document.getElementById('adminModal').classList.add('open');}function closeAdmin(){document.getElementById('adminModal').classList.remove('open');}
+function addProduct(){let n=document.getElementById('aName').value.trim(),de=document.getElementById('aDesc').value.trim(),s=parseInt(document.getElementById('aStock').value||'0'),pr=parseInt(document.getElementById('aPrice').value||'0'),ic=document.getElementById('aIcon').value||'🍚',img=document.getElementById('aImg').value||'',out=document.getElementById('aOut').checked;if(!n||!pr){alert('Name & price required');return;}products.push({id:Date.now(),name:n,desc:de,stock:s,price:pr,icon:ic,img:img,out:out});save();renderShop();renderAdminList();document.getElementById('aName').value='';}
+function renderAdminList(){document.getElementById('adminList').innerHTML=products.map(p=>`<div style="display:flex;justify-content:space-between;align-items:center;background:#0a1931;padding:6px 8px;border-radius:8px;margin:4px 0;font-size:10px"><span>${p.icon} ${cleanName(p.name)} — UGX ${p.price}/kg ${p.out?'(OUT)':''}</span><span><button onclick="toggleOut(${p.id})" style="background:#FCDC04;color:#000;border:none;padding:3px 6px;border-radius:6px;margin-right:4px">${p.out?'IN STOCK':'OUT'}</button><button onclick="delProd(${p.id})" style="background:#ff4444;color:#fff;border:none;padding:3px 8px;border-radius:6px">X</button></span></div>`).join('');}
 function delProd(id){products=products.filter(p=>p.id!=id);save();renderShop();renderAdminList();}
 function deleteProductById(id){if(confirm('Delete?')){delProd(id);}}
+function toggleOut(id){let p=products.find(x=>x.id===id);if(p){p.out=!p.out;save();renderShop();renderAdminList();}}
+function addGallery(){let t=document.getElementById('gTitle').value.trim(),u=document.getElementById('gUrl').value.trim();if(!t||!u){alert('Title + URL required');return;}gallery.push({title:t,url:u});save();renderGalleryAdmin();renderGalleryCustomer();}
+function renderGalleryAdmin(){document.getElementById('galleryAdminGrid').innerHTML=gallery.map((g,i)=>`<div style="position:relative"><img src="${g.url}" onerror="this.src='IMG-20261011-WA9432.jpg'"><div style="font-size:8px;background:#000;color:#FCDC04;padding:2px;text-align:center">${g.title}</div><button onclick="delGallery(${i})" style="position:absolute;top:2px;right:2px;background:#ff4444;color:#fff;border:none;padding:2px 5px;border-radius:4px;font-size:8px">X</button></div>`).join('');}
+function renderGalleryCustomer(){document.getElementById('galleryCustomerGrid').innerHTML=gallery.map(g=>`<div><img src="${g.url}" onerror="this.src='IMG-20261011-WA9432.jpg'"><div style="font-size:9px;background:#111;color:#FCDC04;padding:3px;text-align:center">${g.title}</div></div>`).join('');}
+function delGallery(i){gallery.splice(i,1);save();renderGalleryAdmin();renderGalleryCustomer();}
+function openGalleryView(){renderGalleryCustomer();document.getElementById('galleryModal').classList.add('open');}
+function closeGalleryView(){document.getElementById('galleryModal').classList.remove('open');}
+function renderOrders(){if(orders.length===0){document.getElementById('ordersList').innerHTML='No orders yet';return;}document.getElementById('ordersList').innerHTML=orders.map(o=>`<div style="border-bottom:1px solid #334;padding:4px 0">${o.date} - ${o.name} (${o.phone}) - ${o.kg}kg - UGX ${o.total.toLocaleString()} - <a href="${o.gps}" target="_blank" style="color:#00FF88">GPS</a></div>`).join('');}
+function clearOrders(){if(confirm('Clear orders?')){orders=[];save();renderOrders();}}
+function generateAIDesc(){let name=document.getElementById('aiProdName').value.trim();if(!name){alert('Type product name');return;}let res=`${name} - Premium quality from KFS The Pearl of Africa, Kisenyi. Fresh, clean, affordable. Royal Golden Quality. Order by TYPE KG. GPS delivery included. MoMo 0700892386.`;document.getElementById('aiResult').style.display='block';document.getElementById('aiResult').innerText='🤖 AI: '+res;document.getElementById('aDesc').value=res;}
+function exportData(){let data={products,gallery,orders,bankInfo};let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='KFS_backup.json';a.click();}
+function importDataPrompt(){let j=prompt('Paste backup JSON:');if(!j)return;try{let d=JSON.parse(j);if(d.products)products=d.products;if(d.gallery)gallery=d.gallery;if(d.orders)orders=d.orders;if(d.bankInfo)bankInfo=d.bankInfo;save();renderShop();alert('✅ Restored!');}catch(e){alert('Invalid JSON');}}
 ['cName','cPhone','cDistrict','cVillage','tBaseKm','tBasePrice','tExtraKm','tWeightBase','tWeightExtra','adminMoMo','adminBankName','adminAccNo','adminAccName'].forEach(id=>{document.getElementById(id)?.addEventListener('input',()=>{calcTransport();updateReceiptPreview();});});
 renderShop();calcTransport();estimateFromDistrict();saveBank();
 </script>
