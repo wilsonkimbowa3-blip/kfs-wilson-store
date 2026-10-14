@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>KFS v9.3 Payment Beautiful</title>
-<meta name="theme-color" content="#0a1931">
+<meta name="theme-color" content="#0a1931"><link rel="manifest" href="./manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#08152e;color:#fff;padding-bottom:120px}
@@ -558,5 +560,5 @@ window.addEventListener('DOMContentLoaded',function(){var saved=localStorage.get
 setTimeout(function(){var saved=localStorage.getItem('kfs_cloud_bin');if(!saved)localStorage.setItem('kfs_cloud_bin','aeb8e0b683ec2e2756d8');forceRender();},500);
 forceRender();
 </script>
-</body>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').then(function(){console.log('KFS SW ok');}).catch(function(e){console.log('KFS SW skip');});});}</script></body>
 </html>
