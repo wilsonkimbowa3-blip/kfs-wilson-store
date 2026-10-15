@@ -602,4 +602,23 @@ window.addEventListener('load', function() {
   setTimeout(function() {
     try { if (typeof pushToCloud === 'function') { pushToCloud(); } } catch(e) {}
   }, 3000);
-});</script></html>
+});</script><script>
+// KFS v9.3 PATCH: Auto-PULL for customers
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    try{
+      if(typeof kfsRef !== 'undefined' && kfsRef.on){
+        kfsRef.on('value', function(snap){
+          var d = snap.val();
+          if(d && d.products){
+            localStorage.setItem('kfs_products', JSON.stringify(d.products));
+            if(typeof forceRender === 'function') forceRender();
+            else if(typeof renderShop === 'function') renderShop();
+          }
+        });
+        console.log('KFS Auto-PULL ON');
+      }
+    }catch(e){}
+  }, 2000);
+});
+</script></html>
