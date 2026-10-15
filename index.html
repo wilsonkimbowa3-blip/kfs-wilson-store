@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>KFS v9.3 Payment Beautiful</title>
@@ -561,4 +562,39 @@ setTimeout(function(){var saved=localStorage.getItem('kfs_cloud_bin');if(!saved)
 forceRender();
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').then(function(){console.log('KFS SW ok');}).catch(function(e){console.log('KFS SW skip');});});}</script></body>
-</html>
+<script>
+// === KFS FIREBASE SYNC ADD-ON v9.3 - SAFE, DOES NOT DELETE v9.3 ===
+try{
+var firebaseConfig = { databaseURL: "https://kfs-shop-cf1da-default-rtdb.firebaseio.com" };
+if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+var kfsDB = firebase.database();
+var kfsRef = kfsDB.ref('kfs-shop');
+window.kfsRef = kfsRef;
+
+// When cloud changes -> update local + re-render
+kfsRef.on('value', function(snap){
+  try{
+    var d = snap.val();
+    if(!d) return;
+    if(d.products){
+      try{ localStorage.setItem('kfs_products_v3', JSON.stringify(d.products)); }catch(e){}
+      try{ localStorage.setItem('kfs_products', JSON.stringify(d.products)); }catch(e){}
+      if(typeof products !== 'undefined') products = d.products;
+    }
+    if(typeof forceRender === 'function') forceRender();
+    else if(typeof renderShop === 'function') renderShop();
+  }catch(e){}
+});
+
+// Helper to push your current shop to cloud - call it after you save in Admin
+window.pushToCloud = function(){
+  try{
+    var prods = null;
+    try{ prods = JSON.parse(localStorage.getItem('kfs_products_v3') || localStorage.getItem('kfs_products') || 'null'); }catch(e){}
+    if(!prods && typeof products !== 'undefined') prods = products;
+    if(prods) kfsRef.set({ products: prods, updatedAt: Date.now() });
+  }catch(e){}
+};
+console.log('KFS Firebase Sync ON');
+}catch(e){ console.log('Firebase add-on error', e); }
+</script></html>
