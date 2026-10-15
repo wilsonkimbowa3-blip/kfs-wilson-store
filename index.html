@@ -597,4 +597,9 @@ window.pushToCloud = function(){
 };
 console.log('KFS Firebase Sync ON');
 }catch(e){ console.log('Firebase add-on error', e); }
-</script></html>
+// AUTO-PUSH - runs by itself
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    try { if (typeof pushToCloud === 'function') { pushToCloud(); } } catch(e) {}
+  }, 3000);
+});</script></html>
