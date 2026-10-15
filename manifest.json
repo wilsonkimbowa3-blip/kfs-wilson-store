@@ -1,11 +1,25 @@
 {
   "name": "Kampala Food Shop - KFS",
   "short_name": "KFS Shop",
-  "description": "Kampala Food Shop - Rice, Beans, Posho, Matooke",
+  "description": "Kampala Food Shop - Fresh Food Delivery",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0a1931",
   "theme_color": "#0a1931",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
 }
