@@ -765,26 +765,36 @@ window.addEventListener('load', function(){
   return "";
 }
   function deleteByName(name){
-    var left = 0;
-    for(var i=0;i<localStorage.length;i++){
-      var key = localStorage.key(i);
-      try{
-        var val = JSON.parse(localStorage.getItem(key));
-        if(Array.isArray(val) && val.length>0 && val[0] && typeof val[0]==='object'){
-          var after = val.filter(function(p){
-            var pn = (p.name||p.title||"").toString().toLowerCase();
-            return pn.indexOf(name.toLowerCase().substring(0,10))===-1;
-          });
-          if(after.length!==val.length){
-            localStorage.setItem(key, JSON.stringify(after));
-            fetch(DB_URL,{method:"PUT", body: JSON.stringify(after)});
-            left = after.length;
-          } else { left = val.length; }
-        }
-      }catch(e){}
-    }
-    return left;
+  var clean = (name||"").replace(/[^\w\s\.]/g,"").replace(/\s+/g," ").trim().toLowerCase();
+  var shortName = clean.split(" ").slice(0,3).join(" ");
+  var left = 0;
+  for(var i=0;i<localStorage.length;i++){
+    var key = localStorage.key(i);
+    try{
+      var val = JSON.parse(localStorage.getItem(key));
+      if(Array.isArray(val) && val.length && typeof val[0]==="object"){
+        var after = val.filter(function(p){
+          var pn = ((p.name||p.title||"")+"").toLowerCase();
+          return pn.indexOf(shortName)===-1 && shortName.indexOf(pn)===-1;
+        });
+        if(after.length!==val.length){
+          localStorage.setItem(key, JSON.stringify(after));
+          fetch(DB_URL,{method:"PUT", body: JSON.stringify(after)});
+          left = after.length;
+        } else { left = val.length; }
+      }
+    }catch(e){}
   }
+  ["products","allProducts","shopProducts","items"].forEach(function(k){
+    if(Array.isArray(window[k])){
+      window[k] = window[k].filter(function(p){
+        var pn = ((p.name||p.title||"")+"").toLowerCase();
+        return pn.indexOf(shortName)===-1;
+      });
+    }
+  });
+  return left;
+}
   document.addEventListener("click", function(e){
     var btn = e.target.closest("button");
     if(!btn) return;
