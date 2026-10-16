@@ -621,4 +621,58 @@ window.addEventListener('load', function(){
     }catch(e){}
   }, 2000);
 });
+</script><script>
+// KFS FIX: Stop old list from overwriting cloud
+(function(){
+  var cloudLoaded = false;
+  var originalPush = window.pushToCloud;
+
+  // 1. Block push until cloud is loaded first
+  window.pushToCloud = function(){
+    if(!cloudLoaded){
+      console.log('KFS: Push blocked - waiting for cloud first');
+      return;
+    }
+    if(originalPush) originalPush();
+  };
+
+  // 2. PULL first, then allow PUSH
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      try{
+        if(typeof kfsRef !== 'undefined' && kfsRef.once){
+          kfsRef.once('value').then(function(snap){
+            var d = snap.val();
+            if(d && d.products && d.products.length > 0){
+              // Cloud wins - use cloud list
+              localStorage.setItem('kfs_products', JSON.stringify(d.products));
+              if(typeof products !== 'undefined') products = d.products;
+              if(typeof renderShop === 'function') renderShop();
+              if(typeof forceRender === 'function') forceRender();
+              console.log('KFS: Loaded from cloud, products:', d.products.length);
+            } else {
+              // Cloud empty - push local once
+              console.log('KFS: Cloud empty, pushing local');
+              cloudLoaded = true;
+              if(originalPush) originalPush();
+              return;
+            }
+            cloudLoaded = true;
+          });
+        } else {
+          cloudLoaded = true;
+        }
+      }catch(e){ cloudLoaded = true; }
+    }, 1000);
+  });
+
+  // 3. When you add a product in Admin, push IMMEDIATELY
+  var _setItem = localStorage.setItem.bind(localStorage);
+  localStorage.setItem = function(k, v){
+    _setItem(k, v);
+    if(k === 'kfs_products' && cloudLoaded){
+      setTimeout(function(){ if(originalPush) originalPush(); }, 500);
+    }
+  };
+})();
 </script></html>
