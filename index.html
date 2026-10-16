@@ -675,4 +675,69 @@ window.addEventListener('load', function(){
     }
   };
 })();
+</script><script>
+// KFS ULTIMATE FIX - Force real cloud save
+(function(){
+  function getProducts(){
+    // Try every possible place products are stored
+    if(window.products && window.products.length) return window.products;
+    var keys = ['kfs_products','kfs_shop_data','kfs_data','products','shop_products'];
+    for(var i=0;i<keys.length;i++){
+      try{
+        var v = localStorage.getItem(keys[i]);
+        if(v){ var p = JSON.parse(v); if(p.products) return p.products; if(Array.isArray(p) && p.length) return p; }
+      }catch(e){}
+    }
+    return [];
+  }
+  function saveEverywhere(list){
+    window.products = list;
+    try{
+      localStorage.setItem('kfs_products', JSON.stringify(list));
+      localStorage.setItem('kfs_shop_data', JSON.stringify({products:list}));
+    }catch(e){}
+    // Force Firebase push - try all refs
+    try{
+      if(typeof kfsRef!== 'undefined' && kfsRef.set){
+        kfsRef.set({products:list, updated: Date.now()});
+        console.log('KFS: PUSHED to cloud:', list.length);
+      }
+      if(typeof firebase!== 'undefined' && firebase.database){
+        firebase.database().ref('kfs_shop').set({products:list, updated: Date.now()});
+        firebase.database().ref('shop').set({products:list});
+      }
+    }catch(e){ console.log('KFS push error', e); }
+  }
+
+  // Override pushToCloud completely
+  window.pushToCloud = function(){ saveEverywhere(getProducts()); };
+
+  // When you click ADD PRODUCT, push after 1 sec
+  document.addEventListener('click', function(e){
+    if(e.target && e.target.textContent && e.target.textContent.includes('ADD PRODUCT')){
+      setTimeout(function(){ window.pushToCloud(); alert('Pushed to cloud: ' + getProducts().length + ' products'); }, 1000);
+    }
+  });
+
+  // On load: PULL from cloud first, do NOT overwrite with defaults
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      try{
+        if(typeof kfsRef!== 'undefined' && kfsRef.once){
+          kfsRef.once('value').then(function(snap){
+            var d = snap.val();
+            if(d && d.products && d.products.length > 0){
+              window.products = d.products;
+              localStorage.setItem('kfs_products', JSON.stringify(d.products));
+              if(typeof renderShop === 'function') renderShop();
+              if(typeof forceRender === 'function') forceRender();
+              // Force re-render by reloading list UI
+              setTimeout(function(){ if(typeof renderShop === 'function') renderShop(); }, 500);
+            }
+          });
+        }
+      }catch(e){}
+    }, 1500);
+  });
+})();
 </script></html>
