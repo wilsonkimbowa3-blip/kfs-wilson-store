@@ -744,11 +744,26 @@ window.addEventListener('load', function(){
 // KFS DELETE FIX V2
 (function(){
   var DB_URL = "https://kfs-shop-cf1da-default-rtdb.firebaseio.com/kfs_shop.json";
-  function getNameFromCard(btn){
-    var card = btn.closest("div");
-    for(var i=0;i<4;i++){ if(card && card.parentElement) card = card.parentElement; }
-    return card? card.innerText.split("\n")[0].trim() : "";
+ function getNameFromCard(btn){
+  var el = btn;
+  for(var i=0;i<8;i++){
+    if(!el) break;
+    var txt = el.innerText || "";
+    if(txt.indexOf("UGX")!==-1 && txt.indexOf("SET OUT")!==-1){
+      var lines = txt.split("\n").map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+      // First lines are the product name, before UGX line
+      var nameParts = [];
+      for(var j=0;j<lines.length;j++){
+        if(lines[j].indexOf("UGX")!==-1) break;
+        if(lines[j]==="SET OUT"||lines[j]==="EDIT"||lines[j]==="HIDE"||lines[j]==="X") continue;
+        nameParts.push(lines[j]);
+      }
+      return nameParts.join(" ").trim();
+    }
+    el = el.parentElement;
   }
+  return "";
+}
   function deleteByName(name){
     var left = 0;
     for(var i=0;i<localStorage.length;i++){
