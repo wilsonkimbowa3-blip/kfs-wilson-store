@@ -808,5 +808,24 @@ window.addEventListener('load', function(){
     }
   }, true);
 })();
-</script>
+// HIDE DELETED ITEMS - no need to find products
+try{
+  var deletedNames = JSON.parse(localStorage.getItem("kfs_deleted")||"[]");
+  if(deletedNames.length > 0){
+    var allDivs = document.querySelectorAll("div");
+    for(var d=0; d<allDivs.length; d++){
+      var txt = allDivs[d].innerText || "";
+      // Only check small cards that have a price
+      if(txt.indexOf("UGX")!== -1 && txt.length < 500){
+        for(var n=0; n<deletedNames.length; n++){
+          var dn = deletedNames[n].replace(/[^a-zA-Z0-9 ]/g,"").trim();
+          var short = dn.split(" ").slice(0,2).join(" ");
+          if(short && txt.indexOf(short)!== -1){
+            allDivs[d].style.display = "none";
+          }
+        }
+      }
+    }
+  }
+}catch(e){}</script>
 </html>
