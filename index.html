@@ -740,60 +740,48 @@ window.addEventListener('load', function(){
     }, 1500);
   });
 })();
-</script>
-// KFS DELETE FIX V2 - Deletes by NAME, scans ALL storage
+</script><script>
+// KFS DELETE FIX V2
 (function(){
   var DB_URL = "https://kfs-shop-cf1da-default-rtdb.firebaseio.com/kfs_shop.json";
-
   function getNameFromCard(btn){
     var card = btn.closest("div");
-    // Go up 3 levels to find the whole product card
     for(var i=0;i<4;i++){ if(card && card.parentElement) card = card.parentElement; }
-    var txt = card? card.innerText : "";
-    // First line is usually the product name like "50kg Super Rice"
-    return txt.split("\n")[0].trim();
+    return card? card.innerText.split("\n")[0].trim() : "";
   }
-
   function deleteByName(name){
-    var totalLeft = 0;
-    // Scan EVERYTHING in localStorage, not just one key
+    var left = 0;
     for(var i=0;i<localStorage.length;i++){
       var key = localStorage.key(i);
       try{
         var val = JSON.parse(localStorage.getItem(key));
         if(Array.isArray(val) && val.length>0 && val[0] && typeof val[0]==='object'){
-          var before = val.length;
           var after = val.filter(function(p){
             var pn = (p.name||p.title||"").toString().toLowerCase();
-            var search = name.toLowerCase().substring(0,10);
-            return pn.indexOf(search)===-1 && search.indexOf(pn.substring(0,10))===-1;
+            return pn.indexOf(name.toLowerCase().substring(0,10))===-1;
           });
-          if(after.length!== before){
+          if(after.length!==val.length){
             localStorage.setItem(key, JSON.stringify(after));
-            totalLeft = after.length;
-            // Push this cleaned list to cloud
             fetch(DB_URL,{method:"PUT", body: JSON.stringify(after)});
-          } else {
-            totalLeft = before;
-          }
+            left = after.length;
+          } else { left = val.length; }
         }
       }catch(e){}
     }
-    return totalLeft;
+    return left;
   }
-
   document.addEventListener("click", function(e){
     var btn = e.target.closest("button");
     if(!btn) return;
-    if(btn.innerText.trim() === "X"){
-      e.stopPropagation();
-      e.preventDefault();
+    if(btn.innerText.trim()==="X"){
+      e.stopPropagation(); e.preventDefault();
       var name = getNameFromCard(btn);
-      if(!confirm("Delete " + name + " forever?")) return;
+      if(!confirm("Delete "+name+" forever?")) return;
       var left = deleteByName(name);
-      alert("Deleted: " + name + "\n" + left + " left in cloud");
+      alert("Deleted: "+name+"\n"+left+" left");
       setTimeout(function(){ location.reload(); }, 800);
     }
   }, true);
 })();
-</script></html>
+</script>
+</html>
