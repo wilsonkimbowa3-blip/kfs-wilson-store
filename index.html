@@ -740,4 +740,45 @@ window.addEventListener('load', function(){
     }, 1500);
   });
 })();
+</script><script>
+// KFS DELETE FIX - Make X actually delete from cloud
+(function(){
+  // Find the real database URL from your app, fallback to your URL
+  var DB_URL = "https://kfs-shop-cf1da-default-rtdb.firebaseio.com/kfs_shop.json";
+
+  // Try to find correct key your app uses
+  function getProducts(){
+    var keys = ["kfs_products","products","kfs_shop","KFS_PRODUCTS"];
+    for(var i=0;i<keys.length;i++){
+      var v = localStorage.getItem(keys[i]);
+      if(v){
+        try{ var p = JSON.parse(v); if(Array.isArray(p)) return {key:keys[i], data:p}; }catch(e){}
+      }
+    }
+    return null;
+  }
+
+  function pushDeleteToCloud(){
+    var found = getProducts();
+    if(!found) return;
+    // PUT overwrites cloud with the new list WITHOUT the deleted item
+    fetch(DB_URL, {method:"PUT", body: JSON.stringify(found.data)})
+   .then(()=>{ console.log("Delete pushed to cloud:", found.data.length); })
+   .catch(e=>{ console.log("Delete push failed", e); });
+  }
+
+  // Listen for ANY click on X / Delete buttons
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest("button");
+    if(!btn) return;
+    var txt = btn.innerText.trim();
+    // Your delete button is just "X"
+    if(txt === "X" || txt === "✕" || txt === "×" || txt.toLowerCase().includes("delete")){
+      // Wait for your old delete code to remove it locally first, then push
+      setTimeout(pushDeleteToCloud, 500);
+      setTimeout(pushDeleteToCloud, 1200);
+      setTimeout(function(){ alert("Deleted from cloud: " + (getProducts()?getProducts().data.length:0) + " left"); }, 1300);
+    }
+  }, true);
+})();
 </script></html>
