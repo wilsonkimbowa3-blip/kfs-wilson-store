@@ -740,44 +740,59 @@ window.addEventListener('load', function(){
     }, 1500);
   });
 })();
-</script><script>
-// KFS DELETE FIX - Make X actually delete from cloud
+</script>
+// KFS DELETE FIX V2 - Deletes by NAME, scans ALL storage
 (function(){
-  // Find the real database URL from your app, fallback to your URL
   var DB_URL = "https://kfs-shop-cf1da-default-rtdb.firebaseio.com/kfs_shop.json";
 
-  // Try to find correct key your app uses
-  function getProducts(){
-    var keys = ["kfs_products","products","kfs_shop","KFS_PRODUCTS"];
-    for(var i=0;i<keys.length;i++){
-      var v = localStorage.getItem(keys[i]);
-      if(v){
-        try{ var p = JSON.parse(v); if(Array.isArray(p)) return {key:keys[i], data:p}; }catch(e){}
-      }
+  function getNameFromCard(btn){
+    var card = btn.closest("div");
+    // Go up 3 levels to find the whole product card
+    for(var i=0;i<4;i++){ if(card && card.parentElement) card = card.parentElement; }
+    var txt = card? card.innerText : "";
+    // First line is usually the product name like "50kg Super Rice"
+    return txt.split("\n")[0].trim();
+  }
+
+  function deleteByName(name){
+    var totalLeft = 0;
+    // Scan EVERYTHING in localStorage, not just one key
+    for(var i=0;i<localStorage.length;i++){
+      var key = localStorage.key(i);
+      try{
+        var val = JSON.parse(localStorage.getItem(key));
+        if(Array.isArray(val) && val.length>0 && val[0] && typeof val[0]==='object'){
+          var before = val.length;
+          var after = val.filter(function(p){
+            var pn = (p.name||p.title||"").toString().toLowerCase();
+            var search = name.toLowerCase().substring(0,10);
+            return pn.indexOf(search)===-1 && search.indexOf(pn.substring(0,10))===-1;
+          });
+          if(after.length!== before){
+            localStorage.setItem(key, JSON.stringify(after));
+            totalLeft = after.length;
+            // Push this cleaned list to cloud
+            fetch(DB_URL,{method:"PUT", body: JSON.stringify(after)});
+          } else {
+            totalLeft = before;
+          }
+        }
+      }catch(e){}
     }
-    return null;
+    return totalLeft;
   }
 
-  function pushDeleteToCloud(){
-    var found = getProducts();
-    if(!found) return;
-    // PUT overwrites cloud with the new list WITHOUT the deleted item
-    fetch(DB_URL, {method:"PUT", body: JSON.stringify(found.data)})
-   .then(()=>{ console.log("Delete pushed to cloud:", found.data.length); })
-   .catch(e=>{ console.log("Delete push failed", e); });
-  }
-
-  // Listen for ANY click on X / Delete buttons
   document.addEventListener("click", function(e){
     var btn = e.target.closest("button");
     if(!btn) return;
-    var txt = btn.innerText.trim();
-    // Your delete button is just "X"
-    if(txt === "X" || txt === "✕" || txt === "×" || txt.toLowerCase().includes("delete")){
-      // Wait for your old delete code to remove it locally first, then push
-      setTimeout(pushDeleteToCloud, 500);
-      setTimeout(pushDeleteToCloud, 1200);
-      setTimeout(function(){ alert("Deleted from cloud: " + (getProducts()?getProducts().data.length:0) + " left"); }, 1300);
+    if(btn.innerText.trim() === "X"){
+      e.stopPropagation();
+      e.preventDefault();
+      var name = getNameFromCard(btn);
+      if(!confirm("Delete " + name + " forever?")) return;
+      var left = deleteByName(name);
+      alert("Deleted: " + name + "\n" + left + " left in cloud");
+      setTimeout(function(){ location.reload(); }, 800);
     }
   }, true);
 })();
