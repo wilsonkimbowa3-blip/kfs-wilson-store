@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<head>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KFS v9.3 Payment Beautiful</title>
+<title>KFS v9.4 Perfect - Payment Beautiful</title>
 <meta name="theme-color" content="#0a1931"><link rel="manifest" href="./manifest.json">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -48,25 +49,25 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 <div style="display:flex;gap:10px;align-items:center;justify-content:center">
 <div style="width:50px;height:50px;background:var(--gold);border-radius:12px;display:grid;place-items:center;font-weight:900;color:#000;font-size:20px">KFS</div>
 <div style="text-align:left">
-<div style="font-weight:900;font-size:16px">Kampala Food Shop • v9.3 PAYMENT</div>
-<div style="font-size:11px;color:var(--green);font-weight:800">💰 Beautiful Payment • Pay Before Delivery • COD Last</div>
+<div style="font-weight:900;font-size:16px">Kampala Food Shop • v9.4 PERFECT</div>
+<div style="font-size:11px;color:var(--green);font-weight:800">💰 Beautiful Payment • Pay Before Delivery • COD Last • Cloud Sync</div>
 </div>
 </div>
 </div>
 <div style="display:flex;gap:8px;margin:12px;flex-wrap:wrap">
-<button class="btn btn-gold" onclick="forceRender()">🛒 SHOP v9.3</button>
+<button class="btn btn-gold" onclick="forceRender()">🛒 SHOP v9.4</button>
 <button class="btn" onclick="openAdminNow()" style="background:#102a54">🤖 ADMIN 🔒</button>
 <button class="btn btn-green" onclick="doInstall()">📲 INSTALL</button>
 </div>
 </header>
 <div id="shopView" style="min-height:200px"></div>
 <div id="cartBar">
-<div><div style="font-weight:900" id="cartInfo">0 types • 0kg • UGX 0</div><div style="font-size:11px">💰 v9.3 Payment • 0700892386</div></div>
+<div><div style="font-weight:900" id="cartInfo">0 types • 0kg • UGX 0</div><div style="font-size:11px">💰 v9.4 Perfect • 0700892386 • ☁️ Cloud ON</div></div>
 <button style="background:#000;color:var(--gold);border:none;padding:12px 20px;border-radius:22px;font-weight:900" onclick="doCheckout()">CHECKOUT 🛒</button>
 </div>
 <div id="checkoutModal" class="modal">
 <div class="box">
-<h2 style="color:var(--gold)">🧾 CHECKOUT v9.3</h2>
+<h2 style="color:var(--gold)">🧾 CHECKOUT v9.4</h2>
 <div id="checkoutSummary" style="background:#0a1931;padding:12px;border-radius:12px;margin:10px 0;border:2px solid var(--gold)"></div>
 <input id="cName" class="inp" placeholder="Your Name *">
 <input id="cPhone" class="inp" placeholder="Phone * 07...">
@@ -88,7 +89,7 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 <div style="font-size:11px;color:#aaa;text-align:center;margin-bottom:10px">✅ Beautiful & Secure • Pay exact TOTAL amount • COD is last option</div>
 <div class="pay-card pay-mtn" onclick="selectPay('mtn')"><div style="display:flex;gap:12px;align-items:center"><div class="pay-logo" style="color:#000">MTN</div><div style="flex:1"><div style="font-weight:900;font-size:15px">MTN MoMo</div><div style="font-size:11px">Instant • Most Popular • *165#</div></div><div style="font-size:20px">💛</div></div></div>
 <div class="pay-card pay-airtel" onclick="selectPay('airtel')"><div style="display:flex;gap:12px;align-items:center"><div class="pay-logo" style="color:#E60000">Airtel</div><div style="flex:1"><div style="font-weight:900;font-size:15px">Airtel Money</div><div style="font-size:11px">Fast • Secure • *185#</div></div><div style="font-size:20px">❤️</div></div></div>
-<div class="pay-card pay-momopay" onclick="selectPay('momopay')"><div style="display:flex;gap:12px;align-items:center"><div class="pay-logo" style="color:#0066CC">MoMo</div><div style="flex:1"><div style="font-weight:900;font-size:15px">MoMoPay / MoMoPay</div><div style="font-size:11px">Merchant Code • Scan & Pay</div></div><div style="font-size:20px">💙</div></div></div>
+<div class="pay-card pay-momopay" onclick="selectPay('momopay')"><div style="display:flex;gap:12px;align-items:center"><div class="pay-logo" style="color:#0066CC">MoMo</div><div style="flex:1"><div style="font-weight:900;font-size:15px">MoMoPay</div><div style="font-size:11px">Merchant Code • Scan & Pay</div></div><div style="font-size:20px">💙</div></div></div>
 <div class="pay-card pay-bank" onclick="selectPay('bank')"><div style="display:flex;gap:12px;align-items:center"><div class="pay-logo" style="color:#004D26">🏦</div><div style="flex:1"><div style="font-weight:900;font-size:15px">Bank Transfer</div><div style="font-size:11px">Centenary / Equity / Stanbic</div></div><div style="font-size:20px">💚</div></div></div>
 <div class="pay-card pay-cod" onclick="selectPay('cod')"><div style="display:flex;gap:12px;align-items:center"><div class="pay-logo" style="background:#000;color:#fff">🚚</div><div style="flex:1"><div style="font-weight:900;font-size:15px">Cash on Delivery (COD)</div><div style="font-size:11px">Pay when transporter delivers • Last option</div></div><div style="font-size:20px">📦</div></div></div>
 <div id="payDetailsBox" style="display:none;background:#000;border:2px solid var(--gold);border-radius:14px;padding:14px;margin-top:12px"></div>
@@ -99,7 +100,6 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 <label style="display:flex;gap:8px;align-items:center;margin-top:10px;font-size:12px"><input type="checkbox" id="cPayConfirm" onchange="checkPayReady()"> <span>I have paid <b id="payConfirmAmount" style="color:var(--gold)">UGX 0</b> via selected method</span></label>
 </div>
 </div>
-<div id="finalReceipt" class="receipt" style="display:none"></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
 <button class="btn" style="background:#fff;color:#000;font-weight:900;padding:14px" onclick="closeCheckout()">CLOSE</button>
 <button id="sendWAButton" class="btn" style="padding:14px;background:#333;color:#888;font-weight:900" onclick="doSendWA()" disabled>🔒 SELECT PAYMENT FIRST</button>
@@ -115,11 +115,11 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 <button class="btn" id="tabBtnOrders" onclick="showAdminTab('orders')" style="font-size:11px;background:#102a54">📋 ORDERS</button>
 <button class="btn" id="tabBtnGallery" onclick="showAdminTab('gallery')" style="font-size:11px;background:#102a54;border-color:#00C853;color:#00C853">🖼️ GALLERY</button>
 <button class="btn" id="tabBtnSettings" onclick="showAdminTab('settings')" style="font-size:11px;background:#102a54">⚙️ SETTINGS</button>
-<button class="btn" id="tabBtnCloud" onclick="showAdminTab('cloud')" style="font-size:11px;background:#102a54">☁️ AI+CLOUD</button>
+<button class="btn" id="tabBtnCloud" onclick="showAdminTab('cloud')" style="font-size:11px;background:#102a54">☁️ CLOUD</button>
 </div>
 <div id="adminTabGallery" style="display:none">
 <div style="background:linear-gradient(135deg,#0d2818,#102a54);border:3px solid #00C853;border-radius:14px;padding:12px">
-<div style="font-weight:900;color:#00C853;font-size:14px">🖼️ GALLERY MANAGER - v9 LOCKED</div>
+<div style="font-weight:900;color:#00C853;font-size:14px">🖼️ GALLERY MANAGER - v9.4</div>
 <input id="gImageFile" type="file" accept="image/*" style="display:none" onchange="handleGalleryUpload(this)">
 <button class="btn btn-green" style="width:100%;margin-top:8px;padding:12px" onclick="document.getElementById('gImageFile').click()">📸 CHOOSE IMAGE</button>
 <div id="gPreviewBox" style="display:none;margin-top:10px;text-align:center">
@@ -135,15 +135,13 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 </div>
 <div id="adminTabCloud" style="display:none">
 <div style="background:linear-gradient(135deg,#102a54,#1a3a6a);border:3px solid #00C853;border-radius:14px;padding:12px">
-<div style="font-weight:900;color:#00C853">☁️ UPDATE ANY PHONE → ALL PHONES</div>
-<input id="cloudBinId" class="inp" placeholder="npoint.io BIN ID" style="border:2px solid #00C853">
-<button class="btn" style="width:100%;margin-top:6px;background:#000;border-color:#00C853;color:#00C853" onclick="saveCloudId()">💾 SAVE ID</button>
+<div style="font-weight:900;color:#00C853">☁️ FIREBASE CLOUD — AUTO SYNC</div>
+<div id="cloudStatus" style="font-size:11px;color:#00C853;text-align:center;margin-top:8px;background:#000;padding:10px;border-radius:8px">☁️ Connecting...</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
-<button class="btn btn-green" style="padding:14px" onclick="doCloudPush()">☁️ PUSH</button>
-<button class="btn btn-gold" style="padding:14px" onclick="doCloudPull()">📥 PULL</button>
+<button class="btn btn-green" style="padding:14px" onclick="pushToCloud()">☁️ PUSH NOW</button>
+<button class="btn btn-gold" style="padding:14px" onclick="pullFromCloud()">📥 PULL NOW</button>
 </div>
-<div id="cloudStatus" style="font-size:11px;color:#00C853;text-align:center;margin-top:8px;background:#000;padding:6px;border-radius:8px">☁️ Ready - v9.3 Fixed Cloud</div>
-<div style="margin-top:10px;background:#000;padding:10px;border-radius:10px;font-size:11px;color:#aaa">Firebase Cloud: <b style="color:#00C853">Auto Sync ON</b><br>Products sync automatically to all phones. Use PUSH/PULL for npoint backup.</div>
+<div style="margin-top:10px;background:#000;padding:10px;border-radius:10px;font-size:11px;color:#aaa">✅ Auto Sync ON — Add/Delete on any phone appears on ALL phones.<br>✅ Deleted items stay deleted forever.</div>
 </div>
 </div>
 <div id="adminTabProd">
@@ -185,7 +183,7 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 </div>
 </div>
 <script>
-function toast(m){var t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(function(){t.style.display='none';},4000);}
+function toast(m){var t=document.getElementById('toast');if(!t)return; t.innerText=m;t.style.display='block';setTimeout(function(){t.style.display='none';},4000);}
 var defaultProducts=[
  {id:1,name:'50kg Super Rice',desc:'Tanzania Premium • Today Fresh',stock:3500,price:4000,icon:'🍚',badge:'🔥 HOT TODAY',inStock:true},
  {id:2,name:'50kg Nambale Beans',desc:'Yellow Clean • No Stones',stock:1500,price:4000,icon:'🫘',badge:'🌿 FRESH',inStock:true},
@@ -193,26 +191,32 @@ var defaultProducts=[
  {id:4,name:'50kg Matooke',desc:'Fresh Kisenyi • Morning Harvest',stock:300,price:2000,icon:'🍌',badge:'🌿 TODAY',inStock:true},
  {id:5,name:'50kg Pakistan Rice',desc:'Pakistan Original • Premium Quality',stock:2000,price:5000,icon:'🍚',badge:'⭐ PAKISTAN ORIGINAL',inStock:true}
 ];
+// PERFECT: deletedIds prevents resurrection forever
+function getDeletedIds(){try{return JSON.parse(localStorage.getItem('kfs_deleted_ids')||'[]')}catch(e){return[]}}
+function addDeletedId(id){try{var a=getDeletedIds();if(a.indexOf(id)===-1)a.push(id);localStorage.setItem('kfs_deleted_ids',JSON.stringify(a));}catch(e){}}
+function filterDeleted(list){var d=getDeletedIds();if(!d.length)return list;return list.filter(function(p){return d.indexOf(p.id)===-1;});}
 var products=defaultProducts.slice(); var cart={};
 try{
  var sp=localStorage.getItem('kfs_products_gold_hybrid');
- if(sp){var arr=JSON.parse(sp);if(arr&&arr.length>=3)products=arr;}
- var sc=localStorage.getItem('kfs_cart_gold_hybrid'); if(sc)cart=JSON.parse(sc);
+ if(sp){var arr=JSON.parse(sp);if(arr&&Array.isArray(arr)&&arr.length>0)products=filterDeleted(arr);}
+ var sc=localStorage.getItem('kfs_cart_gold_hybrid'); if(sc)cart=JSON.parse(sc)||{};
 }catch(e){products=defaultProducts.slice();}
 function saveAll(){try{localStorage.setItem('kfs_products_gold_hybrid',JSON.stringify(products));localStorage.setItem('kfs_cart_gold_hybrid',JSON.stringify(cart));}catch(e){}}
 var pendingImageData=null;var pendingGalleryData=null;
-function handleImageUpload(input){if(input.files&&input.files[0]){var reader=new FileReader();reader.onload=function(e){pendingImageData=e.target.result;document.getElementById('aImagePreview').src=pendingImageData;document.getElementById('aImagePreviewBox').style.display='block';toast('✅ Image Loaded!');};reader.readAsDataURL(input.files[0]);}}
+function handleImageUpload(input){if(input.files&&input.files[0]){var r=new FileReader();r.onload=function(e){pendingImageData=e.target.result;document.getElementById('aImagePreview').src=pendingImageData;document.getElementById('aImagePreviewBox').style.display='block';toast('✅ Image Loaded!');};r.readAsDataURL(input.files[0]);}}
 function handleGalleryUpload(input){if(input.files&&input.files[0]){var r=new FileReader();r.onload=function(e){pendingGalleryData=e.target.result;document.getElementById('gPreview').src=pendingGalleryData;document.getElementById('gPreviewBox').style.display='block';toast('✅ Gallery Preview!');};r.readAsDataURL(input.files[0]);}}
 function clearImagePreview(){pendingImageData=null;var b=document.getElementById('aImagePreviewBox');if(b)b.style.display='none';var f=document.getElementById('aImageFile');if(f)f.value='';}
 function clearGalleryPreview(){pendingGalleryData=null;var b=document.getElementById('gPreviewBox');if(b)b.style.display='none';var f=document.getElementById('gImageFile');if(f)f.value='';}
 function getGallery(){try{return JSON.parse(localStorage.getItem('kfs_gallery_v9')||'[]')}catch(e){return []}}
-function saveGallery(g){localStorage.setItem('kfs_gallery_v9',JSON.stringify(g))}
+function saveGallery(g){try{localStorage.setItem('kfs_gallery_v9',JSON.stringify(g))}catch(e){}}
 function doAddGalleryUrl(){if(!pendingGalleryData){toast('Choose image first');return;}var g=getGallery();g.push(pendingGalleryData);saveGallery(g);clearGalleryPreview();renderGallery();toast('✅ Added to Gallery');}
-function renderGallery(){var g=getGallery();var prodImgs=products.filter(p=>p.image).map(p=>p.image);var all=[...g,...prodImgs];var html='';for(var i=0;i<all.length;i++){html+='<div style="position:relative;background:#000;border:1px solid #333;border-radius:10px;overflow:hidden"><img src="'+all[i]+'" style="width:100%;height:80px;object-fit:cover"><button onclick="deleteGalleryByIndex('+i+')" style="width:100%;background:#f44;color:#fff;border:none;padding:6px;font-size:10px;font-weight:900">🗑️ DELETE</button></div>';}var el=document.getElementById('galleryGrid');if(el)el.innerHTML=html||'<div style="color:#aaa;text-align:center">No gallery images.</div>';}
+function renderGallery(){var g=getGallery();var prodImgs=products.filter(function(p){return p.image}).map(function(p){return p.image});var all=g.concat(prodImgs);var html='';for(var i=0;i<all.length;i++){html+='<div style="position:relative;background:#000;border:1px solid #333;border-radius:10px;overflow:hidden"><img src="'+all[i]+'" style="width:100%;height:80px;object-fit:cover"><button onclick="deleteGalleryByIndex('+i+')" style="width:100%;background:#f44;color:#fff;border:none;padding:6px;font-size:10px;font-weight:900">🗑️ DELETE</button></div>';}var el=document.getElementById('galleryGrid');if(el)el.innerHTML=html||'<div style="color:#aaa;text-align:center">No gallery images.</div>';}
 function deleteGalleryByIndex(idx){var g=getGallery();if(idx<g.length){g.splice(idx,1);saveGallery(g);}else{var pIdx=idx-g.length;var c=0;for(var i=0;i<products.length;i++){if(products[i].image){if(c===pIdx){products[i].image=null;saveAll();break;}c++;}}}renderGallery();forceRender();renderAdminListAdmin();toast('🗑️ Deleted');}
 function forceRender(){
  try{
-  if(!products||products.length<3){products=defaultProducts.slice();saveAll();}
+  // PERFECT FIX: Only restore if EXACTLY 0 products. Never restore deleted items.
+  if(!products||!Array.isArray(products)||products.length===0){products=defaultProducts.slice();saveAll();}
+  products=filterDeleted(products);
   var html='';
   for(var i=0;i<products.length;i++){
    var p=products[i];if(!p||p.hidden)continue;
@@ -224,25 +228,21 @@ function forceRender(){
    var disabled=isOut?'opacity:0.4;pointer-events:none':'';
    html+='<div class="product-card" style="'+(isOut?'border-color:#f44;background:#2a1020':'')+'">'+badge+imgHtml+'<div style="flex:1"><div style="font-weight:900">'+p.name+' <span style="font-size:10px;color:var(--green)">• '+p.stock+'kg left</span></div><div style="font-size:12px;color:#aaa">'+(p.desc||'')+'</div><div style="font-size:13px;color:var(--gold);font-weight:900">UGX '+p.price.toLocaleString()+'/kg</div></div><div style="text-align:center;'+disabled+'"><div class="qty-box"><button class="q-btn" onclick="changeQty('+p.id+',-1)">-</button><input class="q-input" id="input-'+p.id+'" type="number" value="'+q+'" oninput="setQty('+p.id+',this.value)"><button class="q-btn" onclick="changeQty('+p.id+',1)">+</button></div><button class="add-btn" onclick="changeQty('+p.id+',1)" style="'+(isOut?'background:#f44':'')+'">'+(isOut?'OUT':' + ADD')+'</button></div></div>';
   }
-  if(html===''){html='<div style="text-align:center;padding:20px"><button class="btn btn-gold" onclick="emergencyReset()">🔄 RESTORE PRODUCTS</button></div>';}
+  if(html===''){html='<div style="text-align:center;padding:20px;color:#aaa">No products yet. Add one in Admin.</div>';}
   document.getElementById('shopView').innerHTML=html;updateCartBar();
- }catch(err){document.getElementById('shopView').innerHTML='Error: '+err.message;}
+ }catch(err){var el=document.getElementById('shopView');if(el)el.innerHTML='Error: '+err.message;}
 }
-function emergencyReset(){if(confirm('Restore default products?')){localStorage.removeItem('kfs_products_gold_hybrid');products=defaultProducts.slice();saveAll();forceRender();toast('✅ Restored!');}}
+function emergencyReset(){if(confirm('Restore default products? This clears deleted history.')){try{localStorage.removeItem('kfs_deleted_ids');}catch(e){}localStorage.removeItem('kfs_products_gold_hybrid');products=defaultProducts.slice();saveAll();forceRender();if(typeof pushToCloud==='function')pushToCloud();toast('✅ Restored!');}}
 function changeQty(id,delta){
- var cur=parseInt(cart[id]||0);
- var inputEl=document.getElementById('input-'+id);
+ var cur=parseInt(cart[id]||0);var inputEl=document.getElementById('input-'+id);
  if(inputEl){var typed=parseInt(inputEl.value||0);if(!isNaN(typed)&&typed!==cur&&typed>0)cur=typed;}
- var v=cur+delta;if(v<0)v=0;
- var p=null;for(var i=0;i<products.length;i++)if(products[i].id==id)p=products[i];
+ var v=cur+delta;if(v<0)v=0;var p=null;for(var i=0;i<products.length;i++)if(products[i].id==id)p=products[i];
  if(p&&p.inStock===false){toast('❌ Out of Stock!');return;}
  if(p&&v>p.stock){toast('Only '+p.stock+'kg left!');v=p.stock;}
- if(v==0)delete cart[id];else cart[id]=v;
- if(inputEl)inputEl.value=v;saveAll();updateCartBar();updateReceipt();
+ if(v==0)delete cart[id];else cart[id]=v;if(inputEl)inputEl.value=v;saveAll();updateCartBar();updateReceipt();
 }
 function setQty(id,val){
- var v=parseInt(val||0);if(isNaN(v)||v<0)v=0;
- var p=null;for(var i=0;i<products.length;i++)if(products[i].id==id)p=products[i];
+ var v=parseInt(val||0);if(isNaN(v)||v<0)v=0;var p=null;for(var i=0;i<products.length;i++)if(products[i].id==id)p=products[i];
  if(p&&p.inStock===false){toast('❌ Out');var el=document.getElementById('input-'+id);if(el)el.value=0;return;}
  if(p&&v>p.stock){v=p.stock;toast('Max '+p.stock+'kg');}
  if(v==0)delete cart[id];else cart[id]=v;saveAll();updateCartBar();updateReceipt();
@@ -255,213 +255,99 @@ function updateCartBar(){
 }
 function toRad(d){return d*Math.PI/180;}
 function calcHav(a,b,c,d){var R=6371;var dLat=toRad(c-a);var dLon=toRad(d-b);var aa=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(toRad(a))*Math.cos(toRad(c))*Math.sin(dLon/2)*Math.sin(dLon/2);return R*2*Math.atan2(Math.sqrt(aa),Math.sqrt(1-aa));}
-var UGANDA_VILLAGES={
- 'kisenyi':0.5,'kisenyi market':0.5,'owino':0.8,'katwe':2.3,'ndeeba':2.8,'kibuye':3.1,'nsambya':3.5,'kabalagala':4.2,'kansanga':5.0,'ggaba':6.8,'munyonyo':9.8,'buziga':5.5,
- 'namasuba':6.2,'zana':6.8,'bunamwaya':7.5,'seguku':8.1,'najjanankumbi':5.8,'lubowa':8.5,'lweza':9.2,'makindye':4.0,'lukuli':5.2,'kyebando':4.5,'kawempe':6.0,'bwaise':5.0,'kazo':6.5,
- 'nateete':5.5,'busega':7.8,'wakiso':15.2,'nansana':11.5,'kawanda':10.2,'kireka':9.0,'banda':8.5,'kyaliwajjala':12.5,'namugongo':13.0,'mukono':21,'entebbe':35,'kajjansi':14.5,'kawuku':18,
- 'buloba':18.5,'kasanje':22,'nakawuka':20,'nsangi':12,'kyengera':10.5,'nakulabye':3.2,'kasubi':4.5,'namirembe':2.5,'rubaga':3.0,'mengo':2.0,'salama':4.8,
- 'budo':16,'kigo':12,'sisa':19,'kikajjo':8,'kabowa':4,'lungujja':3.8,'natete':5.5,'kikoni':4.2,'kamwokya':4,'kololo':3.5,'naguru':5,'ntinda':6.5,'kiwatule':8,
- 'najjera':10,'kungu':11,'kitetika':9,'kasangati':12,'gayaza':14,'manyangwa':16,'matugga':15,'jinja':80,'iganga':115,'mbale':210,'tororo':200,'soroti':300,'lira':320,'gulu':340,'arua':480,'mbarara':270,'masaka':125,'masindi':210,'hoima':200,'fort portal':300,'kasese':350,'kabale':400,'kisoro':450,'mityana':55,'mubende':150,'kiboga':120,'luwero':60,'wobulenzi':50,'bombo':35
-};
-function getOfflineVillageKm(t){
- t=t.toLowerCase().trim();var best=0;
- for(var k in UGANDA_VILLAGES){ if(t.indexOf(k)!==-1 || k.indexOf(t)!==-1){ if(UGANDA_VILLAGES[k]>best) best=UGANDA_VILLAGES[k]; } }
- try{ var saved=JSON.parse(localStorage.getItem('kfs_villages')||'{}'); for(var k2 in saved){ if(t.indexOf(k2)!==-1 || k2.indexOf(t)!==-1){ if(saved[k2]>best) best=saved[k2]; } } }catch(e){}
- return best;
-}
+var UGANDA_VILLAGES={'kisenyi':0.5,'kisenyi market':0.5,'owino':0.8,'katwe':2.3,'ndeeba':2.8,'kibuye':3.1,'nsambya':3.5,'kabalagala':4.2,'kansanga':5.0,'ggaba':6.8,'munyonyo':9.8,'buziga':5.5,'namasuba':6.2,'zana':6.8,'bunamwaya':7.5,'seguku':8.1,'najjanankumbi':5.8,'lubowa':8.5,'lweza':9.2,'makindye':4.0,'lukuli':5.2,'kyebando':4.5,'kawempe':6.0,'bwaise':5.0,'kazo':6.5,'nateete':5.5,'busega':7.8,'wakiso':15.2,'nansana':11.5,'kawanda':10.2,'kireka':9.0,'banda':8.5,'kyaliwajjala':12.5,'namugongo':13.0,'mukono':21,'entebbe':35,'kajjansi':14.5,'kawuku':18,'buloba':18.5,'kasanje':22,'nakawuka':20,'nsangi':12,'kyengera':10.5,'nakulabye':3.2,'kasubi':4.5,'namirembe':2.5,'rubaga':3.0,'mengo':2.0,'salama':4.8,'budo':16,'kigo':12,'sisa':19,'kikajjo':8,'kabowa':4,'lungujja':3.8,'natete':5.5,'kikoni':4.2,'kamwokya':4,'kololo':3.5,'naguru':5,'ntinda':6.5,'kiwatule':8,'najjera':10,'kungu':11,'kitetika':9,'kasangati':12,'gayaza':14,'manyangwa':16,'matugga':15,'jinja':80,'iganga':115,'mbale':210,'tororo':200,'soroti':300,'lira':320,'gulu':340,'arua':480,'mbarara':270,'masaka':125,'masindi':210,'hoima':200,'fort portal':300,'kasese':350,'kabale':400,'kisoro':450,'mityana':55,'mubende':150,'kiboga':120,'luwero':60,'wobulenzi':50,'bombo':35};
+function getOfflineVillageKm(t){t=t.toLowerCase().trim();var best=0;for(var k in UGANDA_VILLAGES){if(t.indexOf(k)!==-1||k.indexOf(t)!==-1){if(UGANDA_VILLAGES[k]>best)best=UGANDA_VILLAGES[k];}}try{var saved=JSON.parse(localStorage.getItem('kfs_villages')||'{}');for(var k2 in saved){if(t.indexOf(k2)!==-1||k2.indexOf(t)!==-1){if(saved[k2]>best)best=saved[k2];}}}catch(e){}return best;}
 var lastGeocodeTimer=null;var currentLiveDistance=null;
 function doVillageSmart(){
- var v=document.getElementById('cVillage').value||''; var d=document.getElementById('cDistrict').value||''; var use=v||d; var msgEl=document.getElementById('villageFoundMsg');
- if(!use){ document.getElementById('cDistance').value=''; if(msgEl)msgEl.style.display='none'; calcTransport();updateReceipt();return; }
+ var v=document.getElementById('cVillage').value||'';var d=document.getElementById('cDistrict').value||'';var use=v||d;var msgEl=document.getElementById('villageFoundMsg');
+ if(!use){document.getElementById('cDistance').value='';if(msgEl)msgEl.style.display='none';calcTransport();updateReceipt();return;}
  var existingGps=document.getElementById('gpsLink').value;
- if(existingGps && existingGps.indexOf('maps.google')!==-1){ calcTransport();updateReceipt();return; }
+ if(existingGps&&existingGps.indexOf('maps.google')!==-1){calcTransport();updateReceipt();return;}
  var offlineKm=getOfflineVillageKm(use);
- if(offlineKm>0){ document.getElementById('cDistance').value=offlineKm.toFixed(1); if(msgEl){msgEl.style.display='block';msgEl.innerHTML='✅ Found offline: '+use+' = '+offlineKm.toFixed(1)+'km exact from Kisenyi (Offline DB: 150+ villages)';} currentLiveDistance=null; calcTransport();updateReceipt(); }
- else{ if(msgEl){msgEl.style.display='block';msgEl.innerHTML='🔍 Searching Uganda: '+use+'... (Live search)';} clearTimeout(lastGeocodeTimer); lastGeocodeTimer=setTimeout(function(){searchVillageLive(use);},800); }
+ if(offlineKm>0){document.getElementById('cDistance').value=offlineKm.toFixed(1);if(msgEl){msgEl.style.display='block';msgEl.innerHTML='✅ Found offline: '+use+' = '+offlineKm.toFixed(1)+'km exact from Kisenyi';}currentLiveDistance=null;calcTransport();updateReceipt();}
+ else{if(msgEl){msgEl.style.display='block';msgEl.innerHTML='🔍 Searching Uganda: '+use+'...';}clearTimeout(lastGeocodeTimer);lastGeocodeTimer=setTimeout(function(){searchVillageLive(use);},800);}
 }
 function searchVillageLive(query){
  var msgEl=document.getElementById('villageFoundMsg');
  var url='https://nominatim.openstreetmap.org/search?format=json&q='+encodeURIComponent(query+', Uganda')+'&limit=1&countrycodes=ug';
- fetch(url,{headers:{'Accept':'application/json'}}).then(r=>r.json()).then(data=>{
-  if(data && data.length>0){
-   var lat=parseFloat(data[0].lat); var lon=parseFloat(data[0].lon); var km=calcHav(0.3136,32.5763,lat,lon);
-   document.getElementById('cDistance').value=km.toFixed(1); currentLiveDistance={lat:lat,lon:lon,km:km,name:data[0].display_name};
-   try{ var saved=JSON.parse(localStorage.getItem('kfs_villages')||'{}'); saved[query.toLowerCase()]=parseFloat(km.toFixed(1)); localStorage.setItem('kfs_villages',JSON.stringify(saved)); }catch(e){}
-   if(msgEl){msgEl.style.display='block';msgEl.innerHTML='🌍 LIVE FOUND: '+data[0].display_name+'<br>📏 Exact: '+km.toFixed(1)+'km from Kisenyi (Live OSM) - Saved!';}
-   calcTransport();updateReceipt();
-  }else{
-   var url2='https://nominatim.openstreetmap.org/search?format=json&q='+encodeURIComponent(query)+'&limit=1';
-   fetch(url2).then(r=>r.json()).then(data2=>{
-    if(data2 && data2.length>0){ var lat=parseFloat(data2[0].lat);var lon=parseFloat(data2[0].lon); var km=calcHav(0.3136,32.5763,lat,lon); if(km<600){ document.getElementById('cDistance').value=km.toFixed(1); if(msgEl)msgEl.innerHTML='🌍 LIVE FOUND (approx): '+data2[0].display_name+' = '+km.toFixed(1)+'km'; calcTransport();updateReceipt(); }else{ document.getElementById('cDistance').value='12.5'; if(msgEl)msgEl.innerHTML='⚠️ Far away / Not in Uganda, using 12.5km default. Use GPS for exact.'; calcTransport();updateReceipt(); } }else{ document.getElementById('cDistance').value='12.5'; if(msgEl)msgEl.innerHTML='❓ Village not found offline. Using 12.5km. Please use 📍 GET EXACT LOCATION for 100% accuracy!'; calcTransport();updateReceipt(); }
-   });
-  }
- }).catch(e=>{ document.getElementById('cDistance').value='12.5'; if(msgEl)msgEl.innerHTML='📡 Offline: Live search failed, using 12.5km. Use GPS button for exact.'; calcTransport();updateReceipt(); });
+ fetch(url).then(function(r){return r.json()}).then(function(data){
+  if(data&&data.length>0){var lat=parseFloat(data[0].lat);var lon=parseFloat(data[0].lon);var km=calcHav(0.3136,32.5763,lat,lon);document.getElementById('cDistance').value=km.toFixed(1);currentLiveDistance={lat:lat,lon:lon,km:km,name:data[0].display_name};try{var saved=JSON.parse(localStorage.getItem('kfs_villages')||'{}');saved[query.toLowerCase()]=parseFloat(km.toFixed(1));localStorage.setItem('kfs_villages',JSON.stringify(saved));}catch(e){}if(msgEl){msgEl.style.display='block';msgEl.innerHTML='🌍 LIVE FOUND: '+data[0].display_name+'<br>📏 Exact: '+km.toFixed(1)+'km from Kisenyi - Saved!';}calcTransport();updateReceipt();}
+  else{document.getElementById('cDistance').value='12.5';if(msgEl)msgEl.innerHTML='❓ Village not found. Using 12.5km. Use GPS for 100% accuracy!';calcTransport();updateReceipt();}
+ }).catch(function(){document.getElementById('cDistance').value='12.5';if(msgEl)msgEl.innerHTML='📡 Offline: Using 12.5km. Use GPS for exact.';calcTransport();updateReceipt();});
 }
 function calcTransport(){
- var village=document.getElementById('cVillage').value||''; var weight=parseInt(document.getElementById('cWeightShow').value||0); var distVal=parseFloat(document.getElementById('cDistance').value||0); var box=document.getElementById('transportBox');
- if(!village &&!distVal){if(box)box.style.display='none';return 0;}
- var dist=distVal||0; var trans=5000; if(dist>3.5) trans+=(dist-3.5)*1500; if(weight>100) trans+=2000; trans=Math.round(trans); var exactDist=dist.toFixed(1);
- var txt=document.getElementById('transportText'); if(txt) txt.innerText='Transport: UGX '+trans.toLocaleString();
- var disp=document.getElementById('autoDistDisplay'); if(disp){ disp.innerText='📍 '+ (village||'Location')+' • '+exactDist+'km EXACT • '+weight+'kg'; }
- var eta=document.getElementById('etaDisplay'); if(eta){ var hours=(dist/30);var mins=Math.round(hours*60); if(mins<60) eta.innerText='⏱️ ETA: ~'+mins+' mins from Kisenyi'; else eta.innerText='⏱️ ETA: ~'+(hours).toFixed(1)+' hours from Kisenyi'; }
- if(box)box.style.display='block'; return trans;
+ var village=document.getElementById('cVillage').value||'';var weight=parseInt(document.getElementById('cWeightShow').value||0);var distVal=parseFloat(document.getElementById('cDistance').value||0);var box=document.getElementById('transportBox');
+ if(!village&&!distVal){if(box)box.style.display='none';return 0;}
+ var dist=distVal||0;var trans=5000;if(dist>3.5)trans+=(dist-3.5)*1500;if(weight>100)trans+=2000;trans=Math.round(trans);
+ var txt=document.getElementById('transportText');if(txt)txt.innerText='Transport: UGX '+trans.toLocaleString();
+ var disp=document.getElementById('autoDistDisplay');if(disp)disp.innerText='📍 '+(village||'Location')+' • '+dist.toFixed(1)+'km EXACT • '+weight+'kg';
+ var eta=document.getElementById('etaDisplay');if(eta){var mins=Math.round((dist/30)*60);if(mins<60)eta.innerText='⏱️ ETA: ~'+mins+' mins from Kisenyi';else eta.innerText='⏱️ ETA: ~'+(dist/30).toFixed(1)+' hours from Kisenyi';}
+ if(box)box.style.display='block';return trans;
 }
 function getNavigationLink(){
- var gps=document.getElementById('gpsLink').value||''; var village=document.getElementById('cVillage').value||''; var district=document.getElementById('cDistrict').value||''; var dest='';
- if(gps && gps.indexOf('q=')!==-1){ var latlng=gps.split('q=')[1].split('&')[0]; dest=latlng; }else if(currentLiveDistance && currentLiveDistance.lat){ dest=currentLiveDistance.lat+','+currentLiveDistance.lon; }else if(village){ dest=encodeURIComponent(village+(district?','+district:'')+', Uganda'); }else{ dest=encodeURIComponent('Kampala, Uganda'); }
- var origin=encodeURIComponent('Kisenyi Market, Kampala, Uganda'); return 'https://www.google.com/maps/dir/?api=1&origin='+origin+'&destination='+dest;
+ var gps=document.getElementById('gpsLink').value||'';var village=document.getElementById('cVillage').value||'';var district=document.getElementById('cDistrict').value||'';var dest='';
+ if(gps&&gps.indexOf('q=')!==-1){dest=gps.split('q=')[1].split('&')[0];}else if(currentLiveDistance&&currentLiveDistance.lat){dest=currentLiveDistance.lat+','+currentLiveDistance.lon;}else if(village){dest=encodeURIComponent(village+(district?','+district:'')+', Uganda');}else{dest=encodeURIComponent('Kampala, Uganda');}
+ return 'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent('Kisenyi Market, Kampala, Uganda')+'&destination='+dest;
 }
 var selectedPay=null;
 function selectPay(type){
- selectedPay=type;
- document.querySelectorAll('.pay-card').forEach(c=>c.classList.remove('selected'));
- var map={mtn:0,airtel:1,momopay:2,bank:3,cod:4};
- var cards=document.querySelectorAll('.pay-card');
- if(cards[map[type]]) cards[map[type]].classList.add('selected');
- var box=document.getElementById('payDetailsBox');
- box.style.display='block';
- var totalInfo=updateReceipt();
- var totalUGX=(totalInfo.ugx+totalInfo.trans).toLocaleString();
- var bankInfo={};
- try{bankInfo=JSON.parse(localStorage.getItem('kfs_bank_gold_hybrid')||'{}')}catch(e){}
- var momo=bankInfo.momo||localStorage.getItem('kfs_momo')||'0700892386';
- var airtel=localStorage.getItem('kfs_airtel')||'0700123456';
- var momopay=localStorage.getItem('kfs_momopay')||'KFS PAY 12345';
- var bank=localStorage.getItem('kfs_bank')||'Centenary Bank - 3100012345 - KFS WILSON';
+ selectedPay=type;document.querySelectorAll('.pay-card').forEach(function(c){c.classList.remove('selected')});
+ var map={mtn:0,airtel:1,momopay:2,bank:3,cod:4};var cards=document.querySelectorAll('.pay-card');if(cards[map[type]])cards[map[type]].classList.add('selected');
+ var box=document.getElementById('payDetailsBox');box.style.display='block';var totalInfo=updateReceipt();var totalUGX=(totalInfo.ugx+totalInfo.trans).toLocaleString();
+ var bankInfo={};try{bankInfo=JSON.parse(localStorage.getItem('kfs_bank_gold_hybrid')||'{}')}catch(e){}
+ var momo=bankInfo.momo||localStorage.getItem('kfs_momo')||'0700892386';var airtel=localStorage.getItem('kfs_airtel')||'0700123456';var momopay=localStorage.getItem('kfs_momopay')||'KFS PAY 12345';var bank=localStorage.getItem('kfs_bank')||'Centenary Bank - 3100012345 - KFS WILSON';
  var html='';
- if(type==='mtn'){
-  html='<div style="background:#FFCC00;color:#000;border-radius:12px;padding:14px;text-align:center"><div style="font-size:40px">💛</div><div style="font-weight:900;font-size:18px">MTN MoMo</div><div style="font-size:13px;margin-top:6px">Pay <b>UGX '+totalUGX+'</b> to:</div><div style="background:#000;color:#FFCC00;padding:10px;border-radius:8px;margin:8px 0;font-weight:900;font-size:18px">'+momo+'</div><div style="font-size:12px">Name: KFS WILSON KISENYI<br>Dial: *165*3# → Send Money<br>Amount: UGX '+totalUGX+'</div></div>';
- }else if(type==='airtel'){
-  html='<div style="background:#E60000;color:#fff;border-radius:12px;padding:14px;text-align:center"><div style="font-size:40px">❤️</div><div style="font-weight:900;font-size:18px">Airtel Money</div><div style="font-size:13px;margin-top:6px">Pay <b>UGX '+totalUGX+'</b> to:</div><div style="background:#fff;color:#E60000;padding:10px;border-radius:8px;margin:8px 0;font-weight:900;font-size:18px">'+airtel+'</div><div style="font-size:12px">Name: KFS WILSON<br>Dial: *185*3# → Send Money<br>Amount: UGX '+totalUGX+'</div></div>';
- }else if(type==='momopay'){
-  html='<div style="background:#0066CC;color:#fff;border-radius:12px;padding:14px;text-align:center"><div style="font-size:40px">💙</div><div style="font-weight:900;font-size:18px">MoMoPay Merchant</div><div style="font-size:13px;margin-top:6px">Pay <b>UGX '+totalUGX+'</b> via MoMoPay Code:</div><div style="background:#fff;color:#0066CC;padding:10px;border-radius:8px;margin:8px 0;font-weight:900;font-size:16px">'+momopay+'</div><div style="font-size:12px">Dial: *165*3*5# → MoMoPay<br>Enter Code & Amount UGX '+totalUGX+'</div></div>';
- }else if(type==='bank'){
-  html='<div style="background:#00A651;color:#fff;border-radius:12px;padding:14px;text-align:center"><div style="font-size:40px">🏦</div><div style="font-weight:900;font-size:18px">Bank Transfer</div><div style="font-size:13px;margin-top:6px">Transfer <b>UGX '+totalUGX+'</b> to:</div><div style="background:#fff;color:#004D26;padding:10px;border-radius:8px;margin:8px 0;font-weight:900;font-size:13px">'+bank+'</div><div style="font-size:12px">Use your Bank App / Mobile Banking<br>Amount: UGX '+totalUGX+'</div></div>';
- }else if(type==='cod'){
-  html='<div style="background:#333;color:#fff;border-radius:12px;padding:14px;text-align:center;border:2px dashed #888"><div style="font-size:40px">🚚</div><div style="font-weight:900;font-size:18px">Cash on Delivery (COD)</div><div style="font-size:13px;margin-top:6px">Pay <b>UGX '+totalUGX+'</b> when transporter delivers</div><div style="background:#000;color:#fff;padding:10px;border-radius:8px;margin:8px 0;font-size:12px">No pre-payment needed<br>Transporter will collect cash<br>Please have exact amount UGX '+totalUGX+'</div></div>';
- }
- box.innerHTML=html;
- document.getElementById('payConfirmAmount').innerText='UGX '+totalUGX;
- checkPayReady();
- box.scrollIntoView({behavior:'smooth',block:'center'});
+ if(type==='mtn')html='<div style="background:#FFCC00;color:#000;border-radius:12px;padding:14px;text-align:center"><div style="font-size:40px">💛</div><div style="font-weight:900;font-size:18px">MTN MoMo</div><div style="font-size:13px;margin-top:6px">Pay <b>UGX '+totalUGX+'</b> to:</div><div style="background:#000;color:#FFCC00;padding:10px;border-radius:8px;margin:8px 0;font-weight:900;font-size:18px">'+momo+'</div><div style="font-size:12px">Name: KFS WILSON KISENYI<br>Dial: *165*3# → Send Money<br>Amount: UGX '+totalUGX+'</div></div>';
+ else if(type==='airtel')html='<div style="background:#E60000;color:#fff;border-radius:12px;padding:14px;text-align:center"><div style="font-size:40px">❤️</div><div style="font-weight:900;font-size:18px">Airtel Money</div><div style="font-size:13px;margin-top:6px">Pay <b>UGX '+totalUGX+'</b> to:</div><div style="background:#fff;color:#E60000;padding:10px;border-radius:8px;margin:8px 0;font-weight:900;font-size:18px">'+airtel+'</div><div style="font-size:12px">Name: KFS WILSON<br>Dial: *185*3# → Send Money<br>Amount: UGX '+totalUGX+'</div></div>';
+ else if(type==='momopay')html='<div style="background:#0066CC;color:#fff;border-radius:12px;padding:14px;text-align:center"><div style="font-size:40px">💙</div><div style="font-weight:900;font-size:18px">MoMoPay Merchant</div><div style="font-size:13px;margin-top:6px">Pay <b>UGX '+totalUGX+'</b> via Code:</div><div style="background:#fff;color:#0066CC;padding:10px;border-radius:8px;margin:8px 0;font-weight:900;font-size:16px">'+momopay+'</div><div style="font-size:12px">Dial: *165*3*5# → MoMoPay<br>Enter Code & Amount UGX '+totalUGX+'</div></div>';
+ else if(type==='bank')html='<div style="background:#00A651;color:#fff;border-radius:12px;padding:14px;text-align:center"><div style="font-size:40px">🏦</div><div style="font-weight:900;font-size:18px">Bank Transfer</div><div style="font-size:13px;margin-top:6px">Transfer <b>UGX '+totalUGX+'</b> to:</div><div style="background:#fff;color:#004D26;padding:10px;border-radius:8px;margin:8px 0;font-weight:900;font-size:13px">'+bank+'</div><div style="font-size:12px">Use Bank App / Mobile Banking<br>Amount: UGX '+totalUGX+'</div></div>';
+ else if(type==='cod')html='<div style="background:#333;color:#fff;border-radius:12px;padding:14px;text-align:center;border:2px dashed #888"><div style="font-size:40px">🚚</div><div style="font-weight:900;font-size:18px">Cash on Delivery (COD)</div><div style="font-size:13px;margin-top:6px">Pay <b>UGX '+totalUGX+'</b> when transporter delivers</div><div style="background:#000;color:#fff;padding:10px;border-radius:8px;margin:8px 0;font-size:12px">No pre-payment needed<br>Transporter will collect cash<br>Have exact amount UGX '+totalUGX+'</div></div>';
+ box.innerHTML=html;document.getElementById('payConfirmAmount').innerText='UGX '+totalUGX;checkPayReady();box.scrollIntoView({behavior:'smooth',block:'center'});
 }
 function checkPayReady(){
- var btn=document.getElementById('sendWAButton');
- var tx=document.getElementById('cTxId').value.trim();
- var confirmChk=document.getElementById('cPayConfirm').checked;
- var totalInfo=updateReceipt();
- var totalUGX=(totalInfo.ugx+totalInfo.trans).toLocaleString();
- if(!selectedPay){
-  btn.disabled=true;btn.style.background='#333';btn.style.color='#888';btn.innerText='🔒 SELECT PAYMENT FIRST';return;
- }
- if(selectedPay==='cod'){
-  btn.disabled=false;btn.style.background='#00C853';btn.style.color='#000';btn.innerText='✅ SEND ORDER — COD UGX '+totalUGX+' 🚚';
- }else{
-  if(tx.length>=4 && confirmChk){
-   btn.disabled=false;btn.style.background='#00C853';btn.style.color='#000';btn.innerText='✅ PAID — SEND TO WHATSAPP UGX '+totalUGX+' 📱';
-  }else{
-   btn.disabled=true;btn.style.background='#333';btn.style.color='#888';
-   if(tx.length<4) btn.innerText='🔒 ENTER TxID TO CONTINUE';
-   else btn.innerText='🔒 CHECK "I HAVE PAID"';
-  }
- }
+ var btn=document.getElementById('sendWAButton');var tx=document.getElementById('cTxId').value.trim();var chk=document.getElementById('cPayConfirm').checked;var totalInfo=updateReceipt();var totalUGX=(totalInfo.ugx+totalInfo.trans).toLocaleString();
+ if(!selectedPay){btn.disabled=true;btn.style.background='#333';btn.style.color='#888';btn.innerText='🔒 SELECT PAYMENT FIRST';return;}
+ if(selectedPay==='cod'){btn.disabled=false;btn.style.background='#00C853';btn.style.color='#000';btn.innerText='✅ SEND ORDER — COD UGX '+totalUGX+' 🚚';}
+ else{if(tx.length>=4&&chk){btn.disabled=false;btn.style.background='#00C853';btn.style.color='#000';btn.innerText='✅ PAID — SEND TO WHATSAPP UGX '+totalUGX+' 📱';}else{btn.disabled=true;btn.style.background='#333';btn.style.color='#888';btn.innerText=tx.length<4?'🔒 ENTER TxID TO CONTINUE':'🔒 CHECK "I HAVE PAID"';}}
 }
 function updateReceipt(){
- var name=document.getElementById('cName').value||'Customer'; var vill=document.getElementById('cVillage').value||''; var dist=document.getElementById('cDistance').value||''; var weight=document.getElementById('cWeightShow').value||'0'; var gps=document.getElementById('gpsLink').value||''; var trans=calcTransport(); var ugx=0,lines=[];
- for(var id in cart){ var qty=parseInt(cart[id]||0);if(qty<=0)continue; var p=null;for(var i=0;i<products.length;i++)if(products[i].id==parseInt(id))p=products[i]; if(p){var tot=qty*p.price;ugx+=tot;lines.push(qty+'kg '+p.name+' — UGX '+tot.toLocaleString());} }
- var exactDist=dist?parseFloat(dist).toFixed(1):'0.0'; var sum=document.getElementById('checkoutSummary');
- if(sum){ sum.innerHTML=lines.join('<br>')+'<br><br>Products: UGX '+ugx.toLocaleString()+'<br>Transport: UGX '+trans.toLocaleString()+'<br><span style="font-size:11px;color:#aaa">📍 Exact: '+exactDist+'km from Kisenyi • Any village in Uganda</span><br><b style="color:var(--gold);font-size:18px">TOTAL: UGX '+(ugx+trans).toLocaleString()+'</b>'; }
- var navLink=getNavigationLink(); return{name:name,vill:vill,dist:exactDist,weight:weight,gps:gps,navLink:navLink,trans:trans,ugx:ugx,lines:lines,rounded:exactDist,total:ugx+trans};
+ var name=document.getElementById('cName').value||'Customer';var vill=document.getElementById('cVillage').value||'';var dist=document.getElementById('cDistance').value||'';var weight=document.getElementById('cWeightShow').value||'0';var gps=document.getElementById('gpsLink').value||'';var trans=calcTransport();var ugx=0,lines=[];
+ for(var id in cart){var qty=parseInt(cart[id]||0);if(qty<=0)continue;var p=null;for(var i=0;i<products.length;i++)if(products[i].id==parseInt(id))p=products[i];if(p){var tot=qty*p.price;ugx+=tot;lines.push(qty+'kg '+p.name+' — UGX '+tot.toLocaleString());}}
+ var exactDist=dist?parseFloat(dist).toFixed(1):'0.0';var sum=document.getElementById('checkoutSummary');if(sum)sum.innerHTML=lines.join('<br>')+'<br><br>Products: UGX '+ugx.toLocaleString()+'<br>Transport: UGX '+trans.toLocaleString()+'<br><span style="font-size:11px;color:#aaa">📍 Exact: '+exactDist+'km from Kisenyi</span><br><b style="color:var(--gold);font-size:18px">TOTAL: UGX '+(ugx+trans).toLocaleString()+'</b>';
+ return{name:name,vill:vill,dist:exactDist,weight:weight,gps:gps,navLink:getNavigationLink(),trans:trans,ugx:ugx,lines:lines,total:ugx+trans};
 }
 function doGPS(){
- var gt=document.getElementById('gpsText'); gt.style.display='block'; gt.innerText='📡 Getting EXACT GPS - Most Accurate!';
- navigator.geolocation.getCurrentPosition(function(pos){
-  var lat=pos.coords.latitude;var lon=pos.coords.longitude; var link='https://maps.google.com/?q='+lat+','+lon; document.getElementById('gpsLink').value=link; var km=calcHav(0.3136,32.5763,lat,lon); document.getElementById('cDistance').value=km.toFixed(1); currentLiveDistance={lat:lat,lon:lon,km:km}; var exact=km.toFixed(1); var nav=getNavigationLink();
-  gt.innerHTML='✅ EXACT GPS: '+exact+'km from Kisenyi (100% Accurate!)<br><a href="'+link+'" target="_blank" style="color:#00FF88">📍 Customer Pin</a><br><a href="'+nav+'" target="_blank" style="color:#D4AF37">🧭 Navigation Route for Transporter - CLICK HERE</a>';
-  var msgEl=document.getElementById('villageFoundMsg'); if(msgEl){msgEl.style.display='block';msgEl.innerHTML='📍 GPS LOCKED: '+exact+'km exact - Most accurate method!';}
-  calcTransport();updateReceipt();toast('✅ EXACT GPS: '+exact+'km');
- },function(e){gt.innerHTML='❌ '+e.message+' - Try typing village name, I will find it live!';},{enableHighAccuracy:true,timeout:15000});
+ var gt=document.getElementById('gpsText');gt.style.display='block';gt.innerText='📡 Getting EXACT GPS...';
+ navigator.geolocation.getCurrentPosition(function(pos){var lat=pos.coords.latitude;var lon=pos.coords.longitude;var link='https://maps.google.com/?q='+lat+','+lon;document.getElementById('gpsLink').value=link;var km=calcHav(0.3136,32.5763,lat,lon);document.getElementById('cDistance').value=km.toFixed(1);currentLiveDistance={lat:lat,lon:lon,km:km};var nav=getNavigationLink();gt.innerHTML='✅ EXACT GPS: '+km.toFixed(1)+'km from Kisenyi<br><a href="'+link+'" target="_blank" style="color:#00FF88">📍 Customer Pin</a><br><a href="'+nav+'" target="_blank" style="color:#D4AF37">🧭 Navigation for Transporter</a>';var m=document.getElementById('villageFoundMsg');if(m){m.style.display='block';m.innerHTML='📍 GPS LOCKED: '+km.toFixed(1)+'km exact!';}calcTransport();updateReceipt();toast('✅ EXACT GPS: '+km.toFixed(1)+'km');},function(e){gt.innerHTML='❌ '+e.message+' - Type village name instead!';},{enableHighAccuracy:true,timeout:15000});
 }
-function doCheckout(){var c=updateCartBar();if(c.kg==0){toast('Type KG first!');return;}updateReceipt();selectedPay=null;document.querySelectorAll('.pay-card').forEach(c=>c.classList.remove('selected'));document.getElementById('payDetailsBox').style.display='none';document.getElementById('cTxId').value='';document.getElementById('cPayConfirm').checked=false;checkPayReady();document.getElementById('checkoutModal').classList.add('open');}
+function doCheckout(){var c=updateCartBar();if(c.kg==0){toast('Type KG first!');return;}updateReceipt();selectedPay=null;document.querySelectorAll('.pay-card').forEach(function(cc){cc.classList.remove('selected')});document.getElementById('payDetailsBox').style.display='none';document.getElementById('cTxId').value='';document.getElementById('cPayConfirm').checked=false;checkPayReady();document.getElementById('checkoutModal').classList.add('open');}
 function closeCheckout(){document.getElementById('checkoutModal').classList.remove('open');}
 function doSendWA(){
- var d=updateReceipt(); if(d.lines.length==0){toast('Type KG first');return;}
+ var d=updateReceipt();if(d.lines.length==0){toast('Type KG first');return;}
  if(!selectedPay){toast('Select payment method first!');return;}
- if(selectedPay!=='cod'){
-  var tx=document.getElementById('cTxId').value.trim();
-  var chk=document.getElementById('cPayConfirm').checked;
-  if(tx.length<4){toast('Enter Transaction ID!');return;}
-  if(!chk){toast('Check "I have paid"!');return;}
- }
- var waNum=localStorage.getItem('kfs_wa')||'256700892386';
- var navLink=d.navLink||getNavigationLink();
- var gpsLink=d.gps||'';
- var payLabels={mtn:'MTN MoMo',airtel:'Airtel Money',momopay:'MoMoPay',bank:'Bank Transfer',cod:'Cash on Delivery (COD)'};
- var payLabel=payLabels[selectedPay]||selectedPay;
- var txId=document.getElementById('cTxId').value.trim()||'COD';
- var msg='*KFS v9.3 PAYMENT BEAUTIFUL - EXACT*%0A👤 '+d.name+'%0A📞 '+document.getElementById('cPhone').value+'%0A📍 Village: '+d.vill+'%0A📏 EXACT Distance: '+d.dist+'km from Kisenyi%0A⚖️ Weight: '+d.weight+'kg%0A%0A*ITEMS*%0A'+d.lines.join('%0A')+'%0A%0AProducts: UGX '+d.ugx.toLocaleString()+'%0ATransport: UGX '+d.trans.toLocaleString()+'%0A*TOTAL: UGX '+(d.ugx+d.trans).toLocaleString()+'*%0A%0A💰 *PAYMENT METHOD:* '+payLabel+'%0A💳 *TxID/Ref:* '+txId+'%0A'+(selectedPay==='cod'?'🚚 COD - Collect cash on delivery':'✅ PAID - Verified by customer')+'%0A%0A📍 *CUSTOMER PIN:* '+(gpsLink?gpsLink:'Village: '+d.vill)+'%0A🧭 *NAV ROUTE FOR TRANSPORTER:*%0A'+navLink;
+ if(selectedPay!=='cod'){var tx=document.getElementById('cTxId').value.trim();var chk=document.getElementById('cPayConfirm').checked;if(tx.length<4){toast('Enter Transaction ID!');return;}if(!chk){toast('Check "I have paid"!');return;}}
+ var waNum=localStorage.getItem('kfs_wa')||'256700892386';var payLabels={mtn:'MTN MoMo',airtel:'Airtel Money',momopay:'MoMoPay',bank:'Bank Transfer',cod:'Cash on Delivery (COD)'};var payLabel=payLabels[selectedPay]||selectedPay;var txId=document.getElementById('cTxId').value.trim()||'COD';
+ var msg='*KFS v9.4 PERFECT - EXACT*%0A👤 '+d.name+'%0A📞 '+document.getElementById('cPhone').value+'%0A📍 Village: '+d.vill+'%0A📏 EXACT Distance: '+d.dist+'km from Kisenyi%0A⚖️ Weight: '+d.weight+'kg%0A%0A*ITEMS*%0A'+d.lines.join('%0A')+'%0A%0AProducts: UGX '+d.ugx.toLocaleString()+'%0ATransport: UGX '+d.trans.toLocaleString()+'%0A*TOTAL: UGX '+(d.ugx+d.trans).toLocaleString()+'*%0A%0A💰 *PAYMENT:* '+payLabel+'%0A💳 *TxID:* '+txId+'%0A'+(selectedPay==='cod'?'🚚 COD - Collect cash on delivery':'✅ PAID - Verified by customer')+'%0A%0A📍 *PIN:* '+(d.gps||'Village: '+d.vill)+'%0A🧭 *NAV:*%0A'+d.navLink;
  window.open('https://wa.me/'+waNum+'?text='+msg,'_blank');
- var orders=[];try{orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]');}catch(e){}
- orders.push({id:Date.now(),name:document.getElementById('cName').value||'Customer',phone:document.getElementById('cPhone').value||'',village:document.getElementById('cVillage').value||'',kg:parseInt(d.weight||0),total:(d.ugx+d.trans),transport:d.trans,distance:d.dist,gps:gpsLink,navLink:navLink,items:d.lines,paymentMethod:payLabel,txId:txId,time:Date.now(),status:(selectedPay==='cod'?'Pending - COD':'Paid - '+payLabel)});
- localStorage.setItem('kfs_orders',JSON.stringify(orders));
- toast('✅ Order Sent with '+payLabel+'!');
+ var orders=[];try{orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]');}catch(e){}orders.push({id:Date.now(),name:document.getElementById('cName').value||'Customer',phone:document.getElementById('cPhone').value||'',village:document.getElementById('cVillage').value||'',kg:parseInt(d.weight||0),total:(d.ugx+d.trans),transport:d.trans,distance:d.dist,gps:d.gps,navLink:d.navLink,items:d.lines,paymentMethod:payLabel,txId:txId,time:Date.now(),status:(selectedPay==='cod'?'Pending - COD':'Paid - '+payLabel)});localStorage.setItem('kfs_orders',JSON.stringify(orders));toast('✅ Order Sent with '+payLabel+'!');
 }
-function doDownloadPDF(){var d=updateReceipt();var payLabels={mtn:'MTN MoMo',airtel:'Airtel Money',momopay:'MoMoPay',bank:'Bank Transfer',cod:'COD'};var pl=payLabels[selectedPay]||'Not selected';var tx=document.getElementById('cTxId').value||'';var w=window.open('','_blank');w.document.write('<html><body><h2>KFS v9.3 Payment</h2><p>Distance: '+d.dist+'km exact</p><hr>'+d.lines.join('<br>')+'<hr><p>Transport UGX '+d.trans.toLocaleString()+'</p><p>TOTAL UGX '+(d.ugx+d.trans).toLocaleString()+'</p><p>Payment: '+pl+' - TxID: '+tx+'</p><p>Nav: '+d.navLink+'</p><script>window.print()<\/script></body></html>');w.document.close();}
+function doDownloadPDF(){var d=updateReceipt();var payLabels={mtn:'MTN MoMo',airtel:'Airtel Money',momopay:'MoMoPay',bank:'Bank Transfer',cod:'COD'};var pl=payLabels[selectedPay]||'Not selected';var tx=document.getElementById('cTxId').value||'';var w=window.open('','_blank');w.document.write('<html><body><h2>KFS v9.4 Perfect</h2><p>Distance: '+d.dist+'km exact</p><hr>'+d.lines.join('<br>')+'<hr><p>Transport UGX '+d.trans.toLocaleString()+'</p><p>TOTAL UGX '+(d.ugx+d.trans).toLocaleString()+'</p><p>Payment: '+pl+' - TxID: '+tx+'</p><p>Nav: '+d.navLink+'</p><script>window.print()<\/script></body></html>');w.document.close();}
 function doInstall(){toast('Chrome ⋮ → Install app');}
-var adminTab='prod';
 function showAdminTab(t){
- adminTab=t;
  document.getElementById('adminTabProd').style.display=t==='prod'?'block':'none';
  document.getElementById('adminTabOrders').style.display=t==='orders'?'block':'none';
  document.getElementById('adminTabGallery').style.display=t==='gallery'?'block':'none';
  document.getElementById('adminTabSettings').style.display=t==='settings'?'block':'none';
  document.getElementById('adminTabCloud').style.display=t==='cloud'?'block':'none';
- document.querySelectorAll('[id^=tabBtn]').forEach(b=>{b.style.background='#102a54';b.style.color='var(--gold)'});
- var btn=document.getElementById('tabBtn'+t.charAt(0).toUpperCase()+t.slice(1));
- if(btn){btn.style.background='var(--gold)';btn.style.color='#000';}
- if(t==='orders')renderOrders();
- if(t==='settings')renderVillageList();
- if(t==='gallery')renderGallery();
- if(t==='cloud'){var saved=localStorage.getItem('kfs_cloud_bin');if(saved)document.getElementById('cloudBinId').value=saved;}
-}
-function saveCloudId(){var id=document.getElementById('cloudBinId').value.trim();if(!id){toast('Paste BIN ID');return;}localStorage.setItem('kfs_cloud_bin',id);document.getElementById('cloudStatus').innerText='✅ ID Saved: '+id;toast('✅ Cloud ID Saved');}
-function doCloudPush(){
- var binId=localStorage.getItem('kfs_cloud_bin')||document.getElementById('cloudBinId').value.trim();
- if(!binId){toast('Create BIN');window.open('https://www.npoint.io','_blank');return;}
- var bankObj={}; try{bankObj=JSON.parse(localStorage.getItem('kfs_bank_gold_hybrid')||'{}')}catch(e){}
- var data={products:products,gallery:getGallery(),bankSettings:bankObj,villages:JSON.parse(localStorage.getItem('kfs_villages')||'{}'),wa:localStorage.getItem('kfs_wa')||'256700892386',momo:localStorage.getItem('kfs_momo')||'0700892386',airtel:localStorage.getItem('kfs_airtel')||'',momopay:localStorage.getItem('kfs_momopay')||'',bankText:localStorage.getItem('kfs_bank')||'',orders:JSON.parse(localStorage.getItem('kfs_orders')||'[]'),updated:Date.now()};
- document.getElementById('cloudStatus').innerText='⏳ Pushing...';
- fetch('https://api.npoint.io/'+binId,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>r.json()).then(j=>{ document.getElementById('cloudStatus').innerText='✅ PUSHED! '+new Date().toLocaleTimeString();toast('✅ Cloud Updated'); }).catch(e=>{document.getElementById('cloudStatus').innerText='❌ '+e.message;});
-}
-function doCloudPull(){
- var binId=localStorage.getItem('kfs_cloud_bin')||document.getElementById('cloudBinId').value.trim();
- if(!binId){toast('Paste ID');return;}
- document.getElementById('cloudStatus').innerText='⏳ Pulling...';
- fetch('https://api.npoint.io/'+binId).then(r=>r.json()).then(j=>{
-  if(j.products){products=j.products;localStorage.setItem('kfs_products_gold_hybrid',JSON.stringify(products));}
-  if(j.gallery){localStorage.setItem('kfs_gallery_v9',JSON.stringify(j.gallery));}
-  if(j.bankSettings)localStorage.setItem('kfs_bank_gold_hybrid',JSON.stringify(j.bankSettings));
-  if(j.villages)localStorage.setItem('kfs_villages',JSON.stringify(j.villages));
-  if(j.wa)localStorage.setItem('kfs_wa',j.wa);
-  if(j.momo)localStorage.setItem('kfs_momo',j.momo);
-  if(j.airtel)localStorage.setItem('kfs_airtel',j.airtel);
-  if(j.momopay)localStorage.setItem('kfs_momopay',j.momopay);
-  if(j.bankText) localStorage.setItem('kfs_bank',j.bankText);
-  if(j.bank && !j.bankText) localStorage.setItem('kfs_bank',j.bank);
-  if(j.orders)localStorage.setItem('kfs_orders',JSON.stringify(j.orders));
-  forceRender();renderAdminListAdmin();renderVillageList();renderGallery();
-  document.getElementById('cloudStatus').innerText='✅ PULLED! Synced!';toast('✅ Synced');
- }).catch(e=>{document.getElementById('cloudStatus').innerText='❌ '+e.message;});
+ document.querySelectorAll('[id^=tabBtn]').forEach(function(b){b.style.background='#102a54';b.style.color='var(--gold)'});
+ var btn=document.getElementById('tabBtn'+t.charAt(0).toUpperCase()+t.slice(1));if(btn){btn.style.background='var(--gold)';btn.style.color='#000';}
+ if(t==='orders')renderOrders();if(t==='settings')renderVillageList();if(t==='gallery')renderGallery();
 }
 function doSaveBankAdmin(){
  var m=document.getElementById('adminMoMo').value.trim(),a=document.getElementById('adminAirtel').value.trim(),mp=document.getElementById('adminMoMoPay').value.trim(),b=document.getElementById('adminBank').value.trim(),wa=document.getElementById('adminWA').value.trim();
  try{var old=JSON.parse(localStorage.getItem('kfs_bank_gold_hybrid')||'{}');if(m)old.momo=m;localStorage.setItem('kfs_bank_gold_hybrid',JSON.stringify(old));}catch(e){}
- if(m) localStorage.setItem('kfs_momo',m);
- if(a) localStorage.setItem('kfs_airtel',a);
- if(mp) localStorage.setItem('kfs_momopay',mp);
- if(b) localStorage.setItem('kfs_bank',b);
- if(wa)localStorage.setItem('kfs_wa',wa);
- document.getElementById('bankSaveMsg').innerText='✅ Saved! All payment methods saved!';toast('✅ Payment Methods Saved');
+ if(m)localStorage.setItem('kfs_momo',m);if(a)localStorage.setItem('kfs_airtel',a);if(mp)localStorage.setItem('kfs_momopay',mp);if(b)localStorage.setItem('kfs_bank',b);if(wa)localStorage.setItem('kfs_wa',wa);
+ document.getElementById('bankSaveMsg').innerText='✅ Saved!';toast('✅ Payment Methods Saved');
 }
 function doAddVillage(){var name=document.getElementById('villName').value.trim().toLowerCase(),km=parseFloat(document.getElementById('villKm').value);if(!name||!km){toast('Enter name & KM');return;}var villages={};try{villages=JSON.parse(localStorage.getItem('kfs_villages')||'{}');}catch(e){}villages[name]=km;localStorage.setItem('kfs_villages',JSON.stringify(villages));document.getElementById('villName').value='';document.getElementById('villKm').value='';renderVillageList();toast('✅ Village added!');}
 function renderVillageList(){var villages={};try{villages=JSON.parse(localStorage.getItem('kfs_villages')||'{"kisenyi":0.5,"namasuba":6.2,"zana":6.8}');}catch(e){}var html='';for(var k in villages){html+='<span style="background:#000;border:1px solid #333;padding:4px 8px;border-radius:12px;margin:2px;display:inline-block">'+k+' '+villages[k]+'km <b onclick="delVill(\''+k+'\')" style="color:#f44;cursor:pointer"> x</b></span>';}var el=document.getElementById('villageList');if(el)el.innerHTML=html||'No villages - but 150+ built-in + Live search works!';}
@@ -471,38 +357,35 @@ function doAddProductAdmin(){
  if(!n||!pr){toast('Name & Price required');return;}
  products.push({id:Date.now(),name:n,desc:de,stock:st||100,price:pr,icon:ic,badge:badge,image:pendingImageData,hidden:false,inStock:true});
  saveAll();if(pendingImageData){var g=getGallery();g.push(pendingImageData);saveGallery(g);}
- if(typeof pushToCloud==='function') pushToCloud();
- forceRender();renderAdminListAdmin();renderGallery();toast('✅ Added! Saved to Cloud!');
+ pushToCloud();forceRender();renderAdminListAdmin();renderGallery();toast('✅ Added! Saved to Cloud!');
  document.getElementById('aName').value='';document.getElementById('aDesc').value='';document.getElementById('aStock').value='';document.getElementById('aPrice').value='';document.getElementById('aIcon').value='';document.getElementById('aBadge').value='';clearImagePreview();
 }
-function doAIWriteDesc(){var name=document.getElementById('aName')?.value||'Product';var desc='Premium Quality • Today Fresh';var badge='🌿 FRESH';var ln=name.toLowerCase();if(ln.indexOf('rice')!==-1)badge='🔥 HOT TODAY';document.getElementById('aDesc').value=desc;document.getElementById('aBadge').value=badge;toast('🤖 AI wrote!');}
+function doAIWriteDesc(){var name=document.getElementById('aName')?document.getElementById('aName').value:'Product';var desc='Premium Quality • Today Fresh';var badge='🌿 FRESH';var ln=name.toLowerCase();if(ln.indexOf('rice')!==-1)badge='🔥 HOT TODAY';document.getElementById('aDesc').value=desc;document.getElementById('aBadge').value=badge;toast('🤖 AI wrote!');}
 function doAIWriteDescForAdd(){var n=document.getElementById('aName').value;if(!n){toast('Type Name first');return;}doAIWriteDesc();}
 function renderAdminListAdmin(){
- var search=(document.getElementById('prodSearch')?.value||'').toLowerCase();
- var html='',low=0;
+ var search=(document.getElementById('prodSearch')?document.getElementById('prodSearch').value:'').toLowerCase();var html='',low=0;
  for(var i=0;i<products.length;i++){
-  var p=products[i];if(!p||(search&&p.name.toLowerCase().indexOf(search)===-1))continue;
-  if(p.stock<100)low++;
-  var hideStyle=p.hidden?'opacity:0.4;border-color:#f44':'';
-  var stockColor=p.inStock===false?'#f44':'#00C853';
-  var stockBtn=p.inStock===false?'🟢 SET IN STOCK':'🔴 SET OUT';
-  var hideBtn=p.hidden?'👁️ SHOW':'🙈 HIDE';
+  var p=products[i];if(!p||(search&&p.name.toLowerCase().indexOf(search)===-1))continue;if(p.stock<100)low++;
+  var hideStyle=p.hidden?'opacity:0.4;border-color:#f44':'';var stockColor=p.inStock===false?'#f44':'#00C853';var stockBtn=p.inStock===false?'🟢 SET IN STOCK':'🔴 SET OUT';var hideBtn=p.hidden?'👁️ SHOW':'🙈 HIDE';
   var thumb=p.image?'<img src="'+p.image+'" style="width:30px;height:30px;object-fit:cover;border-radius:6px;vertical-align:middle">':(p.icon||'📦');
   html+='<div style="display:flex;justify-content:space-between;align-items:center;background:#000;border:1px solid #333;padding:10px;border-radius:10px;margin:6px 0;'+hideStyle+'"><div style="flex:1"><div style="font-weight:900">'+thumb+' '+p.name+' <span style="color:'+stockColor+';font-size:10px">'+(p.inStock===false?'❌ OUT':'✅ IN')+'</span></div><div style="font-size:11px;color:#aaa">UGX '+p.price+' • '+p.stock+'kg • '+(p.badge||'')+'</div></div><div style="display:flex;gap:4px;flex-wrap:wrap;max-width:170px"><button onclick="toggleStock('+p.id+')" style="background:'+(p.inStock===false?'#00C853':'#f44')+';color:#fff;border:none;padding:6px 8px;border-radius:6px;font-size:8px;font-weight:900">'+stockBtn+'</button><button onclick="doEditProd('+p.id+')" style="background:#D4AF37;color:#000;border:none;padding:6px 8px;border-radius:6px;font-size:9px">EDIT</button><button onclick="doHideProd('+p.id+')" style="background:#333;color:#fff;border:none;padding:6px 8px;border-radius:6px;font-size:9px">'+hideBtn+'</button><button onclick="doDelProdAdmin('+p.id+')" style="background:#f44;color:#fff;border:none;padding:6px 8px;border-radius:6px;font-size:9px">X</button></div></div>';
  }
  document.getElementById('adminList').innerHTML=html||'No products';
  var sa=document.getElementById('stockAlert');if(sa)sa.innerText=low?'⚠️ '+low+' LOW STOCK!':'';
 }
-function toggleStock(id){
- for(var i=0;i<products.length;i++)if(products[i].id==id){products[i].inStock=products[i].inStock===false?true:false;}
- saveAll();forceRender();renderAdminListAdmin(); if(typeof pushToCloud==='function') pushToCloud();
- toast(products.find(p=>p.id==id).inStock===false?'🔴 OUT OF STOCK':'🟢 IN STOCK');
+function toggleStock(id){for(var i=0;i<products.length;i++)if(products[i].id==id){products[i].inStock=products[i].inStock===false?true:false;}saveAll();forceRender();renderAdminListAdmin();pushToCloud();toast('✅ Updated + Cloud');}
+function doEditProd(id){var p=null;for(var i=0;i<products.length;i++)if(products[i].id==id)p=products[i];if(!p)return;var np=prompt('Price (now '+p.price+'):',p.price);if(np===null)return;var ns=prompt('Stock (now '+p.stock+'):',p.stock);if(ns===null)return;p.price=parseInt(np)||p.price;p.stock=parseInt(ns)||p.stock;saveAll();forceRender();renderAdminListAdmin();pushToCloud();}
+function doHideProd(id){for(var i=0;i<products.length;i++)if(products[i].id==id)products[i].hidden=!products[i].hidden;saveAll();forceRender();renderAdminListAdmin();pushToCloud();}
+// PERFECT DELETE - By ID only, never by name, never comes back
+function doDelProdAdmin(id){
+ if(!confirm('Delete this product forever? It will never come back.'))return;
+ addDeletedId(id);
+ products=products.filter(function(p){return p.id!=id;});
+ if(cart[id])delete cart[id];
+ saveAll();forceRender();renderAdminListAdmin();renderGallery();pushToCloud();toast('🗑️ Deleted forever + Cloud Updated');
 }
-function doEditProd(id){var p=null;for(var i=0;i<products.length;i++)if(products[i].id==id)p=products[i];if(!p)return;var newPrice=prompt('Price (now '+p.price+'):',p.price);if(newPrice===null)return;var newStock=prompt('Stock (now '+p.stock+'):',p.stock);if(newStock===null)return;p.price=parseInt(newPrice)||p.price;p.stock=parseInt(newStock)||p.stock;saveAll();forceRender();renderAdminListAdmin(); if(typeof pushToCloud==='function') pushToCloud();}
-function doHideProd(id){for(var i=0;i<products.length;i++)if(products[i].id==id)products[i].hidden=!products[i].hidden;saveAll();forceRender();renderAdminListAdmin(); if(typeof pushToCloud==='function') pushToCloud();}
-function doDelProdAdmin(id){if(confirm('Delete?')){var np=[];for(var i=0;i<products.length;i++)if(products[i].id!=id)np.push(products[i]);products=np;saveAll();forceRender();renderAdminListAdmin();renderGallery(); if(typeof pushToCloud==='function') pushToCloud(); toast('🗑️ Deleted + Cloud Updated');}}
 function updateOrderStatus(id,status){var orders=[];try{orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]')}catch(e){}for(var i=0;i<orders.length;i++)if(orders[i].id==id||orders[i].time==id)orders[i].status=status;localStorage.setItem('kfs_orders',JSON.stringify(orders));renderOrders();toast('✅ '+status);}
-function deleteOrder(id){if(!confirm('Delete order?'))return;var orders=[];try{orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]')}catch(e){}orders=orders.filter(o=>o.id!=id&&o.time!=id);localStorage.setItem('kfs_orders',JSON.stringify(orders));renderOrders();toast('🗑️ Deleted');}
+function deleteOrder(id){if(!confirm('Delete order?'))return;var orders=[];try{orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]')}catch(e){}orders=orders.filter(function(o){return o.id!=id&&o.time!=id});localStorage.setItem('kfs_orders',JSON.stringify(orders));renderOrders();toast('🗑️ Deleted');}
 function renderOrders(){
  var orders=[];try{orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]')}catch(e){}
  var today=0,weekKg=0;var now=new Date();var todayStr=now.toDateString();
@@ -511,127 +394,71 @@ function renderOrders(){
  var ws=document.getElementById('weekSales');if(ws)ws.innerText=weekKg+'kg';
  var to=document.getElementById('totalOrders');if(to)to.innerText=orders.length;
  var html='';
- for(var i=orders.length-1;i>=0;i--){
-  var o=orders[i];var oid=o.id||o.time;var status=o.status||'Pending';
-  var statusColor=status.indexOf('Paid')!==-1?'#00C853':status.indexOf('COD')!==-1?'#FFCC00':status==='Delivered'?'#00C853':'#aaa';
-  html+='<div style="background:#000;border:1px solid #333;padding:10px;border-radius:10px;margin:8px 0"><div style="display:flex;justify-content:space-between"><div style="font-weight:900;font-size:12px">'+o.name+' • '+o.village+' • '+o.kg+'kg • UGX '+(o.total||0).toLocaleString()+'</div><span style="background:'+statusColor+';color:#000;padding:2px 8px;border-radius:10px;font-size:9px;font-weight:900">'+status+'</span></div><div style="font-size:10px;color:#aaa;margin-top:2px">📏 '+ (o.distance||'?')+'km • Transport UGX '+(o.transport||0).toLocaleString()+' • '+new Date(o.time).toLocaleString()+' • '+o.phone+'</div><div style="font-size:11px;margin-top:4px">💰 '+(o.paymentMethod||'No pay')+' • Tx: '+(o.txId||'')+'</div><div style="font-size:11px;margin-top:2px">'+(o.items||[]).join(', ')+'</div>'+(o.gps?'<div style="font-size:10px;margin-top:4px"><a href="'+o.gps+'" target="_blank" style="color:#00FF88">📍 Pin</a> • <a href="'+(o.navLink||'')+'" target="_blank" style="color:#D4AF37">🧭 NAV</a></div>':'')+'<div style="display:flex;gap:4px;margin-top:8px"><button onclick="updateOrderStatus('+oid+',\'Delivered\')" style="flex:1;background:#00C853;color:#000;border:none;padding:8px;border-radius:6px;font-size:10px;font-weight:900">✅ Delivered</button><button onclick="updateOrderStatus('+oid+',\'Paid\')" style="flex:1;background:#D4AF37;color:#000;border:none;padding:8px;border-radius:6px;font-size:10px;font-weight:900">💰 Paid</button><button onclick="updateOrderStatus('+oid+',\'Cancelled\')" style="flex:1;background:#f44;color:#fff;border:none;padding:8px;border-radius:6px;font-size:10px">❌ Cancel</button><button onclick="deleteOrder('+oid+')" style="background:#333;color:#fff;border:none;padding:8px;border-radius:6px;font-size:10px">🗑️</button></div></div>';
+ for(var i=orders.length-1;i>=0;i--){var o=orders[i];var oid=o.id||o.time;var status=o.status||'Pending';var sc=status.indexOf('Paid')!==-1?'#00C853':status.indexOf('COD')!==-1?'#FFCC00':status==='Delivered'?'#00C853':'#aaa';
+ html+='<div style="background:#000;border:1px solid #333;padding:10px;border-radius:10px;margin:8px 0"><div style="display:flex;justify-content:space-between"><div style="font-weight:900;font-size:12px">'+o.name+' • '+o.village+' • '+o.kg+'kg • UGX '+(o.total||0).toLocaleString()+'</div><span style="background:'+sc+';color:#000;padding:2px 8px;border-radius:10px;font-size:9px;font-weight:900">'+status+'</span></div><div style="font-size:10px;color:#aaa;margin-top:2px">📏 '+(o.distance||'?')+'km • Transport UGX '+(o.transport||0).toLocaleString()+' • '+new Date(o.time).toLocaleString()+' • '+o.phone+'</div><div style="font-size:11px;margin-top:4px">💰 '+(o.paymentMethod||'No pay')+' • Tx: '+(o.txId||'')+'</div><div style="font-size:11px;margin-top:2px">'+(o.items||[]).join(', ')+'</div>'+(o.gps?'<div style="font-size:10px;margin-top:4px"><a href="'+o.gps+'" target="_blank" style="color:#00FF88">📍 Pin</a> • <a href="'+(o.navLink||'')+'" target="_blank" style="color:#D4AF37">🧭 NAV</a></div>':'')+'<div style="display:flex;gap:4px;margin-top:8px"><button onclick="updateOrderStatus('+oid+',\'Delivered\')" style="flex:1;background:#00C853;color:#000;border:none;padding:8px;border-radius:6px;font-size:10px;font-weight:900">✅ Delivered</button><button onclick="updateOrderStatus('+oid+',\'Paid\')" style="flex:1;background:#D4AF37;color:#000;border:none;padding:8px;border-radius:6px;font-size:10px;font-weight:900">💰 Paid</button><button onclick="updateOrderStatus('+oid+',\'Cancelled\')" style="flex:1;background:#f44;color:#fff;border:none;padding:8px;border-radius:6px;font-size:10px">❌ Cancel</button><button onclick="deleteOrder('+oid+')" style="background:#333;color:#fff;border:none;padding:8px;border-radius:6px;font-size:10px">🗑️</button></div></div>';
  }
- var ol=document.getElementById('ordersList');if(ol)ol.innerHTML=html||'<div style="color:#aaa;text-align:center">No orders yet - With payment proof</div>';
+ var ol=document.getElementById('ordersList');if(ol)ol.innerHTML=html||'<div style="color:#aaa;text-align:center">No orders yet</div>';
 }
 function clearOrders(){if(confirm('Clear all orders?')){localStorage.removeItem('kfs_orders');renderOrders();}}
 function openAdminNow(){
  try{
   var savedPass=localStorage.getItem('kfs_admin_pass')||'wilson321';
   var pass=prompt('🔐 Admin Password:');if(pass===null)return;pass=pass.trim();
-  if(pass===savedPass){
-   renderAdminListAdmin();renderVillageList();renderOrders();renderGallery();showAdminTab('prod');
-   var saved=localStorage.getItem('kfs_cloud_bin');if(!saved)localStorage.setItem('kfs_cloud_bin','aeb8e0b683ec2e2756d8');
-   var cb=document.getElementById('cloudBinId');if(cb)cb.value=localStorage.getItem('kfs_cloud_bin')||'aeb8e0b683ec2e2756d8';
-   var modal=document.getElementById('adminModal');if(modal){modal.classList.add('open');modal.style.display='block';}
-   toast('✅ Admin 🔒 Transport 🔒');
-  }else{toast('❌ Wrong Password');}
- }catch(err){var m=document.getElementById('adminModal');if(m){m.classList.add('open');m.style.display='block';}}
+  if(pass===savedPass){renderAdminListAdmin();renderVillageList();renderOrders();renderGallery();showAdminTab('prod');var m=document.getElementById('adminModal');if(m){m.classList.add('open');m.style.display='block';}toast('✅ Admin 🔒');}
+  else{toast('❌ Wrong Password');}
+ }catch(err){}
 }
 function closeAdmin(){var m=document.getElementById('adminModal');if(m){m.classList.remove('open');m.style.display='none';}}
-window.addEventListener('DOMContentLoaded',function(){var saved=localStorage.getItem('kfs_cloud_bin');if(!saved)localStorage.setItem('kfs_cloud_bin','aeb8e0b683ec2e2756d8');forceRender();});
-setTimeout(function(){var saved=localStorage.getItem('kfs_cloud_bin');if(!saved)localStorage.setItem('kfs_cloud_bin','aeb8e0b683ec2e2756d8');forceRender();},500);
+window.addEventListener('DOMContentLoaded',function(){forceRender();});
 forceRender();
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').then(function(){console.log('KFS SW ok');}).catch(function(e){console.log('KFS SW skip');});});}</script>
 <script>
-// === KFS v9.3 SINGLE CLOUD SYNC - FIXED, PRESERVES v93 ===
+// === KFS v9.4 PERFECT - SINGLE CLOUD SYNC - NO ERRORS ===
+var kfsRef=null;var cloudReady=false;var isPushing=false;
+function setCloudStatus(t){var el=document.getElementById('cloudStatus');if(el)el.innerText=t;}
 try{
-  var firebaseConfig = { databaseURL: "https://kfs-shop-cf1da-default-rtdb.firebaseio.com" };
-  if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-  var kfsDB = firebase.database();
-  var kfsRef = kfsDB.ref('kfs-shop');
-  window.kfsRef = kfsRef;
-  var cloudReady = false;
-  // PULL FIRST - Cloud wins, prevents local defaults overwriting cloud
+  var firebaseConfig={databaseURL:"https://kfs-shop-cf1da-default-rtdb.firebaseio.com"};
+  if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
+  kfsRef=firebase.database().ref('kfs-shop');window.kfsRef=kfsRef;
+  // PULL FIRST - Cloud wins
   kfsRef.once('value').then(function(snap){
     try{
-      var d = snap.val();
-      if(d && d.products && d.products.length > 0){
-        products = d.products;
-        localStorage.setItem('kfs_products_gold_hybrid', JSON.stringify(products));
-        forceRender();
-        console.log('KFS v9.3: Loaded from cloud', d.products.length);
-      } else {
-        kfsRef.set({products: products, updated: Date.now()});
-        console.log('KFS v9.3: Cloud empty, pushed local');
+      var d=snap.val();
+      if(d&&d.products&&Array.isArray(d.products)&&d.products.length>0){
+        var cleaned=filterDeleted(d.products);
+        products=cleaned;saveAll();forceRender();
+        if(cleaned.length!==d.products.length){kfsRef.set({products:cleaned,deletedIds:getDeletedIds(),updated:Date.now()});}
+        setCloudStatus('✅ SYNCED - Cloud: '+cleaned.length+' products');
+      }else{
+        kfsRef.set({products:products,deletedIds:getDeletedIds(),updated:Date.now()});
+        setCloudStatus('✅ CLOUD READY - Pushed local');
       }
-    }catch(e){}
-    cloudReady = true;
-  }).catch(function(){ cloudReady = true; });
-  // Live updates from other phones
-  kfsRef.on('value', function(snap){
-    if(!cloudReady) return;
+    }catch(e){setCloudStatus('⚠️ Cloud error: '+e.message);}
+    cloudReady=true;
+  }).catch(function(){cloudReady=true;setCloudStatus('⚠️ Offline - Local mode');});
+  // LIVE updates
+  kfsRef.on('value',function(snap){
+    if(!cloudReady||isPushing)return;
     try{
-      var d = snap.val();
-      if(d && d.products && JSON.stringify(d.products) !== JSON.stringify(products)){
-        products = d.products;
-        localStorage.setItem('kfs_products_gold_hybrid', JSON.stringify(products));
-        forceRender();
-      }
+      var d=snap.val();if(!d||!d.products)return;
+      if(JSON.stringify(d.products)===JSON.stringify(products))return;
+      // Merge deletedIds from cloud
+      if(d.deletedIds&&Array.isArray(d.deletedIds)){try{var cur=getDeletedIds();var merged=cur.slice();for(var i=0;i<d.deletedIds.length;i++){if(merged.indexOf(d.deletedIds[i])===-1)merged.push(d.deletedIds[i]);}localStorage.setItem('kfs_deleted_ids',JSON.stringify(merged));}catch(e){}}
+      products=filterDeleted(d.products);saveAll();forceRender();renderAdminListAdmin();
+      setCloudStatus('✅ SYNCED - Cloud: '+products.length+' products');
     }catch(e){}
   });
-  // Single PUSH - only after cloud loaded
-  window.pushToCloud = function(){
-    if(!cloudReady){ console.log('KFS: Push blocked - waiting for cloud'); return; }
-    try{ kfsRef.set({products: products, updated: Date.now()}); console.log('KFS v9.3: PUSHED', products.length); }catch(e){}
-  };
-  console.log('KFS v9.3 Firebase Sync ON - Single Sync');
-}catch(e){ console.log('Firebase error', e); }
-</script>
-<script>
-// KFS DELETE FIX V2 - FIXED v9.3 - Uses single cloud sync, correct format
-(function(){
-  function deleteByName(name){
-    var clean = (name||"").replace(/[^\w\s\.]/g,"").replace(/\s+/g," ").trim().toLowerCase();
-    var shortName = clean.split(" ").slice(0,3).join(" ");
-    if(!shortName) return 0;
-    var left = products.length;
-    products = products.filter(function(p){
-      var pn = ((p.name||"")+"").toLowerCase();
-      return pn.indexOf(shortName)===-1 && shortName.indexOf(pn)===-1;
-    });
-    left = products.length;
-    saveAll();
-    if(typeof pushToCloud==='function') pushToCloud();
-    return left;
-  }
-  function getNameFromCard(btn){
-    var el = btn;
-    for(var i=0;i<8;i++){
-      if(!el) break;
-      var txt = el.innerText || "";
-      if(txt.indexOf("UGX")!==-1){
-        var lines = txt.split("\n").map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
-        var nameParts = [];
-        for(var j=0;j<lines.length;j++){
-          if(lines[j].indexOf("UGX")!==-1) break;
-          if(["SET OUT","EDIT","HIDE","X","SET IN STOCK"].indexOf(lines[j])!==-1) continue;
-          nameParts.push(lines[j]);
-        }
-        return nameParts.join(" ").trim();
-      }
-      el = el.parentElement;
-    }
-    return "";
-  }
-  document.addEventListener("click", function(e){
-    var btn = e.target.closest ? e.target.closest("button") : null;
-    if(!btn) return;
-    if(btn.innerText.trim()==="X" && btn.closest && btn.closest("#adminList")){
-      e.stopPropagation(); e.preventDefault();
-      var name = getNameFromCard(btn);
-      if(!confirm("Delete "+name+" forever?")) return;
-      var left = deleteByName(name);
-      alert("Deleted: "+name+"\n"+left+" left");
-      setTimeout(function(){ forceRender(); renderAdminListAdmin(); }, 500);
-    }
-  }, true);
-})();
+}catch(e){setCloudStatus('⚠️ Firebase not available - Local mode');}
+function pushToCloud(){
+  if(!kfsRef){toast('☁️ Cloud not ready');return;}
+  if(!cloudReady){setTimeout(pushToCloud,1000);return;}
+  try{isPushing=true;kfsRef.set({products:products,deletedIds:getDeletedIds(),updated:Date.now()}).then(function(){isPushing=false;setCloudStatus('✅ PUSHED - '+products.length+' products - '+new Date().toLocaleTimeString());}).catch(function(){isPushing=false;});}catch(e){isPushing=false;}
+}
+function pullFromCloud(){
+  if(!kfsRef)return;
+  kfsRef.once('value').then(function(snap){var d=snap.val();if(d&&d.products){products=filterDeleted(d.products);saveAll();forceRender();renderAdminListAdmin();toast('✅ Pulled from Cloud');setCloudStatus('✅ PULLED - '+products.length+' products');}}).catch(function(){toast('❌ Pull failed');});
+}
 </script>
 </body>
 </html>
