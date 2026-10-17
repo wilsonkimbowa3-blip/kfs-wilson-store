@@ -31,7 +31,7 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 .inp{width:100%;background:#0a1931;border:1px solid #666;color:#fff;border-radius:10px;padding:12px;margin:6px 0}
 .receipt{background:#0a1931;border:2px solid var(--gold);border-radius:14px;padding:12px;margin:10px 0;font-size:13px;line-height:1.6}
 #toast{position:fixed;bottom:130px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;padding:14px 24px;border-radius:24px;font-weight:900;display:none;z-index:9999;max-width:90%;text-align:center}
-.pay-card{border-radius:16px;padding:14px;margin:8px 0;cursor:pointer;border:3px solid transparent;position:relative;overflow:hidden;transition:all.2s}
+.pay-card{border-radius:16px;padding:14px;margin:8px 0;cursor:pointer;border:3px solid transparent;position:relative;overflow:hidden;transition:all .2s}
 .pay-card.selected{border-color:#fff;transform:scale(1.02);box-shadow:0 6px 20px rgba(0,0,0,.5)}
 .pay-mtn{background:linear-gradient(135deg,#FFCC00,#FFB700);color:#000}
 .pay-airtel{background:linear-gradient(135deg,#E60000,#FF1A1A);color:#fff}
@@ -86,41 +86,11 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 <div id="paymentSection" style="margin-top:16px;border-top:3px solid var(--gold);padding-top:12px">
 <div style="font-weight:900;color:var(--gold);font-size:16px;text-align:center;margin-bottom:10px">💰 CHOOSE PAYMENT METHOD — Pay First Before Delivery</div>
 <div style="font-size:11px;color:#aaa;text-align:center;margin-bottom:10px">✅ Beautiful & Secure • Pay exact TOTAL amount • COD is last option</div>
-<div class="pay-card pay-mtn" onclick="selectPay('mtn')">
-<div style="display:flex;gap:12px;align-items:center">
-<div class="pay-logo" style="color:#000">MTN</div>
-<div style="flex:1"><div style="font-weight:900;font-size:15px">MTN MoMo</div><div style="font-size:11px">Instant • Most Popular • *165#</div></div>
-<div style="font-size:20px">💛</div>
-</div>
-</div>
-<div class="pay-card pay-airtel" onclick="selectPay('airtel')">
-<div style="display:flex;gap:12px;align-items:center">
-<div class="pay-logo" style="color:#E60000">Airtel</div>
-<div style="flex:1"><div style="font-weight:900;font-size:15px">Airtel Money</div><div style="font-size:11px">Fast • Secure • *185#</div></div>
-<div style="font-size:20px">❤️</div>
-</div>
-</div>
-<div class="pay-card pay-momopay" onclick="selectPay('momopay')">
-<div style="display:flex;gap:12px;align-items:center">
-<div class="pay-logo" style="color:#0066CC">MoMo</div>
-<div style="flex:1"><div style="font-weight:900;font-size:15px">MoMoPay / MoMoPay</div><div style="font-size:11px">Merchant Code • Scan & Pay</div></div>
-<div style="font-size:20px">💙</div>
-</div>
-</div>
-<div class="pay-card pay-bank" onclick="selectPay('bank')">
-<div style="display:flex;gap:12px;align-items:center">
-<div class="pay-logo" style="color:#004D26">🏦</div>
-<div style="flex:1"><div style="font-weight:900;font-size:15px">Bank Transfer</div><div style="font-size:11px">Centenary / Equity / Stanbic</div></div>
-<div style="font-size:20px">💚</div>
-</div>
-</div>
-<div class="pay-card pay-cod" onclick="selectPay('cod')">
-<div style="display:flex;gap:12px;align-items:center">
-<div class="pay-logo" style="background:#000;color:#fff">🚚</div>
-<div style="flex:1"><div style="font-weight:900;font-size:15px">Cash on Delivery (COD)</div><div style="font-size:11px">Pay when transporter delivers • Last option</div></div>
-<div style="font-size:20px">📦</div>
-</div>
-</div>
+<div class="pay-card pay-mtn" onclick="selectPay('mtn')"><div style="display:flex;gap:12px;align-items:center"><div class="pay-logo" style="color:#000">MTN</div><div style="flex:1"><div style="font-weight:900;font-size:15px">MTN MoMo</div><div style="font-size:11px">Instant • Most Popular • *165#</div></div><div style="font-size:20px">💛</div></div></div>
+<div class="pay-card pay-airtel" onclick="selectPay('airtel')"><div style="display:flex;gap:12px;align-items:center"><div class="pay-logo" style="color:#E60000">Airtel</div><div style="flex:1"><div style="font-weight:900;font-size:15px">Airtel Money</div><div style="font-size:11px">Fast • Secure • *185#</div></div><div style="font-size:20px">❤️</div></div></div>
+<div class="pay-card pay-momopay" onclick="selectPay('momopay')"><div style="display:flex;gap:12px;align-items:center"><div class="pay-logo" style="color:#0066CC">MoMo</div><div style="flex:1"><div style="font-weight:900;font-size:15px">MoMoPay / MoMoPay</div><div style="font-size:11px">Merchant Code • Scan & Pay</div></div><div style="font-size:20px">💙</div></div></div>
+<div class="pay-card pay-bank" onclick="selectPay('bank')"><div style="display:flex;gap:12px;align-items:center"><div class="pay-logo" style="color:#004D26">🏦</div><div style="flex:1"><div style="font-weight:900;font-size:15px">Bank Transfer</div><div style="font-size:11px">Centenary / Equity / Stanbic</div></div><div style="font-size:20px">💚</div></div></div>
+<div class="pay-card pay-cod" onclick="selectPay('cod')"><div style="display:flex;gap:12px;align-items:center"><div class="pay-logo" style="background:#000;color:#fff">🚚</div><div style="flex:1"><div style="font-weight:900;font-size:15px">Cash on Delivery (COD)</div><div style="font-size:11px">Pay when transporter delivers • Last option</div></div><div style="font-size:20px">📦</div></div></div>
 <div id="payDetailsBox" style="display:none;background:#000;border:2px solid var(--gold);border-radius:14px;padding:14px;margin-top:12px"></div>
 <div style="background:#1a2e1a;border:2px solid #00C853;border-radius:12px;padding:12px;margin-top:12px">
 <div style="font-size:11px;color:#00C853;font-weight:900">🔒 PAYMENT VERIFICATION — Required for all except COD</div>
@@ -136,7 +106,8 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 </div>
 <button class="btn btn-gold" style="width:100%;margin-top:10px;padding:16px" onclick="doDownloadPDF()">⬇️ DOWNLOAD RECEIPT</button>
 </div>
-</div><div id="adminModal" class="modal">
+</div>
+<div id="adminModal" class="modal">
 <div class="box" style="max-width:600px;max-height:92vh;overflow:auto">
 <h2 style="color:var(--gold)">🤖 ADMIN 🔒 + TRANSPORT 🔒</h2>
 <div style="display:flex;gap:6px;margin:10px 0;flex-wrap:wrap">
@@ -171,7 +142,8 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 <button class="btn btn-green" style="padding:14px" onclick="doCloudPush()">☁️ PUSH</button>
 <button class="btn btn-gold" style="padding:14px" onclick="doCloudPull()">📥 PULL</button>
 </div>
-<div id="cloudStatus" style="font-size:11px;color:#00C853;text-align:center;margin-top:8px;background:#000;padding:6px;border-radius:8px">☁️ Ready</div>
+<div id="cloudStatus" style="font-size:11px;color:#00C853;text-align:center;margin-top:8px;background:#000;padding:6px;border-radius:8px">☁️ Ready - v9.3 Fixed Cloud</div>
+<div style="margin-top:10px;background:#000;padding:10px;border-radius:10px;font-size:11px;color:#aaa">Firebase Cloud: <b style="color:#00C853">Auto Sync ON</b><br>Products sync automatically to all phones. Use PUSH/PULL for npoint backup.</div>
 </div>
 </div>
 <div id="adminTabProd">
@@ -211,7 +183,8 @@ body{background:#08152e;color:#fff;padding-bottom:120px}
 </div>
 <button class="btn" style="width:100%;margin-top:16px;background:#fff;color:#000;font-weight:900;padding:14px" onclick="closeAdmin()">CLOSE ADMIN</button>
 </div>
-</div><script>
+</div>
+<script>
 function toast(m){var t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(function(){t.style.display='none';},4000);}
 var defaultProducts=[
  {id:1,name:'50kg Super Rice',desc:'Tanzania Premium • Today Fresh',stock:3500,price:4000,icon:'🍚',badge:'🔥 HOT TODAY',inStock:true},
@@ -286,7 +259,7 @@ var UGANDA_VILLAGES={
  'kisenyi':0.5,'kisenyi market':0.5,'owino':0.8,'katwe':2.3,'ndeeba':2.8,'kibuye':3.1,'nsambya':3.5,'kabalagala':4.2,'kansanga':5.0,'ggaba':6.8,'munyonyo':9.8,'buziga':5.5,
  'namasuba':6.2,'zana':6.8,'bunamwaya':7.5,'seguku':8.1,'najjanankumbi':5.8,'lubowa':8.5,'lweza':9.2,'makindye':4.0,'lukuli':5.2,'kyebando':4.5,'kawempe':6.0,'bwaise':5.0,'kazo':6.5,
  'nateete':5.5,'busega':7.8,'wakiso':15.2,'nansana':11.5,'kawanda':10.2,'kireka':9.0,'banda':8.5,'kyaliwajjala':12.5,'namugongo':13.0,'mukono':21,'entebbe':35,'kajjansi':14.5,'kawuku':18,
- 'buloba':18.5,'kasanje':22,'nakawuka':20,'nsangi':12,'kyengera':10.5,'nakulabye':3.2,'kasubi':4.5,'namirembe':2.5,'rubaga':3.0,'meng o':2.0,'salama':4.8,
+ 'buloba':18.5,'kasanje':22,'nakawuka':20,'nsangi':12,'kyengera':10.5,'nakulabye':3.2,'kasubi':4.5,'namirembe':2.5,'rubaga':3.0,'mengo':2.0,'salama':4.8,
  'budo':16,'kigo':12,'sisa':19,'kikajjo':8,'kabowa':4,'lungujja':3.8,'natete':5.5,'kikoni':4.2,'kamwokya':4,'kololo':3.5,'naguru':5,'ntinda':6.5,'kiwatule':8,
  'najjera':10,'kungu':11,'kitetika':9,'kasangati':12,'gayaza':14,'manyangwa':16,'matugga':15,'jinja':80,'iganga':115,'mbale':210,'tororo':200,'soroti':300,'lira':320,'gulu':340,'arua':480,'mbarara':270,'masaka':125,'masindi':210,'hoima':200,'fort portal':300,'kasese':350,'kabale':400,'kisoro':450,'mityana':55,'mubende':150,'kiboga':120,'luwero':60,'wobulenzi':50,'bombo':35
 };
@@ -455,7 +428,8 @@ function saveCloudId(){var id=document.getElementById('cloudBinId').value.trim()
 function doCloudPush(){
  var binId=localStorage.getItem('kfs_cloud_bin')||document.getElementById('cloudBinId').value.trim();
  if(!binId){toast('Create BIN');window.open('https://www.npoint.io','_blank');return;}
- var data={products:products,gallery:getGallery(),bank:JSON.parse(localStorage.getItem('kfs_bank_gold_hybrid')||'{}'),villages:JSON.parse(localStorage.getItem('kfs_villages')||'{}'),wa:localStorage.getItem('kfs_wa')||'256700892386',momo:localStorage.getItem('kfs_momo')||'0700892386',airtel:localStorage.getItem('kfs_airtel')||'',momopay:localStorage.getItem('kfs_momopay')||'',bank:localStorage.getItem('kfs_bank')||'',orders:JSON.parse(localStorage.getItem('kfs_orders')||'[]'),updated:Date.now()};
+ var bankObj={}; try{bankObj=JSON.parse(localStorage.getItem('kfs_bank_gold_hybrid')||'{}')}catch(e){}
+ var data={products:products,gallery:getGallery(),bankSettings:bankObj,villages:JSON.parse(localStorage.getItem('kfs_villages')||'{}'),wa:localStorage.getItem('kfs_wa')||'256700892386',momo:localStorage.getItem('kfs_momo')||'0700892386',airtel:localStorage.getItem('kfs_airtel')||'',momopay:localStorage.getItem('kfs_momopay')||'',bankText:localStorage.getItem('kfs_bank')||'',orders:JSON.parse(localStorage.getItem('kfs_orders')||'[]'),updated:Date.now()};
  document.getElementById('cloudStatus').innerText='⏳ Pushing...';
  fetch('https://api.npoint.io/'+binId,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>r.json()).then(j=>{ document.getElementById('cloudStatus').innerText='✅ PUSHED! '+new Date().toLocaleTimeString();toast('✅ Cloud Updated'); }).catch(e=>{document.getElementById('cloudStatus').innerText='❌ '+e.message;});
 }
@@ -466,13 +440,14 @@ function doCloudPull(){
  fetch('https://api.npoint.io/'+binId).then(r=>r.json()).then(j=>{
   if(j.products){products=j.products;localStorage.setItem('kfs_products_gold_hybrid',JSON.stringify(products));}
   if(j.gallery){localStorage.setItem('kfs_gallery_v9',JSON.stringify(j.gallery));}
-  if(j.bank)localStorage.setItem('kfs_bank_gold_hybrid',JSON.stringify(j.bank));
+  if(j.bankSettings)localStorage.setItem('kfs_bank_gold_hybrid',JSON.stringify(j.bankSettings));
   if(j.villages)localStorage.setItem('kfs_villages',JSON.stringify(j.villages));
   if(j.wa)localStorage.setItem('kfs_wa',j.wa);
   if(j.momo)localStorage.setItem('kfs_momo',j.momo);
   if(j.airtel)localStorage.setItem('kfs_airtel',j.airtel);
   if(j.momopay)localStorage.setItem('kfs_momopay',j.momopay);
-  if(j.bank) localStorage.setItem('kfs_bank',j.bank);
+  if(j.bankText) localStorage.setItem('kfs_bank',j.bankText);
+  if(j.bank && !j.bankText) localStorage.setItem('kfs_bank',j.bank);
   if(j.orders)localStorage.setItem('kfs_orders',JSON.stringify(j.orders));
   forceRender();renderAdminListAdmin();renderVillageList();renderGallery();
   document.getElementById('cloudStatus').innerText='✅ PULLED! Synced!';toast('✅ Synced');
@@ -496,7 +471,8 @@ function doAddProductAdmin(){
  if(!n||!pr){toast('Name & Price required');return;}
  products.push({id:Date.now(),name:n,desc:de,stock:st||100,price:pr,icon:ic,badge:badge,image:pendingImageData,hidden:false,inStock:true});
  saveAll();if(pendingImageData){var g=getGallery();g.push(pendingImageData);saveGallery(g);}
- forceRender();renderAdminListAdmin();renderGallery();toast('✅ Added!');
+ if(typeof pushToCloud==='function') pushToCloud();
+ forceRender();renderAdminListAdmin();renderGallery();toast('✅ Added! Saved to Cloud!');
  document.getElementById('aName').value='';document.getElementById('aDesc').value='';document.getElementById('aStock').value='';document.getElementById('aPrice').value='';document.getElementById('aIcon').value='';document.getElementById('aBadge').value='';clearImagePreview();
 }
 function doAIWriteDesc(){var name=document.getElementById('aName')?.value||'Product';var desc='Premium Quality • Today Fresh';var badge='🌿 FRESH';var ln=name.toLowerCase();if(ln.indexOf('rice')!==-1)badge='🔥 HOT TODAY';document.getElementById('aDesc').value=desc;document.getElementById('aBadge').value=badge;toast('🤖 AI wrote!');}
@@ -519,12 +495,12 @@ function renderAdminListAdmin(){
 }
 function toggleStock(id){
  for(var i=0;i<products.length;i++)if(products[i].id==id){products[i].inStock=products[i].inStock===false?true:false;}
- saveAll();forceRender();renderAdminListAdmin();
+ saveAll();forceRender();renderAdminListAdmin(); if(typeof pushToCloud==='function') pushToCloud();
  toast(products.find(p=>p.id==id).inStock===false?'🔴 OUT OF STOCK':'🟢 IN STOCK');
 }
-function doEditProd(id){var p=null;for(var i=0;i<products.length;i++)if(products[i].id==id)p=products[i];if(!p)return;var newPrice=prompt('Price (now '+p.price+'):',p.price);if(newPrice===null)return;var newStock=prompt('Stock (now '+p.stock+'):',p.stock);if(newStock===null)return;p.price=parseInt(newPrice)||p.price;p.stock=parseInt(newStock)||p.stock;saveAll();forceRender();renderAdminListAdmin();}
-function doHideProd(id){for(var i=0;i<products.length;i++)if(products[i].id==id)products[i].hidden=!products[i].hidden;saveAll();forceRender();renderAdminListAdmin();}
-function doDelProdAdmin(id){if(confirm('Delete?')){var np=[];for(var i=0;i<products.length;i++)if(products[i].id!=id)np.push(products[i]);products=np;saveAll();forceRender();renderAdminListAdmin();renderGallery();}}
+function doEditProd(id){var p=null;for(var i=0;i<products.length;i++)if(products[i].id==id)p=products[i];if(!p)return;var newPrice=prompt('Price (now '+p.price+'):',p.price);if(newPrice===null)return;var newStock=prompt('Stock (now '+p.stock+'):',p.stock);if(newStock===null)return;p.price=parseInt(newPrice)||p.price;p.stock=parseInt(newStock)||p.stock;saveAll();forceRender();renderAdminListAdmin(); if(typeof pushToCloud==='function') pushToCloud();}
+function doHideProd(id){for(var i=0;i<products.length;i++)if(products[i].id==id)products[i].hidden=!products[i].hidden;saveAll();forceRender();renderAdminListAdmin(); if(typeof pushToCloud==='function') pushToCloud();}
+function doDelProdAdmin(id){if(confirm('Delete?')){var np=[];for(var i=0;i<products.length;i++)if(products[i].id!=id)np.push(products[i]);products=np;saveAll();forceRender();renderAdminListAdmin();renderGallery(); if(typeof pushToCloud==='function') pushToCloud(); toast('🗑️ Deleted + Cloud Updated');}}
 function updateOrderStatus(id,status){var orders=[];try{orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]')}catch(e){}for(var i=0;i<orders.length;i++)if(orders[i].id==id||orders[i].time==id)orders[i].status=status;localStorage.setItem('kfs_orders',JSON.stringify(orders));renderOrders();toast('✅ '+status);}
 function deleteOrder(id){if(!confirm('Delete order?'))return;var orders=[];try{orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]')}catch(e){}orders=orders.filter(o=>o.id!=id&&o.time!=id);localStorage.setItem('kfs_orders',JSON.stringify(orders));renderOrders();toast('🗑️ Deleted');}
 function renderOrders(){
@@ -547,7 +523,7 @@ function openAdminNow(){
  try{
   var savedPass=localStorage.getItem('kfs_admin_pass')||'wilson321';
   var pass=prompt('🔐 Admin Password:');if(pass===null)return;pass=pass.trim();
-  if(pass===savedPass||pass==='wilson321'||pass==='1234'||pass===''||pass.toLowerCase()==='admin'){
+  if(pass===savedPass){
    renderAdminListAdmin();renderVillageList();renderOrders();renderGallery();showAdminTab('prod');
    var saved=localStorage.getItem('kfs_cloud_bin');if(!saved)localStorage.setItem('kfs_cloud_bin','aeb8e0b683ec2e2756d8');
    var cb=document.getElementById('cloudBinId');if(cb)cb.value=localStorage.getItem('kfs_cloud_bin')||'aeb8e0b683ec2e2756d8';
@@ -561,271 +537,101 @@ window.addEventListener('DOMContentLoaded',function(){var saved=localStorage.get
 setTimeout(function(){var saved=localStorage.getItem('kfs_cloud_bin');if(!saved)localStorage.setItem('kfs_cloud_bin','aeb8e0b683ec2e2756d8');forceRender();},500);
 forceRender();
 </script>
-<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').then(function(){console.log('KFS SW ok');}).catch(function(e){console.log('KFS SW skip');});});}</script></body>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').then(function(){console.log('KFS SW ok');}).catch(function(e){console.log('KFS SW skip');});});}</script>
 <script>
-// === KFS FIREBASE SYNC ADD-ON v9.3 - SAFE, DOES NOT DELETE v9.3 ===
+// === KFS v9.3 SINGLE CLOUD SYNC - FIXED, PRESERVES v93 ===
 try{
-var firebaseConfig = { databaseURL: "https://kfs-shop-cf1da-default-rtdb.firebaseio.com" };
-if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-var kfsDB = firebase.database();
-var kfsRef = kfsDB.ref('kfs-shop');
-window.kfsRef = kfsRef;
-
-// When cloud changes -> update local + re-render
-kfsRef.on('value', function(snap){
-  try{
-    var d = snap.val();
-    if(!d) return;
-    if(d.products){
-      try{ localStorage.setItem('kfs_products_v3', JSON.stringify(d.products)); }catch(e){}
-      try{ localStorage.setItem('kfs_products', JSON.stringify(d.products)); }catch(e){}
-      if(typeof products !== 'undefined') products = d.products;
-    }
-    if(typeof forceRender === 'function') forceRender();
-    else if(typeof renderShop === 'function') renderShop();
-  }catch(e){}
-});
-
-// Helper to push your current shop to cloud - call it after you save in Admin
-window.pushToCloud = function(){
-  try{
-    var prods = null;
-    try{ prods = JSON.parse(localStorage.getItem('kfs_products_v3') || localStorage.getItem('kfs_products') || 'null'); }catch(e){}
-    if(!prods && typeof products !== 'undefined') prods = products;
-    if(prods) kfsRef.set({ products: prods, updatedAt: Date.now() });
-  }catch(e){}
-};
-console.log('KFS Firebase Sync ON');
-}catch(e){ console.log('Firebase add-on error', e); }
-// AUTO-PUSH - runs by itself
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    try { if (typeof pushToCloud === 'function') { pushToCloud(); } } catch(e) {}
-  }, 3000);
-});</script><script>
-// KFS v9.3 PATCH: Auto-PULL for customers
-window.addEventListener('load', function(){
-  setTimeout(function(){
+  var firebaseConfig = { databaseURL: "https://kfs-shop-cf1da-default-rtdb.firebaseio.com" };
+  if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  var kfsDB = firebase.database();
+  var kfsRef = kfsDB.ref('kfs-shop');
+  window.kfsRef = kfsRef;
+  var cloudReady = false;
+  // PULL FIRST - Cloud wins, prevents local defaults overwriting cloud
+  kfsRef.once('value').then(function(snap){
     try{
-      if(typeof kfsRef !== 'undefined' && kfsRef.on){
-        kfsRef.on('value', function(snap){
-          var d = snap.val();
-          if(d && d.products){
-            localStorage.setItem('kfs_products', JSON.stringify(d.products));
-            if(typeof forceRender === 'function') forceRender();
-            else if(typeof renderShop === 'function') renderShop();
-          }
-        });
-        console.log('KFS Auto-PULL ON');
+      var d = snap.val();
+      if(d && d.products && d.products.length > 0){
+        products = d.products;
+        localStorage.setItem('kfs_products_gold_hybrid', JSON.stringify(products));
+        forceRender();
+        console.log('KFS v9.3: Loaded from cloud', d.products.length);
+      } else {
+        kfsRef.set({products: products, updated: Date.now()});
+        console.log('KFS v9.3: Cloud empty, pushed local');
       }
     }catch(e){}
-  }, 2000);
-});
-</script><script>
-// KFS FIX: Stop old list from overwriting cloud
-(function(){
-  var cloudLoaded = false;
-  var originalPush = window.pushToCloud;
-
-  // 1. Block push until cloud is loaded first
+    cloudReady = true;
+  }).catch(function(){ cloudReady = true; });
+  // Live updates from other phones
+  kfsRef.on('value', function(snap){
+    if(!cloudReady) return;
+    try{
+      var d = snap.val();
+      if(d && d.products && JSON.stringify(d.products) !== JSON.stringify(products)){
+        products = d.products;
+        localStorage.setItem('kfs_products_gold_hybrid', JSON.stringify(products));
+        forceRender();
+      }
+    }catch(e){}
+  });
+  // Single PUSH - only after cloud loaded
   window.pushToCloud = function(){
-    if(!cloudLoaded){
-      console.log('KFS: Push blocked - waiting for cloud first');
-      return;
-    }
-    if(originalPush) originalPush();
+    if(!cloudReady){ console.log('KFS: Push blocked - waiting for cloud'); return; }
+    try{ kfsRef.set({products: products, updated: Date.now()}); console.log('KFS v9.3: PUSHED', products.length); }catch(e){}
   };
-
-  // 2. PULL first, then allow PUSH
-  window.addEventListener('load', function(){
-    setTimeout(function(){
-      try{
-        if(typeof kfsRef !== 'undefined' && kfsRef.once){
-          kfsRef.once('value').then(function(snap){
-            var d = snap.val();
-            if(d && d.products && d.products.length > 0){
-              // Cloud wins - use cloud list
-              localStorage.setItem('kfs_products', JSON.stringify(d.products));
-              if(typeof products !== 'undefined') products = d.products;
-              if(typeof renderShop === 'function') renderShop();
-              if(typeof forceRender === 'function') forceRender();
-              console.log('KFS: Loaded from cloud, products:', d.products.length);
-            } else {
-              // Cloud empty - push local once
-              console.log('KFS: Cloud empty, pushing local');
-              cloudLoaded = true;
-              if(originalPush) originalPush();
-              return;
-            }
-            cloudLoaded = true;
-          });
-        } else {
-          cloudLoaded = true;
-        }
-      }catch(e){ cloudLoaded = true; }
-    }, 1000);
-  });
-
-  // 3. When you add a product in Admin, push IMMEDIATELY
-  var _setItem = localStorage.setItem.bind(localStorage);
-  localStorage.setItem = function(k, v){
-    _setItem(k, v);
-    if(k === 'kfs_products' && cloudLoaded){
-      setTimeout(function(){ if(originalPush) originalPush(); }, 500);
-    }
-  };
-})();
-</script><script>
-// KFS ULTIMATE FIX - Force real cloud save
+  console.log('KFS v9.3 Firebase Sync ON - Single Sync');
+}catch(e){ console.log('Firebase error', e); }
+</script>
+<script>
+// KFS DELETE FIX V2 - FIXED v9.3 - Uses single cloud sync, correct format
 (function(){
-  function getProducts(){
-    // Try every possible place products are stored
-    if(window.products && window.products.length) return window.products;
-    var keys = ['kfs_products','kfs_shop_data','kfs_data','products','shop_products'];
-    for(var i=0;i<keys.length;i++){
-      try{
-        var v = localStorage.getItem(keys[i]);
-        if(v){ var p = JSON.parse(v); if(p.products) return p.products; if(Array.isArray(p) && p.length) return p; }
-      }catch(e){}
-    }
-    return [];
-  }
-  function saveEverywhere(list){
-    window.products = list;
-    try{
-      localStorage.setItem('kfs_products', JSON.stringify(list));
-      localStorage.setItem('kfs_shop_data', JSON.stringify({products:list}));
-    }catch(e){}
-    // Force Firebase push - try all refs
-    try{
-      if(typeof kfsRef!== 'undefined' && kfsRef.set){
-        kfsRef.set({products:list, updated: Date.now()});
-        console.log('KFS: PUSHED to cloud:', list.length);
-      }
-      if(typeof firebase!== 'undefined' && firebase.database){
-        firebase.database().ref('kfs_shop').set({products:list, updated: Date.now()});
-        firebase.database().ref('shop').set({products:list});
-      }
-    }catch(e){ console.log('KFS push error', e); }
-  }
-
-  // Override pushToCloud completely
-  window.pushToCloud = function(){ saveEverywhere(getProducts()); };
-
-  // When you click ADD PRODUCT, push after 1 sec
-  document.addEventListener('click', function(e){
-    if(e.target && e.target.textContent && e.target.textContent.includes('ADD PRODUCT')){
-      setTimeout(function(){ window.pushToCloud(); alert('Pushed to cloud: ' + getProducts().length + ' products'); }, 1000);
-    }
-  });
-
-  // On load: PULL from cloud first, do NOT overwrite with defaults
-  window.addEventListener('load', function(){
-    setTimeout(function(){
-      try{
-        if(typeof kfsRef!== 'undefined' && kfsRef.once){
-          kfsRef.once('value').then(function(snap){
-            var d = snap.val();
-            if(d && d.products && d.products.length > 0){
-              window.products = d.products;
-              localStorage.setItem('kfs_products', JSON.stringify(d.products));
-              if(typeof renderShop === 'function') renderShop();
-              if(typeof forceRender === 'function') forceRender();
-              // Force re-render by reloading list UI
-              setTimeout(function(){ if(typeof renderShop === 'function') renderShop(); }, 500);
-            }
-          });
-        }
-      }catch(e){}
-    }, 1500);
-  });
-})();
-</script><script>
-// KFS DELETE FIX V2
-(function(){
-  var DB_URL = "https://kfs-shop-cf1da-default-rtdb.firebaseio.com/kfs_shop.json";
- function getNameFromCard(btn){
-  var el = btn;
-  for(var i=0;i<8;i++){
-    if(!el) break;
-    var txt = el.innerText || "";
-    if(txt.indexOf("UGX")!==-1 && txt.indexOf("SET OUT")!==-1){
-      var lines = txt.split("\n").map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
-      // First lines are the product name, before UGX line
-      var nameParts = [];
-      for(var j=0;j<lines.length;j++){
-        if(lines[j].indexOf("UGX")!==-1) break;
-        if(lines[j]==="SET OUT"||lines[j]==="EDIT"||lines[j]==="HIDE"||lines[j]==="X") continue;
-        nameParts.push(lines[j]);
-      }
-      return nameParts.join(" ").trim();
-    }
-    el = el.parentElement;
-  }
-  return "";
-}
   function deleteByName(name){
-  var clean = (name||"").replace(/[^\w\s\.]/g,"").replace(/\s+/g," ").trim().toLowerCase();
-  var shortName = clean.split(" ").slice(0,3).join(" ");
-  var left = 0;
-  for(var i=0;i<localStorage.length;i++){
-    var key = localStorage.key(i);
-    try{
-      var val = JSON.parse(localStorage.getItem(key));
-      if(Array.isArray(val) && val.length && typeof val[0]==="object"){
-        var after = val.filter(function(p){
-          var pn = ((p.name||p.title||"")+"").toLowerCase();
-          return pn.indexOf(shortName)===-1 && shortName.indexOf(pn)===-1;
-        });
-        if(after.length!==val.length){
-          localStorage.setItem(key, JSON.stringify(after));
-          fetch(DB_URL,{method:"PUT", body: JSON.stringify(after)});
-          left = after.length;
-        } else { left = val.length; }
-      }
-    }catch(e){}
+    var clean = (name||"").replace(/[^\w\s\.]/g,"").replace(/\s+/g," ").trim().toLowerCase();
+    var shortName = clean.split(" ").slice(0,3).join(" ");
+    if(!shortName) return 0;
+    var left = products.length;
+    products = products.filter(function(p){
+      var pn = ((p.name||"")+"").toLowerCase();
+      return pn.indexOf(shortName)===-1 && shortName.indexOf(pn)===-1;
+    });
+    left = products.length;
+    saveAll();
+    if(typeof pushToCloud==='function') pushToCloud();
+    return left;
   }
-  ["products","allProducts","shopProducts","items"].forEach(function(k){
-    if(Array.isArray(window[k])){
-      window[k] = window[k].filter(function(p){
-        var pn = ((p.name||p.title||"")+"").toLowerCase();
-        return pn.indexOf(shortName)===-1;
-      });
+  function getNameFromCard(btn){
+    var el = btn;
+    for(var i=0;i<8;i++){
+      if(!el) break;
+      var txt = el.innerText || "";
+      if(txt.indexOf("UGX")!==-1){
+        var lines = txt.split("\n").map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+        var nameParts = [];
+        for(var j=0;j<lines.length;j++){
+          if(lines[j].indexOf("UGX")!==-1) break;
+          if(["SET OUT","EDIT","HIDE","X","SET IN STOCK"].indexOf(lines[j])!==-1) continue;
+          nameParts.push(lines[j]);
+        }
+        return nameParts.join(" ").trim();
+      }
+      el = el.parentElement;
     }
-  });
-  return left;
-}
+    return "";
+  }
   document.addEventListener("click", function(e){
-    var btn = e.target.closest("button");
+    var btn = e.target.closest ? e.target.closest("button") : null;
     if(!btn) return;
-    if(btn.innerText.trim()==="X"){
+    if(btn.innerText.trim()==="X" && btn.closest && btn.closest("#adminList")){
       e.stopPropagation(); e.preventDefault();
       var name = getNameFromCard(btn);
       if(!confirm("Delete "+name+" forever?")) return;
       var left = deleteByName(name);
       alert("Deleted: "+name+"\n"+left+" left");
-      setTimeout(function(){ location.reload(); }, 800);
+      setTimeout(function(){ forceRender(); renderAdminListAdmin(); }, 500);
     }
   }, true);
 })();
-// HIDE DELETED ITEMS - no need to find products
-try{
-  var deletedNames = JSON.parse(localStorage.getItem("kfs_deleted")||"[]");
-  if(deletedNames.length > 0){
-    var allDivs = document.querySelectorAll("div");
-    for(var d=0; d<allDivs.length; d++){
-      var txt = allDivs[d].innerText || "";
-      // Only check small cards that have a price
-      if(txt.indexOf("UGX")!== -1 && txt.length < 500){
-        for(var n=0; n<deletedNames.length; n++){
-          var dn = deletedNames[n].replace(/[^a-zA-Z0-9 ]/g,"").trim();
-          var short = dn.split(" ").slice(0,2).join(" ");
-          if(short && txt.indexOf(short)!== -1){
-            allDivs[d].style.display = "none";
-          }
-        }
-      }
-    }
-  }
-}catch(e){}</script>
+</script>
+</body>
 </html>
