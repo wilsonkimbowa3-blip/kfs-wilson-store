@@ -275,13 +275,32 @@ function searchVillageLive(query){
   else{document.getElementById('cDistance').value='12.5';if(msgEl)msgEl.innerHTML='❓ Village not found. Using 12.5km. Use GPS for 100% accuracy!';calcTransport();updateReceipt();}
  }).catch(function(){document.getElementById('cDistance').value='12.5';if(msgEl)msgEl.innerHTML='📡 Offline: Using 12.5km. Use GPS for exact.';calcTransport();updateReceipt();});
 }
+ function getVehicleByWeight(totalKg) {
+  if (totalKg > 4000) return "Heavy Truck 10-Ton (>4000kg)";
+  if (totalKg > 3000) return "Big Fuso 4-Ton (>3000kg)";
+  if (totalKg > 1000) return "Medium Canter (>1000kg)";
+  if (totalKg > 300) return "Small Pickup Hilux (>300kg)";
+  return "Boda / Small Van (0-300kg)";
+}
 function calcTransport(){
  var village=document.getElementById('cVillage').value||'';var weight=parseInt(document.getElementById('cWeightShow').value||0);var distVal=parseFloat(document.getElementById('cDistance').value||0);var box=document.getElementById('transportBox');
  if(!village&&!distVal){if(box)box.style.display='none';return 0;}
- var dist=distVal||0;var trans=5000;if(dist>3.5)trans+=(dist-3.5)*1500;if(weight>100)trans+=2000;trans=Math.round(trans);
- var txt=document.getElementById('transportText');if(txt)txt.innerText='Transport: UGX '+trans.toLocaleString();
- var disp=document.getElementById('autoDistDisplay');if(disp)disp.innerText='📍 '+(village||'Location')+' • '+dist.toFixed(1)+'km EXACT • '+weight+'kg';
- var eta=document.getElementById('etaDisplay');if(eta){var mins=Math.round((dist/30)*60);if(mins<60)eta.innerText='⏱️ ETA: ~'+mins+' mins from Kisenyi';else eta.innerText='⏱️ ETA: ~'+(dist/30).toFixed(1)+' hours from Kisenyi';}
+ var dist=distVal||0;var trans=0;var vehicleText="";var perKgInfo="";
+ if(weight <= 300){
+   trans=5000;if(dist>3.5)trans+=(dist-3.5)*1500;if(weight>100)trans+=2000;
+   vehicleText="Boda / Small - OLD rate";
+ } else {
+   var costPerKg = (dist <= 3) ? 25 : 25 + 2 * (dist - 3);
+   trans = weight * costPerKg;
+   if(trans < 5000) trans=5000;
+   trans = Math.round(trans/500)*500;
+   vehicleText=getVehicleByWeight(weight);
+   perKgInfo=" • "+costPerKg+" UGX/kg";
+ }
+ trans=Math.round(trans);
+ var txt=document.getElementById('transportText');if(txt)txt.innerText='Transport: UGX '+trans.toLocaleString()+' • '+vehicleText+perKgInfo;
+ var disp=document.getElementById('autoDistDisplay');if(disp)disp.innerText='📍 '+(village||'Location')+' • '+dist.toFixed(1)+'km • '+weight+'kg • '+vehicleText;
+ var eta=document.getElementById('etaDisplay');if(eta){var mins=Math.round((dist/30)*60);eta.innerText=mins<60?'⏱️ ETA: ~'+mins+' mins':'⏱️ ETA: ~'+(dist/30).toFixed(1)+' hours';}
  if(box)box.style.display='block';return trans;
 }
 function getNavigationLink(){
