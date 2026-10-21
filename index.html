@@ -83,13 +83,10 @@ var defaultProducts=[
 function getDeletedIds(){try{return JSON.parse(localStorage.getItem('kfs_deleted_ids')||'[]')}catch(e){return[]}}
 function addDeletedId(id){try{var a=getDeletedIds();if(a.indexOf(id)===-1)a.push(id);localStorage.setItem('kfs_deleted_ids',JSON.stringify(a));}catch(e){}}
 function filterDeleted(list){var d=getDeletedIds();if(!d.length)return list;return list.filter(function(p){return d.indexOf(p.id)===-1;});}
-var products=defaultProducts.slice(); var cart={};
-try{
- var sp=localStorage.getItem('kfs_products_gold_hybrid');
- if(sp){var arr=JSON.parse(sp);if(arr&&Array.isArray(arr)&&arr.length>0)products=filterDeleted(arr);}
- var sc=localStorage.getItem('kfs_cart_gold_hybrid'); if(sc)cart=JSON.parse(sc)||{};
-}catch(e){products=defaultProducts.slice();}
-function saveAll(){try{localStorage.setItem('kfs_products_gold_hybrid',JSON.stringify(products));localStorage.setItem('kfs_cart_gold_hybrid',JSON.stringify(cart));}catch(e){}}
+var products=[];var cart={};try{var sc=localStorage.getItem('kfs_cart_gold_hybrid');if(sc)cart=JSON.parse(sc)||{};}catch(e){cart={};}
+(function(){var W='kfs_v97_wipe_done';if(!localStorage.getItem(W)){localStorage.removeItem('kfs_products_gold_hybrid');localStorage.setItem(W,'1');}})();
+function saveAll(){try{localStorage.setItem('kfs_cart_gold_hybrid',JSON.stringify(cart));}catch(e){}}
+function saveProductsCache(){try{localStorage.setItem('kfs_products_gold_hybrid',JSON.stringify(products));}catch(e){}}
 var pendingImageData=null;var pendingGalleryData=null;
 function compressDataUrl(dataUrl, maxW, quality, cb){
   var img=new Image(); img.src=dataUrl;
