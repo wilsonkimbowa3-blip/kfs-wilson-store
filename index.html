@@ -133,4 +133,61 @@ window.addEventListener('DOMContentLoaded',function(){forceRender();});forceRend
 function pushToCloud(){if(!kfsRef){toast('Cloud not ready');return;}if(!cloudReady){setTimeout(pushToCloud,1000);return;}try{isPushing=true;var pay={momo:localStorage.getItem('kfs_momo'),airtel:localStorage.getItem('kfs_airtel'),momopay:localStorage.getItem('kfs_momopay'),bank:localStorage.getItem('kfs_bank'),wa:localStorage.getItem('kfs_wa')};kfsRef.set({products:products,payments:pay,deletedIds:getDeletedIds(),updated:Date.now()}).then(function(){isPushing=false;setCloudStatus('PUSHED');toast('Synced to ALL customers!');}).catch(function(){isPushing=false;});}catch(e){isPushing=false;}}
 function pullFromCloud(){if(!kfsRef)return;kfsRef.once('value').then(function(snap){var d=snap.val();if(d&&d.products){products=filterDeleted(d.products);saveAll();forceRender();renderAdminListAdmin();}if(d&&d.payments){if(d.payments.momo)localStorage.setItem('kfs_momo',d.payments.momo);if(d.payments.airtel)localStorage.setItem('kfs_airtel',d.payments.airtel);if(d.payments.momopay)localStorage.setItem('kfs_momopay',d.payments.momopay);if(d.payments.bank)localStorage.setItem('kfs_bank',d.payments.bank);if(d.payments.wa)localStorage.setItem('kfs_wa',d.payments.wa);}toast('Pulled - Payments synced');}).catch(function(){toast('Pull failed');});}
 kfsRef.child('payments').on('value',function(s){var p=s.val();if(!p)return;if(p.momo)localStorage.setItem('kfs_momo',p.momo);if(p.airtel)localStorage.setItem('kfs_airtel',p.airtel);if(p.momopay)localStorage.setItem('kfs_momopay',p.momopay);if(p.bank)localStorage.setItem('kfs_bank',p.bank);if(p.wa)localStorage.setItem('kfs_wa',p.wa);});
-</script></body></html>
+// FINAL FIX: COD = NO VERIFICATION, OTHER PAYMENTS = KEEP AS BEFORE
+(function(){
+  var originalCheck = window.checkPayReady;
+  window.checkPayReady = function(){
+    var p = (selectedPay||'').toLowerCase();
+    var isCOD = p.indexOf('cash')>-1 || p.indexOf('cod')>-1;
+    var txEl = document.getElementById('cTxId');
+    var cb = document.querySelector('input[type=checkbox]');
+    var txParent = txEl ? txEl.parentElement : null;
+
+    if(isCOD){
+      // COD ONLY: Hide verification, allow order
+      if(txEl){
+        txEl.value = 'COD';
+        if(txParent) txParent.style.display = 'none';
+      }
+      if(cb){
+        cb.checked = true;
+        cb.style.display = 'none';
+        if(cb.parentElement) cb.parentElement.style.display = 'none';
+      }
+      // Hide the whole PAYMENT VERIFICATION text
+      document.querySelectorAll('div, p, label').forEach(function(el){
+        if((el.innerText||'').indexOf('PAYMENT VERIFICATION')>-1 && (el.innerText||'').length<100){
+          el.style.display = 'none';
+        }
+      });
+      return true;
+    }else{
+      // OTHER PAYMENTS: Show verification and use original logic
+      if(txParent) txParent.style.display = 'block';
+      if(txEl){
+        txEl.style.display = 'block';
+        if(txEl.value==='COD') txEl.value = '';
+      }
+      if(cb){
+        cb.style.display = 'inline-block';
+        if(cb.parentElement) cb.parentElement.style.display = 'block';
+      }
+      document.querySelectorAll('div, p, label').forEach(function(el){
+        if((el.innerText||'').indexOf('PAYMENT VERIFICATION')>-1){
+          el.style.display = 'block';
+        }
+      });
+      // Use original function for other payments
+      if(typeof originalCheck === 'function'){
+        return originalCheck();
+      }
+      // Fallback if original not found
+      if(!txEl) return false;
+      if(!txEl.value.trim()) return false;
+      if(cb && !cb.checked) return false;
+      return true;
+    }
+  };
+  // Auto run when payment changes
+  setInterval(function(){ if(typeof window.checkPayReady==='function') window.checkPayReady(); }, 500);
+})();</script></body></html>
