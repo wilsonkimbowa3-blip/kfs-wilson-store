@@ -408,6 +408,19 @@ toast('Pulled - Payments synced');
 }).catch(function(){toast('Pull failed');});
 }
 kfsRef.child('payments').on('value',function(s){var p=s.val();if(!p)return;if(p.momo)localStorage.setItem('kfs_momo',p.momo);if(p.airtel)localStorage.setItem('kfs_airtel',p.airtel);if(p.momopay)localStorage.setItem('kfs_momopay',p.momopay);if(p.bank)localStorage.setItem('kfs_bank',p.bank);if(p.wa)localStorage.setItem('kfs_wa',p.wa);});
+// KILL OFFLINE BLACK BOX + BUTTON - FORCE ONLINE ONLY
+setTimeout(function(){
+  // 1. Hide GET EXACT LOCATION button
+  document.querySelectorAll('button').forEach(function(b){
+    if(b.innerText.includes('EXACT')){ b.parentElement.style.display='none'; }
+  });
+  // 2. Hide Found offline black box
+  setInterval(function(){
+    document.querySelectorAll('div,span,p').forEach(function(el){
+      if(el.innerText.includes('Found offline')){ el.style.display='none'; }
+    });
+  },500);
+},1000);
 </script>
 </body>
 </html>
