@@ -184,6 +184,108 @@ function updateReceipt(){var name=document.getElementById('cName').value||'Custo
 var roadKm=straightKm;if(routeData&&routeData.routes&&routeData.routes.length>0){var minD=routeData.routes[0].distance;for(var i=1;i<routeData.routes.length;i++){if(routeData.routes[i].distance<minD)minD=routeData.routes[i].distance;}var r=minD/1000;var g=r;if(r>10){g=r*1.22;}if(r>12){g=r*1.24;}roadKm=g;}
 function doCheckout(){var c=updateCartBar();if(c.kg==0){toast('Type KG first!');return;}updateReceipt();selectedPay=null;document.querySelectorAll('.pay-card').forEach(function(cc){cc.classList.remove('selected')});document.getElementById('payDetailsBox').style.display='none';document.getElementById('cTxId').value='';document.getElementById('cPayConfirm').checked=false;checkPayReady();document.getElementById('checkoutModal').classList.add('open');}
 function closeCheckout(){document.getElementById('checkoutModal').classList.remove('open');}
+// ===== KFS AUTO LOCATION FIX - 4 RULES =====
+var SHOP_LAT=0.3531, SHOP_LON=32.7575;
+var autoDistTimer=null, lastVillageSearch='';
+function hideTransportUntilReady(){
+  var vill=document.getElementById('cVillage').value.trim();
+  var distEl=document.getElementById('cDist');
+  var transEl=document.getElementById('cTrans');
+  if(!vill || vill.length<3){
+    if(distEl) distEl.innerHTML='Type village first...';
+    if(transEl) transEl.innerHTML='---';
+    return false;
+  }
+  return true;
+}
+async function autoFindLocationOnline(){
+  var villInput=document.getElementById('cVillage');
+  var vill=villInput.value.trim();
+  if(!vill || vill.length<3 || vill===lastVillageSearch) return;
+  lastVillageSearch=vill;
+  if(!hideTransportUntilReady()) return;
+  var distEl=document.getElementById('cDist');
+  if(distEl) distEl.innerHTML='Searching online...';
+  try{
+    // 1. GET PLACE ONLINE FROM GOOGLE-LIKE MAP (OpenStreetMap = same data as Google Chrome)
+    var q=encodeURIComponent(vill+', Uganda');
+    var geoRes=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=3&countrycodes=ug&q='+q, {headers:{'Accept':'application/json'}});
+    var places=await geoRes.json();
+    if(!places || places.length==0){
+      if(distEl) distEl.innerHTML='Place not found, try: '+vill+' Town';
+      return;
+    }
+    // 2. CHOOSE SHORTEST DISTANCE - REAL DRIVER ROUTE (NOT STRAIGHT LINE)
+    var best=null, bestKm=99999;
+    for(var p of places){
+      var lat=parseFloat(p.lat), lon=parseFloat(p.lon);
+      // OSRM gives real road distance like Google Maps
+      var routeRes=await fetch('https://router.project-osrm.org/route/v1/driving/'+SHOP_LON+','+SHOP_LAT+';'+lon+','+lat+'?overview=false');
+      var routeData=await routeRes.json();
+      if(routeData.routes && routeData.routes[0]){
+        var km=routeData.routes[0].distance/1000;
+        if(km<bestKm){ bestKm=km; best={lat:lat, lon:lon, display:p.display_name, km:km};}
+      }
+    }
+    if(!best){
+      // fallback to straight line if routing fails
+      var fLat=parseFloat(places[0].lat), fLon=parseFloat(places[0].lon);
+      var R=6371;
+      var dLat=(fLat-SHOP_LAT)*Math.PI/180, dLon=(fLon-SHOP_LON)*Math.PI/180;
+      var a=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(SHOP_LAT*Math.PI/180)*Math.cos(fLat*Math.PI/180)*Math.sin(dLon/2)*Math.sin(dLon/2);
+      var c=2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+      bestKm=R*c; best={lat:fLat, lon:fLon, display:places[0].display_name, km:bestKm};
+    }
+    // 3. AUTO CALCULATE EXACT LOCATION - NO BUTTON NEEDED
+    var gpsField=document.getElementById('cGps');
+    if(gpsField) gpsField.value=best.lat.toFixed(6)+','+best.lon.toFixed(6);
+    if(distEl) distEl.innerHTML=best.km.toFixed(1)+' km (via road)';
+    // save for updateReceipt
+    window._autoLoc={gps:best.lat.toFixed(6)+','+best.lon.toFixed(6), dist:best.km, name:best.display, nav:'https://www.google.com/maps/dir/?api=1&destination='+best.lat+','+best.lon};
+    updateReceipt();
+  }catch(e){
+    if(distEl) distEl.innerHTML='Online error, retry typing...';
+  }
+}
+// 3. AUTO TRIGGER - NO PRESS NEEDED + 4. HIDE FEE UNTIL DONE
+document.addEventListener('DOMContentLoaded',function(){
+  var villEl=document.getElementById('cVillage');
+  if(villEl){
+    villEl.addEventListener('input',function(){
+      hideTransportUntilReady();
+      clearTimeout(autoDistTimer);
+      autoDistTimer=setTimeout(autoFindLocationOnline,1200);
+      updateReceipt();
+    });
+    villEl.addEventListener('blur',function(){ setTimeout(autoFindLocationOnline,300); });
+  }
+});
+var _origUpdateReceipt=updateReceipt;
+updateReceipt=function(){
+  var villVal=document.getElementById('cVillage').value.trim();
+  // 4. DON'T SHOW TRANSPORT FEE UNTIL LOCATION FINISHED
+  if(!villVal || villVal.length<3 || !window._autoLoc){
+    var r=_origUpdateReceipt();
+    r.dist=0; r.trans=0;
+    var transEl=document.getElementById('cTrans');
+    var totalEl=document.getElementById('cTotal');
+    if(transEl) transEl.innerHTML='Enter village first';
+    if(totalEl) totalEl.innerHTML='UGX '+r.ugx.toLocaleString();
+    r.gps=(window._autoLoc?window._autoLoc.gps:'');
+    r.dist=(window._autoLoc?window._autoLoc.dist:0);
+    r.navLink=(window._autoLoc?window._autoLoc.nav:'');
+    return r;
+  }
+  var res=_origUpdateReceipt();
+  if(window._autoLoc){
+    res.gps=window._autoLoc.gps;
+    res.dist=window._autoLoc.dist;
+    res.navLink=window._autoLoc.nav;
+    var trans=Math.round(res.dist*1500+2000);
+    res.trans=trans;
+  }
+  return res;
+};
 function doSendWA(){var d=updateReceipt();if(d.lines.length==0){toast('Type KG first');return;}if(!selectedPay){toast('Select payment method!');return;}if(selectedPay!=='cod'){var tx=document.getElementById('cTxId').value.trim();var chk=document.getElementById('cPayConfirm').checked;if(tx.length<4){toast('Enter Transaction ID!');return;}if(!chk){toast('Check I have paid!');return;}}var waNum=(function(){var r=localStorage.getItem('kfs_wa')||'256700892386';var n=r.toString().replace(/\D/g,'');if(n.startsWith('0')){n='256'+n.substring(1);}n=n.replace(/^2560+/,'256');if(n.length!=12){n='256700892386';}localStorage.setItem('kfs_wa',n);return n;})();var payLabels={mtn:'MTN MoMo',airtel:'Airtel Money',momopay:'MoMoPay',bank:'Bank Transfer',cod:'Cash on Delivery (COD)'};var payLabel=payLabels[selectedPay]||selectedPay;var txId=document.getElementById('cTxId').value.trim()||'COD';var msg='*KFS v9.5 PRO FAST FULL*%0A'+d.name+'%0A'+document.getElementById('cPhone').value+'%0AVillage: '+d.vill+'%0ADistance: '+d.dist+'km%0AWeight: '+d.weight+'kg%0AITEMS%0A'+d.lines.join('%0A')+'%0AProducts: UGX '+d.ugx.toLocaleString()+'%0ATransport: UGX '+d.trans.toLocaleString()+'%0ATOTAL: UGX '+(d.ugx+d.trans).toLocaleString()+'%0APAYMENT: '+payLabel+'%0ATxID: '+txId+'%0APIN: '+(d.gps||d.vill)+'%0ANAV:%0A'+d.navLink;window.open('https://wa.me/'+waNum+'?text='+msg,'_blank');var orders=[];try{orders=JSON.parse(localStorage.getItem('kfs_orders')||'[]');}catch(e){}orders.push({id:Date.now(),name:document.getElementById('cName').value||'Customer',phone:document.getElementById('cPhone').value||'',village:document.getElementById('cVillage').value||'',kg:parseInt(d.weight||0),total:(d.ugx+d.trans),transport:d.trans,distance:d.dist,gps:d.gps,navLink:d.navLink,items:d.lines,paymentMethod:payLabel,txId:txId,time:Date.now(),status:(selectedPay==='cod'?'Pending - COD':'Paid - '+payLabel)});localStorage.setItem('kfs_orders',JSON.stringify(orders));toast('Order Sent with '+payLabel+'!');}
 function doDownloadPDF(){var d=updateReceipt();var pl=selectedPay||'Not selected';var tx=document.getElementById('cTxId').value||'';var w=window.open('','_blank');w.document.write('<html><body><h2>KFS v9.5 FULL</h2><hr>'+d.lines.join('<br>')+'<hr><p>Transport UGX '+d.trans.toLocaleString()+'</p><p>TOTAL UGX '+(d.ugx+d.trans).toLocaleString()+'</p><p>Payment: '+pl+' - TxID: '+tx+'</p></body></html>');w.document.close();}
 function doInstall(){toast('Chrome Install app');}
